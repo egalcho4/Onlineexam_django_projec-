@@ -1,0 +1,176 @@
+
+{% extends 'exam/adminbase.html' %}
+{% load widget_tweaks %}
+{%load static%}
+{% block content %}
+<link rel="stylesheet" href="{%static 'font/css/all.min.css'%}">
+  <link rel="stylesheet" href="{%static 'font/css/fontawesome.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/font.css'%}">
+<script type="text/javascript" src="{%static 'jsb/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/proper.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/jq.js' %}"></script>
+<link rel="stylesheet" href="{%static 'css/ex.css'%}"> 
+<link rel="stylesheet" href="{%static 'css/style.css'%}"> 
+
+<link rel="stylesheet" href="{%static 'css/color.css'%}"> <a class="btn btn-success btn-xs" style="border-radius: 0%;margin-left:20px" href="{% url 'exam:admin-dashboard'  %}"> <i class="bi bi-chevron-left">back</i></a>
+<div class="container-sm ">
+  <div class="card">
+
+  <div class="card-body">
+  <button onclick="window.print()" style="float:right;" class="btn btn-warning">print</button>
+  <span data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success" style="float:right;"> report</span>
+  <div class="panel panel-primary rounded-0">
+    <div class="panel-heading rounded-0">
+      <h6 class="panel-title text-white">Students marks</h6>
+    </div>
+    <input type="text" id="myinput" placeholder="search......." class="form-control" style="font-size:20px">
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Full Name</th>
+         
+          <th>exam date</th>
+          
+         
+          <th>Total marks</th>
+          <th>percentage</th>
+          
+        </tr>
+      </thead>
+      {% for t in courses %}
+      <tr>
+        <td> {{forloop.counter}}</td>
+        <td> {{t.student}}</td>
+        
+        <td>{{t.date}}</td>
+        
+        <td>{{t.marks}}</td>
+        <td>
+            {{t.perc}}%</td>
+           
+            
+          
+       
+         </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+</div>
+<center>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">see full report bellow</h1>
+
+          
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+     
+      
+  
+        <table class="table table-hover table-bordered" id="dev-table">
+        
+            <h1 class="btn btn-info" id="">general student report</h1>
+<hr>
+            <tr>
+              <th>ID</th>
+              <th>Student above 75%</th>
+             
+              <th>above 50%% and bellow 75%</th>
+              
+             
+              <th>bellow 50 %</th>
+             
+              
+            </tr>
+         
+         
+          <tr>
+            <td> {{forloop.counter}}</td>
+            <td> {{above_seven}}</td>
+            
+            <td>{{above_fift}}</td>
+            
+            <td>{{below_fift}}</td>
+            
+                
+              
+           
+             </tr>
+            </table>
+        <table class="table table-hover table-bordered" id="dev-table">
+             
+      <tr class="bg-warning">female student report<tr>
+             <tr>
+             
+              <th>ID</th>
+              <th>Student above 75%</th>
+             
+              <th>above 50%% and bellow 75%</th>
+              
+             
+              <th>bellow 50 %</th>
+             
+              
+            </tr>
+      
+         
+          <tr>
+            <td> {{forloop.counter}}</td>
+            <td> {{above_seven}}</td>
+            
+            <td>{{above_fift}}</td>
+            
+            <td>{{below_fift}}</td>
+            
+                
+          
+           
+             </tr>
+         
+        </table>
+  
+  
+    
+       
+       
+     
+       
+        
+               
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+   
+  </div>
+</form>
+</div>
+</div>
+</div></center>
+<center>
+    <script>
+    //function myFunction() {
+      input = document.getElementById("myinput");
+      input.addEventListener('keyup',()=>{
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myinput");
+        filter = input.value.toUpperCase();
+        table = document.querySelector('.table')
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            tda = tr[i].getElementsByTagName("td")[3];
+            tdi = tr[i].getElementsByTagName("td")[0];
+            if (td, tda) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || tda.innerHTML.toUpperCase().indexOf(filter) > -1 || tdi.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+      })</script>
+{% endblock content %}

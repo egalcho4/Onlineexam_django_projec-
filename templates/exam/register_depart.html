@@ -1,0 +1,167 @@
+{% extends 'exam/adminbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+  <link rel="stylesheet" href="{%static 'font/css/all.min.css'%}">
+  <link rel="stylesheet" href="{%static 'font/css/fontawesome.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/font.css'%}">
+<script type="text/javascript" src="{%static 'jsb/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/proper.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/jq.js' %}"></script>
+<link rel="stylesheet" href="{%static 'css/ex.css'%}"> 
+<link rel="stylesheet" href="{%static 'css/style.css'%}"> 
+
+<link rel="stylesheet" href="{%static 'css/color.css'%}"> 
+<style>
+     a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+  </style>
+ 
+</head>
+<a class="btn btn-success btn-xs" style="border-radius: 0%;margin-left:20px" href="{% url 'exam:register_collage'  %}"> <i class="bi bi-chevron-left">back</i></a>
+<div class="container">
+  {% if messages %}
+    {% for message in messages %}
+<div class="container-fluid p-0">
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="True">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+</div>
+{% endfor %}
+        {%endif%}
+ 
+  <span data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success" style="float:right;font-size:20px"> add new</span>
+ 
+  <div class="panel panel-primary rounded-0">
+    <div class="panel-heading rounded-0">
+      <h6 class="panel-title">departimentS list</h6>
+    </div>
+    <input type="text" id="myinput" placeholder="saerch......." class="form-control" style="font-size:20px">
+    <table class="table table-hover table-bordered mytb" id="dev-table">
+      <thead>
+        <tr>
+
+          <th>departiment</th>
+          <th>collage</th>
+          <td>update</td>
+          <th>Action</th>
+        </tr>
+      </thead>
+      {% for t in courses %}
+      <tr>
+
+        <td> {{t.name}}</td>
+        <td>{{t.cl_name}}</td>
+        <td>
+          <a class=" btn-xs" style="border-radius: 0%;" href="{% url 'exam:edit_departiment' t.id  %}"><span class="bi bi-pencil"></span></a>
+        </td>
+        <td>
+          <div class="dropdown show">
+            <a href="" class="logout_btn1 dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius:0px;">
+              <button class="btn btn-primary" style="margin-top:30px">more</button>
+              </a>
+           
+              
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class=" btn-xs" style="border-radius: 0%;" href="{% url 'exam:head' t.id  %}"><span class="fa fa-send">assign head</span></a><br>
+                <a class=" btn-xs" style="border-radius: 0%;" href="{% url 'exam:admin-course' t.id  %}"><span class="fa fa-plus">add course</span></a><br>
+                <a class=" btn-xs" style="border-radius: 0%;" href="{% url 'exam:add_student_info' t.id  %}"><span class="fa fa-plus-circle">add student</span></a><br>
+                <a class="text-danger btn-xs" style="border-radius: 0%;" href="{% url 'exam:departdel' t.id  %}"><span class="fa fa-trash">delete</span></a>
+            </div>
+
+
+
+        </td>
+       
+        
+    </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+<br><br><br><br><br><br>
+<center>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Create Collage</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+    <form class="modal-content animate" action="" id="form" name="my-form1" method="post" style="font-size:20px">
+  {%csrf_token%}
+  <div class="modal-body">
+  
+  
+
+        
+     <label class="form-label">enter name of departiment</label>
+     <input type="text" name="depart" id="mark" class="form-control" placeholder="example:computer science" style="font-size:20px">
+    
+       
+     <label class="form-label">discription</label>
+     <textarea class="form-control" rows="4" id="question" name="descr" placeholder="example:computer scince is..." style="font-size:20px"></textarea>
+     
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Save </button>
+    </div>
+  </form>
+  </div>
+</div>
+</div></center>
+  <script>
+    //function myFunction() {
+      input = document.getElementById("myinput");
+      input.addEventListener('keyup',()=>{
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myinput");
+        filter = input.value.toUpperCase();
+        table = document.querySelector('.mytb')
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            tda = tr[i].getElementsByTagName("td")[2];
+            tdi = tr[i].getElementsByTagName("td")[0];
+            if (td, tda) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || tda.innerHTML.toUpperCase().indexOf(filter) > -1 || tdi.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+      })
+    //}
+
+</script>
+
+{% endblock content %}

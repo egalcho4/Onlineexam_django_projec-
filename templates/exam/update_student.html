@@ -1,0 +1,77 @@
+{% extends 'exam/adminbase.html' %}
+{% load widget_tweaks %}
+{%load static%}
+{% block content %}
+<head>
+  <style media="screen">
+    input[type=text], select,input[type=number] ,input[type=password], textarea{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  </style>
+
+  <link rel="stylesheet" href="{%static 'font/css/all.min.css'%}">
+  <link rel="stylesheet" href="{%static 'font/css/fontawesome.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/font.css'%}">
+<script type="text/javascript" src="{%static 'jsb/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/proper.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/jq.js' %}"></script>
+<link rel="stylesheet" href="{%static 'css/ex.css'%}"> 
+<link rel="stylesheet" href="{%static 'css/style.css'%}"> 
+
+<link rel="stylesheet" href="{%static 'css/color.css'%}"> 
+</head>
+
+<div class="container-sm">
+
+<div class="card">
+  <div class="card-body">
+<h2 style="text-align:center;">Update Student</h2>
+{% if messages %}
+{% for message in messages %}
+<div class="container-fluid p-0">
+<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="True">&times;</span>
+</button>
+{{ message }}
+</div>
+</div>
+{% endfor %}
+    {%endif%}
+
+<div>
+  <form method="post" autocomplete="off" enctype="multipart/form-data" style="margin-left:200px;margin-right:200px;">
+      {% csrf_token %}
+        <label for="first_name">First Name</label>
+        {% render_field userForm.first_name class="form-control form-control-sm rounded-0" placeholder="First_Name" %}
+        <label for="last_name">Last Name</label>
+        {% render_field userForm.last_name class="form-control form-control-sm rounded-0" placeholder="Last_Name" %}
+         <!--<label for="mobile">Contact</label>-->
+          {% render_field studentForm.mobile class="form-control form-control-sm rounded-0" placeholder="Mobile" %}
+            <!--<label for="address">Address</label>-->
+          {% render_field studentForm.address class="form-control form-control-sm rounded-0" placeholder="Address" %}
+          <label for="address">semister</label>
+          {% render_field studentForm.sem class="form-control form-control-sm rounded-0" placeholder="8" %}
+          
+        <label for="username">Username</label>
+        {% render_field userForm.username class="form-control form-control-sm rounded-0" placeholder="Username" %}
+          <label for="password">gender</label>
+        {% render_field studentForm.gender class="form-control form-control-sm rounded-0"  %} <br><br>
+        <label for="profile_pic">Profile Picture</label>
+          {% render_field studentForm.profile_pic class="form-control form-control-sm rounded-0" placeholder="Profile Picture" %}
+<br><br>
+    <input type="submit" class="btn btn-lg rounded-0 btn-primary" value="Update" style="border-radius:0px;">
+  </form>
+</div>
+
+
+
+<br><br><br><br><br><br><br><br>
+{% endblock content %}

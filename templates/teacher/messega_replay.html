@@ -1,0 +1,64 @@
+{%extends 'teacher/teacherbase.html'%}
+{%block content%}
+{%load static %}
+<center><div class="shadow-lg" style="width:600px">
+    <span>{{student}}</span>
+    <div class="table table-responsive shadow-lg" style="max-height:500px;min-height:500px">
+    <ul id="ul">
+
+    </ul>
+        
+
+
+       
+    </div>
+    <form action="{%url 'teacher:msgsender'%}" method="post">
+        {%csrf_token%}
+        <input type="hidden" name="id" value="{{id}}"/>
+        <textarea rows="2" cols="70" name="msg" placeholder="type your message here"></textarea>
+    <button type="submit" class="btn btn-primary fa fa-send">send</button>
+    </form>
+    
+    
+</div></center>
+<script src="{%static 'js/jquery-2.1.1.min.js'%}"></script>
+<script>
+    
+    $(document).ready(function () {
+
+
+        
+ 
+        ///var dxas= setInterval(function () {
+         var postData = {csrfmiddlewaretoken: '{{ csrf_token }}' }
+             $.ajax({
+                 url: "",
+                 type: "POST",
+                 dataType: 'json',
+                 data: {
+ 
+                 },
+                 success: function (response) {
+                     
+                     
+            var li=document.createElement("li");
+            //li.append(response.stm)
+            li.innerHTML='<p style="color:green">'+response.stm+'</p>'
+             li.append(response.msgd)
+             li.style.color="red"
+             ul.appendChild(li)
+                     
+                     
+                     
+                 }
+ 
+             });
+             //}, 1000);
+     
+     })
+
+
+
+
+</script>
+{%endblock%}

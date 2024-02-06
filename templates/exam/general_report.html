@@ -1,0 +1,91 @@
+{%extends 'exam/adminbase.html'%}
+{%load static%}
+{%block content%}
+{% load widget_tweaks %}
+<div class="container-sm">
+
+<div class="card">
+    <div class="card-body">
+        {% if messages %}
+  {% for message in messages %}
+<div class="container-fluid p-0">
+<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+  <button  class="btn close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="True">&times;</span>
+  </button>
+  {{ message }}
+</div>
+</div>
+{% endfor %}
+      {%endif%}
+        <button class="btn btn-success" style="float: right;" id="bt" onclick="window.print()">print</button>
+        
+
+<div class="panel panel-primar rounded-0" id="pn">
+    <div class="panel-heading rounded-0">
+      <h6 class="panel-title">General Orgnazation Report</h6>
+    </div>
+    <input type="text" id="myinput" placeholder="search......." class="form-control" style="font-size:20px">
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+          <th>NO</th>
+          <th>Name</th>
+          <th>Total</th>
+          
+          
+        </tr>
+      </thead>
+     
+      <tr>
+        <td> 1</td>
+        <td> student</td>
+        <td> {{total_student}}</td>
+   
+      </tr>
+      <tr>
+        <td> 2</td>
+        <td> Teacher</td>
+        <td> {{total_teacher}}</td>
+   
+      </tr>
+      <tr>
+        <td> 3</td>
+        <td> Course</td>
+        <td> {{total_course}}</td>
+   
+      </tr>
+      <tr>
+        <td> 4</td>
+        <td>Question</td>
+        <td> {{total_question}}</td>
+   
+      </tr>
+      <tr>
+        <td> 5</td>
+        <td>Collage</td>
+        <td> {{collage}}</td>
+   
+      </tr>
+      <tr>
+        <td> 6</td>
+        <td>Departiment</td>
+        <td> {{departiment}}</td>
+   
+      </tr>
+    </table>
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+<script>
+function show(){
+    var d=document.querySelector('#frm');
+    var p=document.querySelector('#pn');
+    d.style.display="block";
+    p.style.display="none"
+}
+</script>
+{%endblock%}

@@ -1,0 +1,190 @@
+{% extends 'teacher/teacherbase.html' %}
+{% load widget_tweaks %}
+{%load static%}
+{% block content %}
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <style type="text/css">
+      
+    </style>
+  </head>
+
+
+  <div class="container-sm">
+
+
+
+
+   
+
+<div class="card">
+    <div class="card-body">
+        {% if messages %}
+  {% for message in messages %}
+<div class="container-fluid p-0">
+<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+  <button  class="btn close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="True">&times;</span>
+  </button>
+  {{ message }}
+</div>
+</div>
+{% endfor %}
+      {%endif%}
+        <button class="btn btn-success" style="float: right;" id="bt" onclick="show()">Add Exam</button>
+        <div style="display: none;" id="frm">
+<form action="" method="post">
+    {%csrf_token%}
+    
+    <label class="form-label">Exam Name</label>
+    <input type="text" class="form-control" name="tname" id="tn">
+     <label class="form-label">total Question</label>
+     <input type="number" class="form-control" name="tq" id="tq">
+      <label class="form-label">total Marks</label>
+      <input type="number" class="form-control" name="tm" id="tm">
+      <br>
+    <button type="submit" class="btn btn-primary" id="ad" style="display: none;">Add Exam</button>
+</form>
+</div></div></div>
+
+<div class="panel panel-primary rounded-0" id="pn">
+    <div class="panel-heading rounded-0">
+     </div>
+{%for t in tes%}
+<div class="row">
+
+<div class="col-6">
+<div class="card"  >
+<div class="card-header bg-c-blue" style="background-color: rgb(20, 117, 117);">
+<span>{{t.name}}</span>
+</div>
+<div class="card-body">
+  <a href="{%url 'teacher:teacher_add_question' t.id %}" class="btn btn-info" style="text-decoration: none;"><p class=" fa fa-plus"></p> <p class=" fa fa-plus fa fa-question"></p></a>
+ &nbsp;&nbsp;&nbsp; <a href="{%url 'teacher:delet_test' t.id%}" class="btn btn-danger" style="text-decoration: none;"><p class=" fa fa-trash"></p> </a>
+ &nbsp;&nbsp;&nbsp;  <span data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success fa fa-plus" style="" id="sh"><p class="fa fa-plus"></p>&nbsp;password</span>
+ <input type="hidden" id="ida" name="id" value="{{t.name}}">   
+
+</div>
+</div>
+</div>
+
+<div class="col-6">
+  <div class="card" >
+  <div class="card-header bg-c-blue" style="background-color: rgb(20, 117, 117);">
+  <span>{{t.name}}</span>
+  </div>
+  <div class="card-body">
+   
+    <a href="teacher-view-question" style="text-decoration: none;"><p class="fa fa-eye"></p><p class=" fa fa-plus fa fa-question"></p></a>
+    &nbsp;&nbsp;&nbsp;<a href="{%url 'teacher:makepretest' t.id%}" class="btn btn-danger" style="text-decoration: none;">make frist exam</a>
+
+  </div>
+  </div>
+</div>
+</div>
+<br>
+{%endfor%}
+
+     
+  </div>
+</div>
+
+</div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Enter Exam Password </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+   
+     <div style="padding:20px">
+    <form  action="{%url 'teacher:exam_password_set'%}"  name="my-form1" method="post" style="font-size:20px">
+  {%csrf_token%}
+  <label class="form-label">Select Exam</label>
+ <select class="form-control" id="" name="id">
+{%for t in tes%}
+<option value="{{t.id}}">{{t.name}}</option>
+{%endfor%}
+ </select>
+  
+  <label class="form-label">Enter Exam Password</label>
+  <input type="text" class="form-control" name="pas">
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  <button type="submit" class="btn btn-primary">Save </button>
+</div>
+</form>
+</div>
+</div>
+</div></center>
+</div>
+<script>
+  var sh=document.getElementById('sh');
+  sh.addEventListener('click',()=>{
+    var ida=document.getElementById('ida').value;
+    var id=document.getElementById('idc');
+    id.setAttribute("value",ida);
+  })
+</script>
+<script>
+    var mailformat =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var telformat = /\d{3}[\-]\d{3}[\-]\d{4}$/;
+    var letters = /^[A-Za-z]+$/;
+    var tn=document.querySelector('#tn');
+    tn.addEventListener('keyup',()=>{
+      var ad=document.querySelector('#ad');
+      var bn=tn.value;
+      if(bn!=""||bn!=null){
+        tn.setAttribute("class","form-control is-valid")
+        ad.style.display="block";
+      }else{
+        tn.setAttribute("class","form-control is-invalid")
+        ad.style.display="none";
+      }
+    })
+    var tq=document.querySelector('#tq');
+    tq.addEventListener('keyup',()=>{
+      var ad=document.querySelector('#ad');
+      var bn=tq.value;
+      if(bn.match(letters)){
+        tq.setAttribute("class","form-control is-invalid")
+        ad.style.display="none";
+      }else{
+        tq.setAttribute("class","form-control is-valid")
+        ad.style.display="block";
+      }
+    })
+    var tq=document.querySelector('#tm');
+    tm.addEventListener('keyup',()=>{
+      var ad=document.querySelector('#ad');
+      var bn=tm.value;
+      if(bn.match(letters)){
+        tm.setAttribute("class","form-control is-invalid")
+        ad.style.display="none";
+      }else{
+        tm.setAttribute("class","form-control is-valid")
+        ad.style.display="block";
+      }
+    })
+</script>
+<script>
+function show(){
+    var d=document.querySelector('#frm');
+    var p=document.querySelector('#pn');
+    d.style.display="block";
+    p.style.display="none"
+}
+</script>
+<br><br><br><br><br><br><br><br><br><br>
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
+
+{% endblock content %}

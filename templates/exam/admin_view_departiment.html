@@ -1,0 +1,250 @@
+{% extends 'exam/adminbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+  
+  
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+  </style>
+  <style>
+    ul .li{
+        padding-left: 20px;
+        font-size: 30px;
+        color: white;
+    
+      }
+  </style>
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+  <script type="text/javascript" src="{%static 'jsb/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{%static 'js/proper.js' %}"></script>
+  <link rel="stylesheet" href="{%static 'bicon/font/bootstrap-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
+<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
+<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
+
+</head>
+<div class="container-sm">
+
+  <div class="card">
+    <div class="card-body">
+  <a class="btn btn-success btn-xs" style="border-radius: 0%;margin-left:20px" href="{% url 'exam:admin-dashboard'  %}"> <i class="bi bi-chevron-left">back</i></a><center>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-left:20px">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">create departiment</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form  action="" name="my-form1" method="post" style="font-size:20px">
+          {%csrf_token%}
+               
+        <div class="modal-body">
+   
+  
+  
+     
+     
+        <label class="form-label">select Collage</label>
+        <select name="cl" class="form-control" >
+          {%for cl in colage%}
+          <option value="{{cl.id}}"  style="font-size:20px">{{cl.name}}</option>
+          {%endfor%}
+        </select><br>
+     <label class="form-label">enter name of departiment</label>
+     <input type="text" name="depart" id="mark" style="font-size:20px" class="form-control" placeholder="example:computer science">
+    
+       
+     <label class="form-label">discription</label>
+     <textarea class="form-control" style="font-size:20px" rows="4" id="question" name="descr" placeholder="example:computer scince is..."></textarea>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+  </div>
+</div>
+</div>
+     
+    
+ 
+  </center>
+<div class="container">
+  {% if messages %}
+    {% for message in messages %}
+<div class="container-fluid p-0">
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="True">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+</div>
+{% endfor %}
+        {%endif%}
+ 
+  <span data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success" style="float:right;font-size:20px"> add new</span>
+ 
+  <div class="panel panel-primary rounded-0">
+    <div class="panel-heading rounded-0">
+      <h6 class="panel-title">departimentS list</h6>
+    </div>
+    <input type="text" id="myinput" placeholder="search......." class="form-control" style="font-size:20px">
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+         <th>Id</th>
+          <th>departiment</th>
+          <th>collage</th>
+         
+         
+          <th>Action</th>
+        </tr>
+      </thead>
+      {% for t in courses %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td> {{t.name}}</td>
+        <td>{{t.cl_name}}</td>
+        <td>
+          <div class="dropdown show">
+            <a href="" class="logout_btn1 dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius:0px;">
+              <button class="btn btn-primary" style="margin-top:30px">more</button>
+              </a>
+           
+              
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class=" btn-xs fa fa-send" style="border-radius: 0%;" href="{% url 'exam:head' t.id  %}">&nbsp;&nbsp;<small class="">assign head</small></a><br>
+                <a class=" btn-xs fa fa-plus" style="border-radius: 0%;" href="{% url 'exam:admin-course' t.id  %}">&nbsp;&nbsp;<small class=" ">add courses</small></a><br>
+                <a class=" btn-xs fa fa-plus-circle" style="border-radius: 0%;" href="{% url 'exam:add_student_info' t.id  %}">&nbsp;&nbsp;<small class="">add student</small></a><br>
+                <a class="fas fa-trash btn-xs text-danger"  style="border-radius: 0%;" href="{% url 'exam:departdel' t.id  %}">&nbsp;&nbsp;<small class="">delete</small></a>
+            </div>
+
+
+
+        </td>
+        
+       
+    </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+
+<main style="visiblity:none">
+
+    <section id="form-container">
+
+       
+
+        <div id="welcome-message">
+           
+        </div>
+
+        <form id="form">
+            <div class="field-wrapper" style="display:none">
+
+                <div class="form-field" >
+                    <label>Room:</label>
+                    <input name="room" type="hidden" placeholder="Enter a room name..."  style="text-transform:uppercase"/>
+                </div>
+
+                <div class="form-field">
+                    <label>Name:</label>
+                    <input name="name" placeholder="Enter your name..."  type="hidden" style="text-transform:uppercase"/>
+                </div>
+
+                <div class="form-field" >
+                    <input type="submit" value="Join Stream" />
+                </div>
+            </div>
+        </form>
+    </section>
+</main>
+
+<script>
+    let form = document.getElementById('form')
+    let video = document.getElementById('video')
+
+    let handleSubmit = async (e) => {
+        //e.preventDefault()
+        var csrf=document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+        let room = e.target.room.value.toUpperCase()
+        let name = e.target.name.value
+
+        let response = await fetch(`/base/get_token/?channel=${room}`)
+        let data = await response.json()
+
+        let UID = data.uid
+        let token = data.token
+
+        sessionStorage.setItem('UID', UID)
+        sessionStorage.setItem('token', token)
+        sessionStorage.setItem('room', room)
+        sessionStorage.setItem('name', name)
+
+        window.open('base/room/', '_self')
+    }
+
+
+video.addEventListener('click',()=>{
+  form.submit()
+})
+   
+</script>
+
+
+
+
+
+  <script>
+    //function myFunction() {
+      input = document.getElementById("myinput");
+      input.addEventListener('keyup',()=>{
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myinput");
+        filter = input.value.toUpperCase();
+        table = document.querySelector('.table')
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            tda = tr[i].getElementsByTagName("td")[2];
+            tdi = tr[i].getElementsByTagName("td")[0];
+            if (td, tda) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || tda.innerHTML.toUpperCase().indexOf(filter) > -1 || tdi.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+      })</script>
+
+{% endblock content %}

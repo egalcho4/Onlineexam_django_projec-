@@ -1,0 +1,147 @@
+{% extends 'teacher/teacherbase.html' %}
+{% load widget_tweaks %}
+{%load static%}
+{% block content %}
+<html>
+    <style>
+        ul .li{
+            padding-left: 20px;
+            font-size: 30px;
+            color: white;
+        
+          } #qz{
+              border: 3px solid white;
+                background: -webkit-linear-gradient(top left,black,darkgray);
+                background: -linear-gradient(top left,black,darkgray);
+                background: -o-linear-gradient(top left,black,darkgray);
+                height: 100%;
+                
+            }#cont{
+               background: -webkit-linear-gradient(top left,black,darkgray);
+                background: -linear-gradient(top left,black,darkgray);
+                background: -o-linear-gradient(top left,black,darkgray);
+            }#rpo{
+               border: 3px solid white;
+                background: -webkit-linear-gradient(top left,black,darkgray);
+                background: -linear-gradient(top left,black,darkgray);
+                background: -o-linear-gradient(top left,black,darkgray);
+                height: 100%;
+            }
+            input[type=text],
+            input[type=password] {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+            }
+            
+        
+    </style>
+    <link rel="stylesheet" href="{%static 'font/css/all.min.css'%}">
+  <link rel="stylesheet" href="{%static 'font/css/fontawesome.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/font.css'%}">
+<script type="text/javascript" src="{%static 'jsb/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/proper.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/jq.js' %}"></script>
+<link rel="stylesheet" href="{%static 'css/ex.css'%}"> 
+<link rel="stylesheet" href="{%static 'css/style.css'%}"> 
+
+<link rel="stylesheet" href="{%static 'css/color.css'%}">   
+          
+            
+              
+        {% if messages %}
+        {% for message in messages %}
+    <div class="container-fluid p-0">
+      <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="True">&times;</span>
+        </button>
+        {{ message }}
+      </div>
+    </div>
+    {% endfor %}
+            {%endif%}
+     
+            
+                
+            <form  action=""  name="my-form1" method="post" enctype="multipart/form-data" style="padding:30px;margin:50px;box-shadow:10px 10px 10px 10px black">
+              {%csrf_token%}
+                    
+             
+                  <input type="hidden" name="id" id="idb" value="{{username}}">
+                  
+                  <input type="hidden" name="course" id="idb" value="{{course}}">
+                  <label class="form-label">question weight</label>
+                  <input type="text" name="mark" id="mark" class="form-control" placeholder="example:2" value="{{qtn.marks}}">
+                 
+                    
+                  <label class="form-label">write your question bellow</label>
+                  <textarea class="form-control" rows="4" id="question" name="question" value="{{qtn.question}}" placeholder="{{qtn.question}}" ></textarea>
+                  <label class="form-label">add image </label>
+                  <input type="file" name="image" id="option1" class="form-control"  value="">
+                   
+                  <label class="form-label">enter choose A</label>
+                  <input type="text" name="option1" id="option1" class="form-control"  value="{{qtn.option1}}">
+                         <label class="form-label">enter choose B</label>
+                  <input type="text" name="option2" id="option2" class="form-control"  value="{{qtn.option2}}">
+                  <label class="form-label">enter choose c</label>
+                  <input type="text" name="option3" id="option3" class="form-control"  value="{{qtn.option3}}">
+                  <label class="form-label">enter choose d</label>
+                  <input type="text" name="option4" id="option4" class="form-control"  value="{{qtn.option4}}">
+                  <label class="form-label">select answer</label>
+                  <select name="answer" class="form-control" >
+                    <option value="option1">A</option>
+                    <option value="option2">B</option>
+                    <option value="option3">C</option>
+                    <option value="option4">D</option>
+                  </select>
+                  
+                  <button type="submit" class="btn btn-primary">Save</button>
+               
+            
+                 </form>
+                     
+                    
+             
+         
+          <script type="text/javascript">
+            /*var tm=document.querySelector('.tim');
+            
+            var qz=document.querySelector('#qz');
+            var qts=document.querySelector('#qts');
+            var st=document.querySelector('#stud');
+            
+            var tim=document.querySelector('#tm');
+            var rp=document.querySelector('#rp');
+            var rpo=document.querySelector('#rpo');
+           
+            qts.addEventListener('click',()=>{
+            
+            qz.style.display="block"
+            st.style.display="none"
+            tm.style.display="none"
+            rpo.style.display="none"
+            })
+            
+            tim.addEventListener('click',()=>{
+            //qt.style.display="none"
+            qz.style.display="none"
+            st.style.display="none"
+            tm.style.display="block"
+            rpo.style.display="none"
+            })
+            rp.addEventListener('click',()=>{
+            //qt.style.display="none"
+            qz.style.display="none"
+            st.style.display="none"
+            tm.style.display="none"
+            rpo.style.display="block"
+            })*/
+        </script>
+    </body>
+</html>
+{%endblock content %}

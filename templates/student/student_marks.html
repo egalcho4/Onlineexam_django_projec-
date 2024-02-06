@@ -1,0 +1,89 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+ 
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+  <style media="screen">
+   
+  </style>
+  <script type="text/javascript" src="{%static 'jsb/bootstrap.min.js' %}"></script>
+</head>
+<body onload="local()">
+  
+<div class="container-sm">
+  <div class="card"  >
+    <div class="card-header">
+<button class="btn btn-info" style="width: 100%;">Welcome to Smart Onlinexam Platform </button>
+    </div>
+    <div class="card-body">
+
+    
+
+  <div class="row">
+    <span>select your level and subject to see your mark,and system takes you to the result page if marks not visible it mean the time over to see mark</span>
+
+    <div class="col-6">
+<form action="" method="post">
+  <label class="label">select year and semister</label>
+<select class="form-control" name="yer" id="y" style="border: 3px solid blueviolet;">
+  {%for n in yer%}
+<option value="{{n.sem}}">{{n.year}}</option>
+{%endfor%}
+</select>
+</form>
+</div>
+<div class="col-6">
+  <label class="label">select subject</label>
+ <select class="form-control"  id="course" style="border: 3px solid blueviolet;">
+  
+
+ </select>
+</div>
+  </div>
+  
+<script>
+  
+
+var n=setInterval(function(){
+  localStorage.clear()
+  console.log("removed")
+},100)
+setTimeout(function(){
+  clearInterval(n)
+},200)
+$(document).ready(function(){
+  $('#y').change(function(){
+    var na=$('#y').val()
+    $.ajax({
+      url:"",
+      method:"POST",
+      data:{
+        sem:na,
+      },
+      success:function(response){
+       var name=response.name;
+       var id=response.id;
+       console.log(name[0])
+       console.log(id[0])
+       var course=$('#course');
+       for(i=0;i<name.length;i++){
+course.append('<option value="'+id[i]+'">'+name[i]+'</option>');
+       }
+       $('#course').change(function(){
+       var id=$('#course').val()
+       window.open("../student/check-marks/"+id,"_self")
+      
+       })
+      }
+    })
+  })
+})
+  
+</script>
+
+</body>
+{% endblock content %}

@@ -1,0 +1,101 @@
+{% extends 'teacher/teacherbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+ 
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+  <style media="screen">
+   
+  </style>
+  <script type="text/javascript" src="{%static 'jsb/bootstrap.min.js' %}"></script>
+</head>
+<body onload="local()">
+    {% if messages %}
+    {% for message in messages %}
+  <div class="container-fluid p-0">
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="True">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+  </div>
+  {% endfor %}
+        {%endif%}
+<div class="container-sm">
+  <div class="card"  style="width: 90%;border: 3px solid brown;">
+    <div class="card-header bg-info">
+<button class="btn btn-info" style="width: 100%;">Welcome to Smart Onlinexam Platform </button>
+    </div>
+    <div class="card-body">
+<button class="btn btn-success">Never let student to take same exam at one computer</button>
+<button class="btn btn-success" style="float: right;">student computer ip list during exam</button>
+<br><a href="{%url 'teacher:removeipfrom'%}" class="btn btn-danger" style="float: right;">remove</a>
+
+<table class="table table-striped" style="width: 80%;">
+<th>No</th>
+
+<th>full Name</th>
+<th>Ip</th>
+<th>Computer Name</th>
+<th>registered time</th>
+<th>delete</th>
+
+{%for t in stud%}
+<tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{t.name.first_name}}&nbsp;&nbsp;{{t.name.last_name}}</td>
+    <td>{{t.ip}}</td>
+    <td>{{t.host}}</td>
+    <td>{{t.tim}}</td>
+    <td><a href="" ><span class="fa fa-trash text-danger"></span></a></td>
+{%endfor%}</table>
+
+</div>
+  </div>
+  </div>
+<script>
+  
+
+var n=setInterval(function(){
+  localStorage.clear()
+  console.log("removed")
+},100)
+setTimeout(function(){
+  clearInterval(n)
+},200)
+$(document).ready(function(){
+  $('#y').change(function(){
+    var na=$('#y').val()
+    $.ajax({
+      url:"",
+      method:"POST",
+      data:{
+        sem:na,
+      },
+      success:function(response){
+       var name=response.name;
+       var id=response.id;
+       console.log(name[0])
+       console.log(id[0])
+       var course=$('#course');
+       for(i=0;i<name.length;i++){
+course.append('<option value="'+id[i]+'">'+name[i]+'</option>');
+       }
+       $('#course').change(function(){
+       var id=$('#course').val()
+       window.open("../student/check-marks/"+id,"_self")
+      
+       })
+      }
+    })
+  })
+})
+  
+</script>
+
+</body>
+{% endblock content %}

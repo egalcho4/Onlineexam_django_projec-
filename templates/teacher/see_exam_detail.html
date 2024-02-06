@@ -1,0 +1,970 @@
+{% extends 'teacher/teacherbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+ 
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+
+  <script type="text/javascript" src="{%static 'jsb/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{%static 'js/proper.js' %}"></script>
+  <script type="text/javascript" src="{%static 'jsb/bootstrap.bundle.js' %}"></script>
+ 
+  <link rel="stylesheet" href="{%static 'bicon/font/bootstrap-icons.css' %}">
+  <link rel="stylesheet" href="{%static 'bicon/font/bootstrap-icons.min.css' %}">
+  <script type="text/javascript" src="{%static 'js/jqn.js' %}"></script>
+
+
+  <link rel="stylesheet" href="{%static 'font/css/all.min.css'%}">
+  <link rel="stylesheet" href="{%static 'font/css/fontawesome.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+
+
+<script type="text/javascript" src="{%static 'js/proper.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/jq.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/drop.js' %}"></script>
+
+
+<link rel="stylesheet" href="{%static 'css/color.css'%}"> 
+ 
+</head>
+
+<body>
+
+
+  
+ <div class="container-sm">
+  <center>
+    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Update Student Mark </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+       
+         <div style="padding:20px">
+    <form  action=""  name="my-form1" method="post" enctype="multipart/form-data" >
+  {%csrf_token%}
+ 
+  <label class="form-label">Enter Updated Total Mark</label>
+  <textarea class="form-control" rows="2" id="question"  name="um" placeholder="{{mrk}}"></textarea>
+         
+  <label class="form-label">Answer Leter</label>
+  
+  <div class="" style="overflow-y: auto;max-height: 100px;overflow-x: scroll;width: 300px;">
+    <span id="rln"></span>
+    <span id="sln"></span>
+<br>
+Enter answer later by separating coma to make student exam evaluated agian by matching with real answer leter update latter you want to give
+  </div>
+  <textarea class="form-control" rows="2" id="question"  name="ua" placeholder="enter answer letter here"></textarea>
+            
+  
+ 
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary" id="sub" >Save </button>
+    </div>
+  </form>
+  </div>
+  </div>
+  </div></div>
+</center>
+  </div>
+  
+  <div class="container-sm" style="width: 90%;">
+ <div class="card">
+    <div class="card-body" style="border: 3px solid brown;">
+      <span data-bs-toggle="modal" data-bs-target="#exampleModal3" class="btn btn-success fa fa-plus" style="float: right;" id="para">Update</span>
+      {% for q in questions%}
+      <div class="d-flex w-100 align-items-center" style="padding: 30px;">
+
+        {%if q.typ == 0 %}
+        <div class="col-auto flex-shrink-1 ">
+          <h3 class="{{ forloop.counter }}" ></h3>
+            <h3 class="">{{ forloop.counter }}. {{q.question}}&nbsp;&nbsp;({{q.marks}} Marks)&nbsp;&nbsp;<input type="checkbox" id="{{ forloop.counter }}" name="vehicle3" value="Boat"></h3>
+       
+          
+       <br>
+       <div class="continer-sm">
+        {%if q.tabl %}
+        <div class="card">
+          <div class="card-header">
+            <span class="text-black">{{q.tabl.name}}</span>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped">
+              <tr>
+              {%for t in q.tabl.data1%}
+             
+              
+               <th>{{t}}</th>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data2%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data3%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data4%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data5%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data6%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data7%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data8%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data9%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data10%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data11%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data12%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data13%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            
+            </table>
+          </div>
+
+        </div>
+        {%endif%}
+       </div><br>
+       {% if q.image != "2" %}
+      
+       
+       <div class="d-flex w-100 align-items-center">
+       <image src="{{q.image.url }}" style="width:400px;height:400px;margin-left:2px"/>
+     </div>
+
+       {%endif%}
+       
+       <div class="form-check mx-4 d-flex align-items-center">
+
+        <input class="form-check-input option1" type="radio" name="{{ forloop.counter }}" id="A" value="A">
+        <label class="form-check-label ml-3" for="option1">
+          A {{q.option1}}
+        </label>
+    </div>
+
+
+    <div class="form-check mx-4 d-flex align-items-center">
+        <input class="form-check-input option2" type="radio" name="{{ forloop.counter }}" id="B" value="B">
+        <label class="form-check-label ml-3" for="option2">
+          B {{q.option2}}
+        </label>
+    </div>
+
+
+    <div class="form-check mx-4 d-flex align-items-center">
+        <input class="form-check-input option3" type="radio" name="{{ forloop.counter }}" id="C" value="C">
+        <label class="form-check-label ml-3" for="option3">
+          C {{q.option3}}
+        </label>
+    </div>
+
+
+    <div class="form-check mx-4 d-flex align-items-center">
+        <input class="form-check-input option4" type="radio" name="{{ forloop.counter }}" id="D" value="D">
+        <label class="form-check-label ml-3" for="option4">
+          D {{q.option4}}
+        </label>
+       
+    </div>
+      
+      <center>
+        <div class="container-sm" style="width: 90%;">
+        
+           
+          
+          
+            <span>&nbsp;&nbsp;<p name="{{ forloop.counter }}" class="{{ forloop.counter }} " style="background-color: aqua;width: 70%;margin-left: 20%;" id="tod">hello</p>
+            </span>
+          </center>
+       
+    <span id="{{ forloop.counter }}"></span>
+      </div>
+       {%elif q.typ == 1 %}
+       <div class="col-auto flex-shrink-1 ">
+        <h3 class="">{{ forloop.counter }}. {{q.question}}&nbsp;&nbsp;({{q.marks}} Marks)&nbsp;&nbsp;<input type="checkbox" id="{{ forloop.counter }}" name="vehicle3" value="Boat"></h3>
+          
+       <div class="continer-sm">
+        {%if q.tabl %}
+        <div class="card">
+          <div class="card-header">
+            <span class="text-black">{{q.tabl.name}}</span>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped">
+              <tr>
+              {%for t in q.tabl.data1%}
+             
+              
+               <th>{{t}}</th>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data2%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data3%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data4%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data5%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data6%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data7%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data8%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data9%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data10%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data11%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data12%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data13%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            
+            </table>
+          </div>
+
+        </div>
+        {%endif%}
+        </div><br>
+        {% if q.image != "2" %}
+
+ 
+        <div class="d-flex w-100 align-items-center">
+        <image src="{{q.image.url }}" style="width:400px;height:400px;margin-left:2px"/>
+      </div>
+      <span id="{{ forloop.counter }}"></span>
+      
+    
+    
+      {%endif%}
+      <br>
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              exaplanation
+            </button>
+          </h2>
+          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">{{q.exp}}</div>
+          </div>
+        </div></div>
+        <center>
+          <div class="container-sm" style="width: 90%;">
+          
+             
+            
+            
+              <span>&nbsp;&nbsp;<p name="{{ forloop.counter }}" class="{{ forloop.counter }} " style="background-color: aqua;width: 70%;margin-left: 20%;" id="tod">hello</p>
+              </span></div>
+            </center>
+    </div>
+    {%elif q.typ == 2 %}
+    <div class="col-auto flex-shrink-1 ">
+      <h3 class="">{{ forloop.counter }}. {{q.question}}&nbsp;&nbsp;({{q.marks}} Marks)&nbsp;&nbsp;<input type="checkbox" id="{{ forloop.counter }}" name="vehicle3" value="Boat"></h3>
+      <div class="continer-sm">
+        {%if q.tabl %}
+        <div class="card">
+          <div class="card-header">
+            <span class="text-black">{{q.tabl.name}}</span>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped">
+              <tr>
+              {%for t in q.tabl.data1%}
+             
+              
+               <th>{{t}}</th>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data2%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data3%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data4%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data5%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data6%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data7%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data8%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data9%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data10%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data11%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data12%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            <tr>
+              {%for t in q.tabl.data13%}
+             
+              
+               <td>{{t}}</td>
+              
+              
+              {%endfor%}
+            </tr>
+            
+            </table>
+          </div>
+
+        </div>
+        {%endif%}
+        </div>
+        {% if q.image != "2" %}
+
+ 
+  <div class="d-flex w-100 align-items-center">
+  <image src="{{q.image.url }}" style="width:400px;height:400px;margin-left:2px"/>
+</div>
+<span id="{{ forloop.counter }}"></span>
+
+  {%endif%}
+<br>
+<input type="hidden" name="csrfmiddlewaretoken" style="display:none" value="C24rUotmdHawVQJL3KrqiWxvti8UffOFYUc8TRbZtLt36AVLdP3jbkzUVe3beRAa">
+
+<div class="accordion accordion-flush" id="accordionFlushExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingOne">
+
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+        exaplanation
+      </button>
+    </h2>
+    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">{{q.exp}}</div>
+    </div>
+  </div>
+</div>
+<center>
+<div class="container-sm" style="width: 90%;">
+
+   
+  
+  
+    <span>&nbsp;&nbsp;<p name="{{ forloop.counter }}" class="{{ forloop.counter }} " style="background-color: aqua;width: 70%;margin-left: 20%;" id="tod">hello</p>
+    </span></div>
+  </center>
+  </div>
+  {%elif q.typ == 3%}
+  <div class="col-auto flex-shrink-1 ">
+    <h3 class="">{{ forloop.counter }}. {{q.question}}&nbsp;&nbsp;({{q.marks}} Marks)&nbsp;&nbsp;<input type="checkbox" id="{{ forloop.counter }}" name="vehicle3" value="Boat"></h3>
+    <div class="continer-sm">
+      {%if q.tabl %}
+      <div class="card">
+        <div class="card-header">
+          <span class="text-black">{{q.tabl.name}}</span>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <tr>
+            {%for t in q.tabl.data1%}
+           
+            
+             <th>{{t}}</th>
+            
+            
+            {%endfor%}
+          </tr>
+          <tr>
+            {%for t in q.tabl.data2%}
+           
+            
+             <td>{{t}}</td>
+            
+            
+            {%endfor%}
+          </tr>
+          <tr>
+            {%for t in q.tabl.data3%}
+           
+            
+             <td>{{t}}</td>
+            
+            
+            {%endfor%}
+          </tr>
+          <tr>
+            {%for t in q.tabl.data4%}
+           
+            
+             <td>{{t}}</td>
+            
+            
+            {%endfor%}
+          </tr>
+          <tr>
+            {%for t in q.tabl.data5%}
+           
+            
+             <td>{{t}}</td>
+            
+            
+            {%endfor%}
+          </tr>
+          <tr>
+            {%for t in q.tabl.data6%}
+           
+            
+             <td>{{t}}</td>
+            
+            
+            {%endfor%}
+          </tr>
+          <tr>
+            {%for t in q.tabl.data7%}
+           
+            
+             <td>{{t}}</td>
+            
+            
+            {%endfor%}
+          </tr>
+          <tr>
+            {%for t in q.tabl.data8%}
+           
+            
+             <td>{{t}}</td>
+            
+            
+            {%endfor%}
+          </tr>
+          <tr>
+            {%for t in q.tabl.data9%}
+           
+            
+             <td>{{t}}</td>
+            
+            
+            {%endfor%}
+          </tr>
+          <tr>
+            {%for t in q.tabl.data10%}
+           
+            
+             <td>{{t}}</td>
+            
+            
+            {%endfor%}
+          </tr>
+          <tr>
+            {%for t in q.tabl.data11%}
+           
+            
+             <td>{{t}}</td>
+            
+            
+            {%endfor%}
+          </tr>
+          <tr>
+            {%for t in q.tabl.data12%}
+           
+            
+             <td>{{t}}</td>
+            
+            
+            {%endfor%}
+          </tr>
+          <tr>
+            {%for t in q.tabl.data13%}
+           
+            
+             <td>{{t}}</td>
+            
+            
+            {%endfor%}
+          </tr>
+          
+          </table>
+        </div>
+
+      </div>
+      {%endif%}
+      </div> <br>
+      {% if q.image != "2" %}
+
+
+<div class="d-flex w-100 align-items-center">
+<image src="{{q.image.url }}" style="width:400px;height:400px;margin-left:2px"/>
+</div>
+<span id="{{ forloop.counter }}"></span>
+
+
+
+{%endif%}
+<br>
+<div class="form-check mx-4 d-flex align-items-center">
+
+<input class="form-check-input " type="radio" name="{{ forloop.counter }}" id="A" >
+<label class="form-check-label ml-3" for="option1">
+A {{q.option1}}
+</label>
+</div>
+
+
+<div class="form-check mx-4 d-flex align-items-center">
+<input class="form-check-input " type="radio" name="{{ forloop.counter }}" id="B" >
+<label class="form-check-label ml-3" for="option2">
+B {{q.option2}}
+</label>
+</div>
+<div class="form-check mx-4 d-flex align-items-center" style="display:none">
+<input class="form-check-input option3" type="radio" name="{{ forloop.counter }}" id="C" value="C" style="display:none">
+
+</div>
+
+
+<div class="form-check mx-4 d-flex align-items-center" style="display:none">
+<input class="form-check-input option4" type="radio" name="{{ forloop.counter }}" id="D" value="D" style="display:none">
+
+</div>
+<center>
+<div class="container-sm" style="width: 90%;">
+
+ 
+
+
+  <span>&nbsp;&nbsp;<p name="{{ forloop.counter }}" class="{{ forloop.counter }} " style="background-color: aqua;width: 70%;margin-left: 20%;" id="tod">hello</p>
+  </span></div>
+</center>     
+</div>
+
+       {%endif%}
+      </div>
+     
+
+      {% endfor %}
+    
+
+    </div>
+          
+     
+     
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+
+
+    
+$.ajax({
+    url: "",
+    type: "POST",
+    dataType: 'json',
+    data: {
+        
+    },
+    success: function (response) {
+     
+     real=response.real;
+     ans=response.selected;
+     stans=response.stans
+     var rln=document.getElementById('rln').innerHTML="real answer=["+real+"]<br>";
+     var sln=document.getElementById('sln').innerHTML="student answer=["+ans+"]";
+    }
+  })
+})
+</script>
+<script>
+  var acc = document
+.getElementsByClassName("accordion");
+
+var i;
+
+for (i = 0; i < acc.length; i++) {
+ acc[i].onclick = function(){
+  this.classList.toggle("active");
+  this.nextElementSibling.classList
+  .toggle("show");
+  }
+}
+  $(document).ready(function () {
+
+
+    
+          $.ajax({
+              url: "",
+              type: "POST",
+              dataType: 'json',
+              data: {
+                  
+              },
+              success: function (response) {
+               
+               real=response.real;
+               ans=response.selected;
+               stans=response.stans
+               
+              var sp = document.getElementsByTagName('p');
+              for(i=0;i<sp.length;i++){
+                sp[i].innerHTML=stans[i]
+              }
+              
+
+             var ele = document.getElementsByTagName('input');
+                for (i = 0; i < ele.length; i++) {
+                if(ele[i].type=="radio"){
+                  var dt=document.getElementsByName(ele[i].name);
+                  //console.log(ele[i].name)
+                  var loc=ans[ele[i].name-1]
+                 
+                
+                
+                  for(j=0;j<4;j++){
+                    if(dt[j].id==loc){
+                      //console.log(dt[j])
+                    
+                      dt[j].setAttribute("checked","")
+                    
+                    
+                  }
+        }
+      }}
+
+      var ele = document.getElementsByTagName('input');
+
+      for (i=0; i<real.length;i++){
+               
+        if (ele[i].type = "checkbox") {
+         
+           
+            if(real[i]==ans[i]){
+              var id=i+1
+              var nb=document.getElementById(id);
+             
+              
+              
+
+              if(nb.value=ans[i]){
+
+                nb.setAttribute("class","fa fa-check")
+                nb.setAttribute("style","font-size:40px;color:green;font-weight:bold")
+                nb.style.backgroundColor="green"
+                
+              }
+          }else if(real[i]!=ans[i]){
+            var id=i+1
+            var nb=document.getElementById(id);
+            
+            if(nb.value=ans[i]){
+              nb.setAttribute("class","bi bi-x-lg")
+              
+                nb.setAttribute("style","font-size:40px;color:red;font-weight:bold")
+               
+             
+            }
+
+          }
+        }
+   
+       }
+
+              /*for (i=1;i<=ele.length;i++){
+                var dt=document.getElementsByName(ele[i].name);
+                console.log(dt)
+                
+                var loc=ans[i-1]
+               
+              
+                  for(j=0;j<4;j++){
+                    if(dt[j].id==loc){
+                      //console.log(dt[i].id)
+                    
+                    
+                      dt[j].setAttribute("checked","")
+                    
+                    
+                  }
+                }
+              
+                }*/
+                
+
+
+
+               widt=parseInt( response.pers)
+              
+               var pro1=document.getElementById("pro1");
+             
+               var pro2=document.getElementById("pro2");
+               
+              
+              
+             
+               var num=0
+               
+                  
+              }
+
+          });
+  })
+
+</script>
+
+{% endblock content %}

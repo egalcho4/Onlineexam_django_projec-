@@ -1,0 +1,93 @@
+from django.urls import path,include
+from django.contrib import admin
+from . import views
+from django.contrib.auth.views import LogoutView,LoginView
+app_name="exam"
+urlpatterns = [
+    path('home/',views.home_view,name=''),
+    path('logout', LogoutView.as_view(template_name='exam/logout.html'),name='logout'),
+    path('contactus', views.contactus_view),
+    path('afterlogin', views.afterlogin_view,name='afterlogin'),
+
+
+
+    path('adminclick', views.adminclick_view),
+    path('', LoginView.as_view(template_name='exam/adminlogin.html'),name='adminlogin'),
+    path('admin-dashboard', views.admin_dashboard_view,name='admin-dashboard'),
+    path('admin-teacher', views.admin_teacher_view,name='admin-teacher'),
+    path('admin-view-teacher', views.admin_view_teacher_view,name='admin-view-teacher'),
+    path('update-teacher/<int:pk>', views.update_teacher_view,name='update-teacher'),
+    path('delete-teacher/<int:pk>', views.delete_teacher_view,name='delete-teacher'),
+    path('admin-view-pending-teacher', views.admin_view_pending_teacher_view,name='admin-view-pending-teacher'),
+    path('admin-view-teacher-salary', views.admin_view_teacher_salary_view,name='admin-view-teacher-salary'),
+    path('approve-teacher/<int:pk>', views.approve_teacher_view,name='approve-teacher'),
+    path('reject-teacher/<int:pk>', views.reject_teacher_view,name='reject-teacher'),
+
+    path('admin-student', views.admin_student_view,name='admin-student'),
+    path('admin-view-student', views.admin_view_student_view,name='admin-view-student'),
+    path('admin-view-student-marks', views.admin_view_student_marks_view,name='admin-view-student-marks'),
+    path('admin-view-marks/<int:pk>', views.admin_view_marks_view,name='admin-view-marks'),
+    path('admin-check-marks/<int:pk>', views.admin_check_marks_view,name='admin-check-marks'),
+    path('update-student/<int:pk>', views.update_student_view,name='update-student'),
+    path('delete_student_view/<int:id>', views.delete_student_view,name='delete_student_view'),
+
+    path('admin-course/<int:id>', views.admin_course_view,name='admin-course'),
+    path('admin-add-course', views.admin_add_course_view,name='admin-add-course'),
+    path('admin-view-course', views.admin_view_course_view,name='admin-view-course'),
+    path('delete-course/<int:pk>', views.delete_course_view,name='delete-course'),
+    path('start_all_exam/',views.start_all_exam,name="start_all_exam"),
+    path('start_now/<int:id>',views.start_now,name="start_now"),
+path('stop_now/<int:id>',views.stop_now,name="stop_now"),
+    path('admin-question', views.admin_question_view,name='admin-question'),
+    path('admin-add-question/<int:id>', views.admin_add_question_view,name='admin-add-question'),
+    path('admin-view-question', views.admin_view_question_view,name='admin-view-question'),
+    path('view-question/<int:pk>', views.view_question_view,name='view-question'),
+    path('delete-question/<int:pk>', views.delete_question_view,name='delete-question'),
+    path('register_depart/<int:id>',views.register_depart,name="register_depart"),
+    path('admin_view_departiment/',views.admin_view_departiment,name="admin_view_departiment"),
+    path('departdel/<int:id>',views.departdel,name="departdel"),
+    path('head/<int:id>/',views.head,name="head"),
+    path('assgin_teacher/<int:id>/',views.assgin_teacher,name="assgin_teacher"),
+    path('register_collage/',views.register_collage,name="register_collage"),
+    path('colage_edit/<int:id>',views.colage_edit,name="colage_edit"),
+    path('permistion/',views.permistion,name="permistion"),
+    path('first_exam/<int:id>',views.first_exam,name="first_exam"),
+    path('add_student/',views.add_student,name="add_student"),
+    path('add_student_info/<int:id>',views.add_student_info,name="add_student_info"),
+    path('view_student_marks/',views.view_student_marks,name="view_student_marks"),
+    path('student_marks/<int:id>',views.student_marks,name="student_marks"),
+    path('livestreaming/<int:id>',views.livestreaming,name="livestreaming"),
+    path('sendmessage/',views.sendmessage,name="sendmessage"),
+    path('settings/',views.settingsa,name="settingsa"),
+    path('enable_student/<int:id>',views.enable_student,name="enable_student"),
+    path('disable_student/<int:id>',views.disable_student,name="disable_student"),
+    path('qedit/<int:id>',views.qedit,name="qedit"),
+    path('uploadscv/',views.uploadscv,name="uploadscv"),
+    path('delet_studentsm/<int:id',views.delet_studentsm,name="delet_studentsm"),
+    path('markdelete/<int:id>',views.markdelete,name="markdelete"),
+    path('search_password/',views.search_password,name="search_password"),
+    path('uploadscvad/',views.uploadscvad,name="uploadscvad"),
+    path('psforgot/',views.psforgot,name='psforgot'),
+    path('forgot/<token>/',views.forgot,name='forgot'),
+    path('depart_mark_views/',views.depart_mark_views,name="depart_mark_views"),
+    path('student_marks/',views.student_marks,name="student_marks"),
+    path('student_mark_report/<int:id>',views.student_mark_report,name="student_mark_report"),
+    path('all_course/<int:id>',views.all_course,name="all_course"),
+    path('edit_departiment/<int:id>',views.edit_departiment,name="edit_departiment"),
+    path('depart_password/<int:id>',views.depart_password,name="depart_password"),
+    path('add_question_admin/<int:id>',views.add_question_admin,name="add_question_admin"),
+    path('blanck_question/',views.blanck_question,name="blanck_question"),
+path('short_question/',views.short_question,name="short_question"),
+path('true_false_question/',views.true_false_question,name="true_false_question"),
+path('paragraph/',views.paragraph,name="paragraph"),
+
+path('teacher-add-question', views.teacher_add_question_view,name='teacher-add-question'),
+
+     path('add_year/<int:id>',views.add_year,name="add_year"), 
+     path('general_report/',views.general_report,name="general_report"),
+    
+
+
+ ]
+ 
+ 

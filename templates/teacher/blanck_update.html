@@ -1,0 +1,347 @@
+{% extends 'teacher/teacherbase.html' %}
+{% load widget_tweaks %}
+{%load static%}
+{% block content %}
+<html>
+    <style>
+        ul .li{
+            padding-left: 20px;
+            font-size: 30px;
+            color: white;
+        
+          }
+            
+        
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <body>
+        
+          
+            
+              
+           
+        <div class="container-sm " >
+         
+
+          <div class="card">
+
+          <div class="card-body">
+            <div class="row">
+              <div class="col-2" style="border: 1px solid black;">
+                <label class="form-label">selct update type</label>
+                <select class="form-control" id="ch">
+                  <option value="chos">without image</option>
+                  <option value="short">image</option>
+                  
+                  <option value="TF">table</option>
+                  <option value="pare">add Paragraph</option>
+                  
+                </select>
+               <br>
+                  
+                
+
+                <span data-bs-toggle="modal" data-bs-target="#exampleModala" class="btn btn-success fa fa-plus" style="float: right;display:none;width: 100%;" id="sh">image</span>
+                <span data-bs-toggle="modal" data-bs-target="#exampleModal1" class="btn btn-warning fa fa-plus" style="float: right;display:none;width: 100%;" id="bl">withiout iamge</span>
+                <span data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-warning fa fa-plus" style="float: right;display:none;width: 100%;" id="tf">add table</span>
+                <span data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success fa fa-plus" style="float: right;width: 100%;" id="chos">without image</span>
+                <span data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success fa fa-plus" style="float: right;width: 100%;display: none;" id="prg">add Paragraph</span>
+               
+                {% if messages %}
+                {% for message in messages %}
+            <div class="container-fluid p-0">
+              <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                <button class="btn close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="True">&times;</span>
+                </button>
+                {{ message }}
+              </div>
+            </div>
+            {% endfor %}
+                    {%endif%}
+              </div>
+              <div class="col-10">
+            <h1 style="text-decoration:underline" class="btn">update your question bellow</h1>
+            <span id="full">
+                
+            <form  action=""  name="my-form1" method="post" enctype="multipart/form-data" style="">
+              {%csrf_token%}
+              
+ 
+             
+              <input type="hidden" name="idt" id="idt" value="{{id}}">
+          
+            
+              <input type="hidden" name="id" id="idb" value="{{username}}">
+              
+              <input type="hidden" name="course" id="idb" value="{{course}}">
+              <label class="form-label">question code</label>
+      <input type="number" name="code" id="mark" class="form-control" value="1" placeholder="example:2">
+       
+              <label class="form-label">question weight</label>
+              <input type="text" name="mark" id="mark" class="form-control" placeholder="example:2" value="{{qtn.marks}}">
+             
+                
+              <label class="form-label">write your question bellow</label>
+              <textarea class="form-control" rows="4" id="question" value="{{qtn.question}}" name="question" placeholder="{{qtn.question}}"></textarea>
+             
+              <label class="form-label">exact answer only</label>
+              <textarea class="form-control" rows="4" id="question"  name="answer" placeholder="{{qtn.answer}}"></textarea>
+              <label class="form-label">explanation</label>
+            <textarea class="form-control" rows="4" id="question"  name="exp" placeholder="{{qtn.exp}}"></textarea>
+           
+              
+          
+                  
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary"  style="">Save </button>
+              </div>
+              </form>
+                    </span>
+
+                    <span style="display: none;" id="para">
+                     
+        
+
+                        
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">add parragraph here </h1>
+                                
+                        <form  action="{%url 'teacher:paragraph'%}"  name="my-form1" method="post" enctype="multipart/form-data" >
+                      {%csrf_token%}
+                      <input type="hidden" name="id" id="idb" value="{{qid}}">
+                  
+                              
+                           
+                      
+                      <label class="form-label">Write your parragraph bellow</label>
+                              <textarea class="form-control" rows="4" id="question"  name="question" placeholder="example:where is jinka university"></textarea>
+                             
+                        
+                        <button type="submit" class="btn btn-primary" id="sub" >Save </button>
+                       
+                      </form>
+                      
+                    </span>
+                    <span id="image" style="display:none">
+                      <form action="{%url 'teacher:image_upadeta'%}" method="post" enctype="multipart/form-data">
+                        {%csrf_token%}
+                        <input type="hidden" name="id" id="idb" value="{{qid}}">
+                  
+                        <input type="hidden" name="course" id="idb" value="{{course}}">
+                        <label class="form-label">choose image to embed with question</label>
+                        <input type="file" class="form-control" name="img">
+                        <br>
+                        <button type="submit" class="btn-primary">Update Image</button>
+                      </form>
+
+                    </span>
+                    <span id="wimage" style="display:none">
+                      <form action="{%url 'teacher:wwitout_image' %}" method="post" enctype="multipart/form-data">
+                        {%csrf_token%}
+                        <input type="hidden" name="id" id="idb" value="{{qid}}">
+                  
+                        <input type="hidden" name="course" id="idb" value="{{course}}">
+                        <label class="form-label">question weight</label>
+                        <input type="text" name="mark" id="mark" class="form-control" placeholder="example:2" value="{{qtn.marks}}">
+                       
+                          
+                        <label class="form-label">write your question bellow</label>
+                        <textarea class="form-control" rows="4" id="question" name="question" value="{{qtn.question}}" placeholder="{{qtn.question}}" ></textarea>
+                       
+                        <label class="form-label">enter choose A</label>
+                        <input type="text" name="option1" id="option1" class="form-control"  value="{{qtn.option1}}">
+                               <label class="form-label">enter choose B</label>
+                        <input type="text" name="option2" id="option2" class="form-control"  value="{{qtn.option2}}">
+                        <label class="form-label">enter choose c</label>
+                        <input type="text" name="option3" id="option3" class="form-control"  value="{{qtn.option3}}">
+                        <label class="form-label">enter choose d</label>
+                        <input type="text" name="option4" id="option4" class="form-control"  value="{{qtn.option4}}">
+                        <label class="form-label">select answer</label>
+                        <select name="answer" class="form-control" >
+                          <option value="A">A</option>
+                          <option value="B">B</option>
+                          <option value="C">C</option>
+                          <option value="D">D</option>
+                        </select><br>
+                        
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
+
+                    </span>
+                    <span id="tb" style="display:none;" >
+                      <form action="{%url 'teacher:add_tabele'%}" method="post" enctype="multipart/form-data">
+                        {%csrf_token%}
+                        <input type="hidden" name="id" id="idb" value="{{qid}}">
+                  
+                       
+                        
+                        <div style="overflow-y: auto;max-height: 80%;">
+                          <label class="form-label">Table name</label>
+                        <input type="text" class="form-control" name="tname">
+                        <label>this input field is for table header ,add word separeted by coma. remember each word separeted by came will columns of table</label>
+                        <textarea class="form-control" cols="100" rows="4" name="data1" placeholder="example:No,name,age,gender"></textarea>
+                       <div id="row2" style="display: none;">
+                        <label>add word separeted by coma. remember each word separeted by came will columns of table</label>
+                        <textarea class="form-control" cols="100" rows="4" name="data2" placeholder="example:No,name,age,gender"></textarea>
+                        </div>
+                        <div id="row3"  style="display: none;">
+                          <label>add word separeted by coma. remember each word separeted by came will columns of table</label>
+                          <textarea class="form-control" cols="100" rows="4" name="data3" placeholder="example:No,name,age,gender"></textarea>
+                          </div>
+                          <div id="row4" style="display: none;">
+                            <label>add word separeted by coma. remember each word separeted by came will columns of table</label>
+                            <textarea class="form-control" cols="100" rows="4" name="data4" placeholder="example:No,name,age,gender"></textarea>
+                            </div>
+                            <div id="row5" style="display: none;">
+                              <label>add word separeted by coma. remember each word separeted by came will columns of table</label>
+                              <textarea class="form-control" cols="100" rows="4" name="data5" placeholder="example:No,name,age,gender"></textarea>
+                              </div>
+                              <div id="row6" style="display: none;">
+                                <label>add word separeted by coma. remember each word separeted by came will columns of table</label>
+                                <textarea class="form-control" cols="100" rows="4" name="data6" placeholder="example:No,name,age,gender"></textarea>
+                                </div>
+                                <div id="row7" style="display: none;">
+                                  <label>add word separeted by coma. remember each word separeted by came will columns of table</label>
+                                  <textarea class="form-control" cols="100" rows="4" name="data7" placeholder="example:No,name,age,gender"></textarea>
+                                  </div>
+                                  <div id="row8" style="display: none;">
+                                    <label>add word separeted by coma. remember each word separeted by came will columns of table</label>
+                                    <textarea class="form-control" cols="100" rows="4" name="data8" placeholder="example:No,name,age,gender"></textarea>
+                                    </div>
+                                    <div id="row9" style="display: none;">
+                                      <label>add word separeted by coma. remember each word separeted by came will columns of table</label>
+                                      <textarea class="form-control" cols="100" rows="4" name="data9" placeholder="example:No,name,age,gender"></textarea>
+                                      </div>
+                                      <div id="row10" style="display: none;">
+                                        <label>add word separeted by coma. remember each word separeted by came will columns of table</label>
+                                        <textarea class="form-control" cols="100" rows="4" name="data10" placeholder="example:No,name,age,gender"></textarea>
+                                        </div>
+                                        <div id="row11" style="display: none;">
+                                          <label>add word separeted by coma. remember each word separeted by came will columns of table</label>
+                                          <textarea class="form-control" cols="100" rows="4" name="data11" placeholder="example:No,name,age,gender"></textarea>
+                                          </div>
+                                          <div id="row12" style="display: none;">
+                                            <label>add word separeted by coma. remember each word separeted by came will columns of table</label>
+                                            <textarea class="form-control" cols="100" rows="4" name="data12" placeholder="example:No,name,age,gender"></textarea>
+                                            </div>
+                                            <div id="row13" style="display: none;">
+                                              <label>add word separeted by coma. remember each word separeted by came will columns of table</label>
+                                              <textarea class="form-control" cols="100" rows="4" name="data13" placeholder="example:No,name,age,gender"></textarea>
+                                              </div>
+                                              </div>
+                        <br>
+                        <span id="add" class="btn btn-success fa fa-plus" style="float: right;">add row</span><br>
+                        <button type="submit" class="btn-primary">Add Table</button>
+                      </form>
+
+                    </span>
+                    </div>
+             
+                </div>
+                <script>
+                  var add=document.getElementById('add');
+                  var na=1;
+                  add.addEventListener('click',()=>{
+                    
+                    na++
+                    n=na;
+                    
+                    var id="row"+n;
+                    document.getElementById(id).style.display="block";
+
+                  })
+                </script>
+          <script type="text/javascript">
+             var ch=document.getElementById('ch');
+          ch.addEventListener("change",()=>{
+            var bl=document.getElementById('bl');
+            var sh=document.getElementById('sh');
+            var chos=document.getElementById('chos');
+            var tf=document.getElementById('tf');
+            var prg=document.getElementById('prg');
+           
+            var name=ch.value;
+           if(name=="blanck"){
+           
+            bl.style.display="block"
+            chos.style.display="none"
+            sh.style.display="none"
+            tf.style.display="none"
+           
+           }else if(name=="short"){
+            
+            bl.style.display="none"
+            chos.style.display="none"
+            sh.style.display="block"
+            para.style.display="none"
+            tf.style.display="none"
+           }else if(name=="TF"){
+           
+            bl.style.display="none"
+            chos.style.display="none"
+            sh.style.display="none"
+            tf.style.display="block"
+           
+            
+           }else if(name=="chos"){
+            bl.style.display="none"
+            chos.style.display="block"
+            sh.style.display="none"
+            tf.style.display="none"
+           }
+           else if(name=="pare"){
+            bl.style.display="none"
+            chos.style.display="none"
+            sh.style.display="none"
+            tf.style.display="none"
+            prg.style.display="block"
+           }
+           
+           
+           else{
+           
+            bl.style.display="none"
+            chos.style.display="block"
+            sh.style.display="none"
+            tf.style.display="none"
+           
+           }
+          })
+         var sh=document.getElementById('sh');
+         sh.addEventListener('click',()=>{
+          var full=document.getElementById('full').style.display="none";
+          document.getElementById('image').style.display="block";
+          document.getElementById('tb').style.display="none";
+          document.getElementById('para').style.display="none";
+         })
+         var sh=document.getElementById('bl');
+         sh.addEventListener('click',()=>{
+          document.getElementById('full').style.display="none";
+          document.getElementById('wimage').style.display="block";
+          document.getElementById('tb').style.display="none";
+          document.getElementById('para').style.display="none";
+         })
+         var sh=document.getElementById('tf');
+         sh.addEventListener('click',()=>{
+          document.getElementById('full').style.display="none";
+          document.getElementById('wimage').style.display="none";
+          document.getElementById('image').style.display="none";
+          document.getElementById('tb').style.display="block";
+          document.getElementById('para').style.display="none";
+         })
+         var prg=document.getElementById('prg');
+         prg.addEventListener('click',()=>{
+          document.getElementById('full').style.display="none";
+          document.getElementById('wimage').style.display="none";
+          document.getElementById('image').style.display="none";
+          document.getElementById('tb').style.display="none";
+          document.getElementById('para').style.display="block";
+         })
+
+        </script>
+    </body>
+</html>
+{%endblock content %}

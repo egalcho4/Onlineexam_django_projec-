@@ -1,0 +1,147 @@
+{% extends 'teacher/teacherbase.html' %}
+
+{%load static%}
+{% block content %}
+
+<head>
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+  </style>
+  <style>
+    ul .li{
+        padding-left: 20px;
+        font-size: 30px;
+        color: white;
+    
+      }#qz{
+          border: 3px solid white;
+            background: -webkit-linear-gradient(top left,black,darkgray);
+            background: -linear-gradient(top left,black,darkgray);
+            background: -o-linear-gradient(top left,black,darkgray);
+            height: 100%;
+            
+        }#cont{
+           background: -webkit-linear-gradient(top left,black,darkgray);
+            background: -linear-gradient(top left,black,darkgray);
+            background: -o-linear-gradient(top left,black,darkgray);
+        }#rpo{
+           border: 3px solid white;
+            background: -webkit-linear-gradient(top left,black,darkgray);
+            background: -linear-gradient(top left,black,darkgray);
+            background: -o-linear-gradient(top left,black,darkgray);
+            height: 100%;
+        }
+        
+</style>
+<link rel='stylesheet' type='text/css' media='screen' href="{% static 'styles/main.css' %}">
+
+</head>
+
+
+{% if messages %}
+{% for message in messages %}
+<div class="container-fluid p-0">
+<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="True">&times;</span>
+</button>
+{{ message }}
+</div>
+</div>
+{% endfor %}
+    {%endif%}
+
+  <span  data-bs-toggle="modal" data-bs-target="#exampleModal3" class="btn btn-warning" style="float:right">message</span>
+  <span  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning" style="float:right">create channel</span>
+
+     <div class="panel panel-primary rounded-0">
+    <div class="panel-heading rounded-0">
+      <h6 class="panel-title">Students</h6>
+    </div>
+    
+   <!-- Button trigger modal -->
+   
+
+<div>
+  
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="form">
+          <div class="field-wrapper">
+
+              <div class="form-field">
+                  
+                  <input name="room" type="hidden"  value="{{course}}" style="text-transform:uppercase"/>
+              </div>
+
+              <div class="form-field">
+                  
+                  <input name="name" type="hidden" value="teacher" style="text-transform:uppercase"/>
+              </div>
+
+              <div class="form-field">
+                 
+              </div>
+          </div>
+     
+      </div>
+      <div class="modal-footer">
+        <input type="submit" value="Create Stream" />
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<script>
+let form = document.getElementById('formv')
+
+let handleSubmit = async (e) => {
+//e.preventDefault()
+let room = e.target.room.value.toUpperCase()
+let name = e.target.name.value
+
+let response = await fetch(`/student/get_token/?channel=${room}`)
+let data = await response.json()
+
+let UID = data.uid
+let token = data.token
+
+sessionStorage.setItem('UID', UID)
+sessionStorage.setItem('token', token)
+sessionStorage.setItem('room', room)
+sessionStorage.setItem('name', name)
+
+
+}
+
+
+
+form.addEventListener('submit', handleSubmit)
+</script>
+        <script>
+           
+            
+        </script> 
+{% endblock content %}

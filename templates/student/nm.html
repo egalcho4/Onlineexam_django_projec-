@@ -1,0 +1,1259 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+ 
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+
+  <script type="text/javascript" src="{%static 'jsb/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{%static 'js/proper.js' %}"></script>
+  <script type="text/javascript" src="{%static 'jsb/bootstrap.bundle.js' %}"></script>
+ 
+  <link rel="stylesheet" href="{%static 'bicon/font/bootstrap-icons.css' %}">
+  <link rel="stylesheet" href="{%static 'bicon/font/bootstrap-icons.min.css' %}">
+  <script type="text/javascript" src="{%static 'js/jqn.js' %}"></script>
+
+
+  <link rel="stylesheet" href="{%static 'font/css/all.min.css'%}">
+  <link rel="stylesheet" href="{%static 'font/css/fontawesome.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+
+
+<script type="text/javascript" src="{%static 'js/proper.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/jq.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/drop.js' %}"></script>
+
+
+<link rel="stylesheet" href="{%static 'css/color.css'%}"> 
+ <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    .order-card {
+      color: rgb(255, 255, 255);
+    }
+
+    .bg-c-blue {
+      background: #104f66;
+    }
+
+    .bg-c-green {
+      background:#4C51BF;
+    }
+
+    .bg-c-yellow {
+      background: #53616e;
+    }
+
+    .bg-c-pink {
+      background: #663a30;
+    }
+
+
+    .card {
+      
+      -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+      box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+      margin-bottom: 30px;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .card .card-block {
+      padding: 25px;
+    }
+
+    .order-card i {
+      font-size: 26px;
+    }
+
+    .f-left {
+      float: left;
+    }
+
+    .f-right {
+      float: right;
+    }
+    header {
+    left: 0px;
+    right: 0px;
+  }
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 20px;
+    }
+    .card {
+        
+      -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+      box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+      margin-bottom: 30px;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+    
+  </style>
+  
+    
+
+</head>
+
+<body>
+ 
+
+  {%if anser_show == 1 %}
+  <div class="container-sm ">
+    <div class="card">
+
+    <div class="card-body">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">More Details</button>
+
+  <div class="panel panel-primary rounded-0">
+    <div class="panel-heading rounded-0">
+      <h6 class="panel-title">My Marks</h6>
+    </div>
+    <div class="container">
+      <div class="row">
+        
+    
+        <div class="col-md-4 col-xl-6">
+          <div class="card bg-c-blue order-card">
+            <div class="card-block">
+              <h6 class="m-b-20">Persent</h6>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:100px" id="pro1">
+                 
+                </div>
+              </div>
+              
+             <h2 class="text-right"><i class=""></i><span>{{persent}}%</span></h2>
+            </div>
+          </div>
+        </div>
+    
+        <div class="col-md-4 col-xl-6">
+          <div class="card bg-c-yellow order-card">
+            <div class="card-block">
+              <h6 class="m-b-20">mark out of</h6>
+              <div class="progress">
+                <div class="progress-bar progress-bar-danger bg-danger" role="progressbar" aria-valuenow="70"
+                aria-valuemin="0" aria-valuemax="100" style="width:70%" id="pro2">
+                  
+                </div>
+              </div>
+              
+              <h2 class="text-right"><i class=""></i><span>{{mark}}/{{total}}</span></h2>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+    <table class="table table-hover table-bordered" id="dev-table" style="font-size:20px">
+      <thead>
+        <tr>
+
+          <th>Course</th>
+          <th>Total Marks</th>
+          <th>Number of Attempts</th>
+          <th>Exam Date</th>
+        </tr>
+      </thead>
+      {% for t in results %}
+      <tr>
+
+        <td> {{t.exam}}</td>
+        <td> {{t.marks}}</td>
+        <td>Attempt {{ forloop.counter }}</td>
+        <td> {{t.date}}</td>
+        
+        
+      </tr>
+      {% endfor %}
+    </table>
+   
+    
+  </div>
+  {%else%}
+  <div class="container-sm " style="width: 80%;">
+    <div class="card">
+      <div class="card-header bg-c-green">
+        <span class="text-white" style="align-content: center;">showing answer is not allowed by departiment</span>
+      </div>
+      <div class="card-body">
+        
+    <ol>
+    <li class=" ">currently we can not show answer. you may ask you departiment when the release</li>
+    <li class=" "> because of exam police we can't show answer at this moment</li>
+    <li class=" "> you will check your beautifull work when your departiment give privaladge to see</li>
+    <li class=" ">we ask your patience until we give access</li>
+  </ol>
+  <hr>
+  Mission and Vision Mission and Vision Mission: Contribute to knowledge expansion and national development by providing quality and relevant education and training; undertaking basic and applied researches; and engaging in community services. Vision: Become one the top 15 public higher education institutions in Ethiopia by 2027. Values: Excellence, quality, relevance, academic freedom, cooperation, tolerance, determination, loyalty, participatory, transparency and accountability, fairness and equality, social responsibility, corruption free, factual and reasonable, job creation, exemplary, and internationalization. Objectives: To produce internationally competent and nationally relevant graduates; to equip students with the right knowledge, skills, attitudes and ethics; to undertake relevant studies with the intention to transfer knowledge and technology; to provide community services; to ensure academic freedom and accountability; to ensure justice, fairness and the rule of law; and to promote democratic culture and maintain diversity.
+</div></div>
+  </div>
+  {%endif%}
+</div></div></div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+    
+  <div class="modal-dialog modal-lg" style="border-radius:30px;width: 90%;" >
+    <div class="modal-content" style="border-radius:20px;padding:20px">
+        <form class="form" autocomplete="off" onsubmit="return saveAns()" action="/student/calculate-marks" method="POST" style="font-size:20px">
+     
+         {%csrf_token%}<span class="btn ">Welcome to jinka university online exam platform result page,this all you done  enjoy your result &hearts;</span>
+          <span style="text-align: center;color:white">Course: {{course.course_name}}</span>
+          <div class="jumbotron1 table table-responsive " style="min-height:400px;max-height:400px;border:10px inset black;">
+            {% for q in questions%}
+            
+            <div class="d-flex w-100 align-items-center">
+              {%if q.typ == 0 %}
+                <div class="col-auto flex-shrink-1 ">
+                  <h3 class="{{ forloop.counter }}" ></h3>
+                    <h3 class="">{{ forloop.counter }}. {{q.question}}&nbsp;&nbsp;({{q.marks}} Marks)&nbsp;&nbsp;<input type="checkbox" id="{{ forloop.counter }}" name="vehicle3" value="Boat"></h3>
+               
+                  
+               </div>
+           <br>
+            <center>
+            {%if q.tabl %}
+
+<span style="width:100%" class="btn btn-info">{{q.tabl.name}}</span>
+
+<div style="overflow-y: auto;max-height: 200px;width: 90%;overflow-x: auto;max-width: 90%;" >
+
+
+<table class="table table-striped">
+  <tr>
+  {%for t in q.tabl.data1%}
+ 
+  
+   <th>{{t}}</th>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data2%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data3%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data4%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data5%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data6%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data7%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data8%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data9%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data10%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data11%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data12%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data13%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+
+</table>
+{%endif%}
+</div></center></div>
+            {% if q.image != "2" %}
+            
+             
+              <div class="d-flex w-100 align-items-center">
+              <image src="{{q.image.url }}" style="width:400px;height:400px;margin-left:2px"/>
+            </div>
+    
+              {%endif%}
+          
+           
+           
+            <div class="form-check mx-4 d-flex align-items-center">
+  
+                <input class="form-check-input option1" type="radio" name="{{ forloop.counter }}" id="A" value="A">
+                <label class="form-check-label ml-3" for="option1">
+                  A {{q.option1}}
+                </label>
+            </div>
+    
+    
+            <div class="form-check mx-4 d-flex align-items-center">
+                <input class="form-check-input option2" type="radio" name="{{ forloop.counter }}" id="B" value="B">
+                <label class="form-check-label ml-3" for="option2">
+                  B {{q.option2}}
+                </label>
+            </div>
+    
+    
+            <div class="form-check mx-4 d-flex align-items-center">
+                <input class="form-check-input option3" type="radio" name="{{ forloop.counter }}" id="C" value="C">
+                <label class="form-check-label ml-3" for="option3">
+                  C {{q.option3}}
+                </label>
+            </div>
+    
+    
+            <div class="form-check mx-4 d-flex align-items-center">
+                <input class="form-check-input option4" type="radio" name="{{ forloop.counter }}" id="D" value="D">
+                <label class="form-check-label ml-3" for="option4">
+                  D {{q.option4}}
+                </label>
+               
+            </div>
+              
+              <center>
+                <div class="container-sm" style="width: 90%;">
+                
+                   
+                  
+                  
+                    <span>&nbsp;&nbsp;<p name="{{ forloop.counter }}" class="{{ forloop.counter }} " style="background-color: aqua;width: 70%;margin-left: 20%;" id="tod">hello</p>
+                    </span>
+                  </center>
+               
+            <span id="{{ forloop.counter }}"></span>
+            
+            {%elif q.typ == 1%}
+            <div class="col-auto flex-shrink-1 ">
+              <h3 class="">{{ forloop.counter }}. {{q.question}}&nbsp;&nbsp;({{q.marks}} Marks)&nbsp;&nbsp;<input type="checkbox" id="{{ forloop.counter }}" name="vehicle3" value="Boat"></h3>
+               
+          </div>
+          
+         
+      
+          <center>
+            {%if q.tabl %}
+
+<span style="width:100%" class="btn btn-info">{{q.tabl.name}}</span>
+
+<div style="overflow-y: auto;max-height: 200px;width: 90%;overflow-x: auto;max-width: 90%;" >
+
+
+<table class="table table-striped">
+  <tr>
+  {%for t in q.tabl.data1%}
+ 
+  
+   <th>{{t}}</th>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data2%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data3%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data4%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data5%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data6%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data7%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data8%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data9%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data10%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data11%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data12%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data13%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+
+</table>
+{%endif%}
+</div></center>
+      {% if q.image != "2" %}
+      
+       
+        <div class="d-flex w-100 align-items-center">
+        <image src="{{q.image.url }}" style="width:400px;height:400px;margin-left:2px"/>
+      </div>
+      <span id="{{ forloop.counter }}"></span>
+      
+    
+    
+      {%endif%}
+      <br>
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              exaplanation
+            </button>
+          </h2>
+          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">{{q.exp}}</div>
+          </div>
+        </div></div>
+        <center>
+          <div class="container-sm" style="width: 90%;">
+          
+             
+            
+            
+              <span>&nbsp;&nbsp;<p name="{{ forloop.counter }}" class="{{ forloop.counter }} " style="background-color: aqua;width: 70%;margin-left: 20%;" id="tod">hello</p>
+              </span></div>
+            </center>
+      {%elif q.typ == 2%}
+            <div class="col-auto flex-shrink-1 ">
+              <h3 class="">{{ forloop.counter }}. {{q.question}}&nbsp;&nbsp;({{q.marks}} Marks)&nbsp;&nbsp;<input type="checkbox" id="{{ forloop.counter }}" name="vehicle3" value="Boat"></h3>
+               
+          </div>
+          <br>
+          <center>
+            {%if q.tabl %}
+
+<span style="width:100%" class="btn btn-info">{{q.tabl.name}}</span>
+
+<div style="overflow-y: auto;max-height: 200px;width: 90%;overflow-x: auto;max-width: 90%;" >
+
+
+<table class="table table-striped">
+  <tr>
+  {%for t in q.tabl.data1%}
+ 
+  
+   <th>{{t}}</th>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data2%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data3%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data4%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data5%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data6%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data7%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data8%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data9%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data10%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data11%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data12%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data13%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+
+</table>
+{%endif%}
+</div></center>
+      {% if q.image != "2" %}
+      
+       
+        <div class="d-flex w-100 align-items-center">
+        <image src="{{q.image.url }}" style="width:400px;height:400px;margin-left:2px"/>
+      </div>
+      <span id="{{ forloop.counter }}"></span>
+      
+        {%endif%}
+      <br>
+      <input type="hidden" name="csrfmiddlewaretoken" style="display:none" value="C24rUotmdHawVQJL3KrqiWxvti8UffOFYUc8TRbZtLt36AVLdP3jbkzUVe3beRAa">
+      
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingOne">
+
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              exaplanation
+            </button>
+          </h2>
+          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">{{q.exp}}</div>
+          </div>
+        </div>
+    </div>
+    <center>
+      <div class="container-sm" style="width: 90%;">
+      
+         
+        
+        
+          <span>&nbsp;&nbsp;<p name="{{ forloop.counter }}" class="{{ forloop.counter }} " style="background-color: aqua;width: 70%;margin-left: 20%;" id="tod">hello</p>
+          </span></div>
+        </center>
+    {%elif q.typ == 3%}
+    <div class="col-auto flex-shrink-1 ">
+      <h3 class="">{{ forloop.counter }}. {{q.question}}&nbsp;&nbsp;({{q.marks}} Marks)&nbsp;&nbsp;<input type="checkbox" id="{{ forloop.counter }}" name="vehicle3" value="Boat"></h3>
+               
+  </div>
+  
+  
+ 
+  <center>
+    {%if q.tabl %}
+
+<span style="width:100%" class="btn btn-info">{{q.tabl.name}}</span>
+
+<div style="overflow-y: auto;max-height: 200px;width: 90%;overflow-x: auto;max-width: 90%;" >
+
+
+<table class="table table-striped">
+<tr>
+{%for t in q.tabl.data1%}
+
+
+<th>{{t}}</th>
+
+
+{%endfor%}
+</tr>
+<tr>
+{%for t in q.tabl.data2%}
+
+
+<td>{{t}}</td>
+
+
+{%endfor%}
+</tr>
+<tr>
+{%for t in q.tabl.data3%}
+
+
+<td>{{t}}</td>
+
+
+{%endfor%}
+</tr>
+<tr>
+{%for t in q.tabl.data4%}
+
+
+<td>{{t}}</td>
+
+
+{%endfor%}
+</tr>
+<tr>
+{%for t in q.tabl.data5%}
+
+
+<td>{{t}}</td>
+
+
+{%endfor%}
+</tr>
+<tr>
+{%for t in q.tabl.data6%}
+
+
+<td>{{t}}</td>
+
+
+{%endfor%}
+</tr>
+<tr>
+{%for t in q.tabl.data7%}
+
+
+<td>{{t}}</td>
+
+
+{%endfor%}
+</tr>
+<tr>
+{%for t in q.tabl.data8%}
+
+
+<td>{{t}}</td>
+
+
+{%endfor%}
+</tr>
+<tr>
+{%for t in q.tabl.data9%}
+
+
+<td>{{t}}</td>
+
+
+{%endfor%}
+</tr>
+<tr>
+{%for t in q.tabl.data10%}
+
+
+<td>{{t}}</td>
+
+
+{%endfor%}
+</tr>
+<tr>
+{%for t in q.tabl.data11%}
+
+
+<td>{{t}}</td>
+
+
+{%endfor%}
+</tr>
+<tr>
+{%for t in q.tabl.data12%}
+
+
+<td>{{t}}</td>
+
+
+{%endfor%}
+</tr>
+<tr>
+{%for t in q.tabl.data13%}
+
+
+<td>{{t}}</td>
+
+
+{%endfor%}
+</tr>
+
+</table>
+{%endif%}
+</div></center>
+  {% if q.image != "2" %}
+  
+  
+  <div class="d-flex w-100 align-items-center">
+  <image src="{{q.image.url }}" style="width:400px;height:400px;margin-left:2px"/>
+  </div>
+  <span id="{{ forloop.counter }}"></span>
+  
+  
+  
+  {%endif%}
+  <br>
+  <div class="form-check mx-4 d-flex align-items-center">
+  
+    <input class="form-check-input " type="radio" name="{{ forloop.counter }}" id="A" >
+    <label class="form-check-label ml-3" for="option1">
+      A {{q.option1}}
+    </label>
+  </div>
+  
+  
+  <div class="form-check mx-4 d-flex align-items-center">
+    <input class="form-check-input " type="radio" name="{{ forloop.counter }}" id="B" >
+    <label class="form-check-label ml-3" for="option2">
+      B {{q.option2}}
+    </label>
+  </div>
+  <div class="form-check mx-4 d-flex align-items-center" style="display:none">
+    <input class="form-check-input option3" type="radio" name="{{ forloop.counter }}" id="C" value="C" style="display:none">
+  
+  </div>
+  
+  
+  <div class="form-check mx-4 d-flex align-items-center" style="display:none">
+    <input class="form-check-input option4" type="radio" name="{{ forloop.counter }}" id="D" value="D" style="display:none">
+  
+  </div>
+  <center>
+    <div class="container-sm" style="width: 90%;">
+    
+       
+      
+      
+        <span>&nbsp;&nbsp;<p name="{{ forloop.counter }}" class="{{ forloop.counter }} " style="background-color: aqua;width: 70%;margin-left: 20%;" id="tod">hello</p>
+        </span></div>
+      </center>
+  {%elif q.typ == 4 %}
+            <div class="col-auto flex-shrink-1 ">
+              <h1 style="text-decoration:underline">READING parragraph</h1>
+              <h3 class="">. {{q.question}}</h3></h4><input type="checkbox" id="{{ forloop.counter }}" name="vehicle3" value="Boat" style="display:none">
+          </div>
+         
+          <center>
+            {%if q.tabl %}
+
+<span style="width:100%" class="btn btn-info">{{q.tabl.name}}</span>
+
+<div style="overflow-y: auto;max-height: 200px;width: 90%;overflow-x: auto;max-width: 90%;" >
+
+
+<table class="table table-striped">
+  <tr>
+  {%for t in q.tabl.data1%}
+ 
+  
+   <th>{{t}}</th>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data2%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data3%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data4%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data5%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data6%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data7%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data8%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data9%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data10%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data11%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data12%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+<tr>
+  {%for t in q.tabl.data13%}
+ 
+  
+   <td>{{t}}</td>
+  
+  
+  {%endfor%}
+</tr>
+
+</table>
+{%endif%}
+</div></center>
+      {% if q.image != "2" %}
+      
+       
+        <div class="d-flex w-100 align-items-center">
+        <image src="{{q.image.url }}" style="width:400px;height:400px;margin-left:2px"/>
+      </div>
+      
+        {%endif%}
+      
+        <div class="form-check mx-4 d-flex align-items-center" style="display:none">
+  
+          <input class="form-check-input " type="radio" name="{{ forloop.counter }}" id="A" style="display:none">
+          
+        </div>
+        
+        
+        <div class="form-check mx-4 d-flex align-items-center" style="display:none">
+          <input class="form-check-input " type="radio" name="{{ forloop.counter }}" id="B" style="display:none" >
+         
+        </div>
+        <div class="form-check mx-4 d-flex align-items-center" style="display:none">
+          <input class="form-check-input option3" type="radio" name="{{ forloop.counter }}" id="C" value="C" style="display:none">
+        
+        </div>
+        
+        
+        <div class="form-check mx-4 d-flex align-items-center" style="display:none">
+          <input class="form-check-input option4" type="radio" name="{{ forloop.counter }}" id="D" value="D" style="display:none">
+        
+        </div>
+        <center>
+          <div class="container-sm" style="width: 90%;">
+          
+             
+            
+            
+              <span>&nbsp;&nbsp;<p name="{{ forloop.counter }}" class="{{ forloop.counter }} " style="background-color: aqua;width: 70%;margin-left: 20%;" id="tod">hello</p>
+              </span></div>
+            </center>
+            {%endif%}
+  
+            {% endfor %}
+          
+ 
+          
+     </div>
+        </form></div></div></div></div></div>
+     
+
+
+<script>
+  var acc = document
+.getElementsByClassName("accordion");
+
+var i;
+
+for (i = 0; i < acc.length; i++) {
+ acc[i].onclick = function(){
+  this.classList.toggle("active");
+  this.nextElementSibling.classList
+  .toggle("show");
+  }
+}
+$(document).ready(function () {
+
+
+    
+$.ajax({
+    url: "",
+    type: "POST",
+    dataType: 'json',
+    data: {
+        
+    },
+    success: function (response) {
+     
+     real=response.real;
+     ans=response.selected;
+     stans=response.lreal
+     
+    var sp = document.getElementsByTagName('p');
+    for(i=0;i<sp.length;i++){
+      sp[i].innerHTML=stans[i]
+    }
+    
+
+   var ele = document.getElementsByTagName('input');
+      for (i = 0; i < ele.length; i++) {
+      if(ele[i].type=="radio"){
+        var dt=document.getElementsByName(ele[i].name);
+        //console.log(ele[i].name)
+        var loc=ans[ele[i].name-1]
+       
+      
+      
+        for(j=0;j<4;j++){
+          if(dt[j].id==loc){
+            //console.log(dt[j])
+          
+            dt[j].setAttribute("checked","")
+          
+          
+        }
+}
+}}
+
+var ele = document.getElementsByTagName('input');
+
+for (i=0; i<real.length;i++){
+     
+if (ele[i].type = "checkbox") {
+
+ 
+  if(real[i]==ans[i]){
+    var id=i+1
+    var nb=document.getElementById(id);
+   
+    
+    
+
+    if(nb.value=ans[i]){
+
+      nb.setAttribute("class","fa fa-check")
+      nb.setAttribute("style","font-size:40px;color:green;font-weight:bold")
+      nb.style.backgroundColor="green"
+      
+    }
+}else if(real[i]!=ans[i]){
+  var id=i+1
+  var nb=document.getElementById(id);
+  
+  if(nb.value=ans[i]){
+    nb.setAttribute("class","bi bi-x-lg")
+    
+      nb.setAttribute("style","font-size:40px;color:red;font-weight:bold")
+     
+   
+  }
+
+}
+}
+
+}
+
+    /*for (i=1;i<=ele.length;i++){
+      var dt=document.getElementsByName(ele[i].name);
+      console.log(dt)
+      
+      var loc=ans[i-1]
+     
+    
+        for(j=0;j<4;j++){
+          if(dt[j].id==loc){
+            //console.log(dt[i].id)
+          
+          
+            dt[j].setAttribute("checked","")
+          
+          
+        }
+      }
+    
+      }*/
+      
+
+
+
+     widt=parseInt( response.pers)
+    
+     var pro1=document.getElementById("pro1");
+   
+     var pro2=document.getElementById("pro2");
+     
+    
+    
+   
+     var num=0
+     
+        
+    }
+
+});
+})
+
+</script>
+
+{% endblock content %}

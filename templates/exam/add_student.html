@@ -1,0 +1,134 @@
+{% extends 'exam/adminbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+  <script type="text/javascript" src="{%static 'jsb/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{%static 'js/proper.js' %}"></script>
+  <link rel="stylesheet" href="{%static 'bicon/font/bootstrap-icons.css' %}">
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      
+    }
+  </style>
+</head>
+<div class="container-sm">
+  <div class="card">
+
+  <div class="card-body">
+<a class="btn btn-success btn-xs" style="border-radius: 0%;margin-left:20px" href="{% url 'exam:admin-dashboard'  %}"> <i class="bi bi-chevron-left">back</i></a>
+
+  
+  {% if messages %}
+  {% for message in messages %}
+<div class="container-fluid p-0">
+<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="True">&times;</span>
+  </button>
+  {{ message }}
+</div>
+</div>
+{% endfor %}
+      {%endif%}
+
+  </ul>
+  <span data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-danger" style="float:right"> by csv file</span>
+
+  <div class="panel panel-primary rounded-0">
+    <div class="panel-heading rounded-0">
+      <h6 class="panel-title">Courses</h6>
+    </div>
+    <input type="text" id="myinput" placeholder="search......." class="form-control" style="font-size:20px">
+    <table class="table table-hover table-bordered " id="dev-table">
+      <thead>
+        <tr>
+            <th>Id</th>
+          <th>departiment</th>
+          <th>collage</th>
+          
+          <th>add student</th>
+       
+        </tr>
+      </thead>
+      {% for t in courses %}
+      <tr>
+       <td>{{forloop.counter}}</td>
+        <td> {{t.name}}</td>
+        <td>{{t.cl_name}}</td>
+        
+      
+        <!--<td class="text-center"><a class="btn btn-primary btn-xs" style="border-radius: 0%;" href="{% url 'exam:add_student_info' t.id  %}"><span class="fa fa-plus"></span></a></td>
+        -->
+        <td class="text-center"><a class="btn btn-primary btn-xs" style="border-radius: 0%;" href="{% url 'exam:add_year' t.id  %}"><span class="fa fa-plus"></span></a></td>
+
+        
+    </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">student creation by csv </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      {%if messages%}
+      {%for message in messages %}
+      {{message|safe}}
+      {%endfor%}  {%endif%}
+      
+      <form action="{%url 'exam:uploadscvad' %}" method="post" enctype="multipart/form-data">
+      <div class="modal-body">
+        <span class="h5 ">the file order must be first_name,last_name,Sid,departiment,semister please remember when you export excel file make sure you choose delimeted comma options thank you </span>
+       
+        {%csrf_token%}
+        <input type="hidden" name="id" value="{{id}}"/>
+       <input type="file" name="file" class="form-control"/>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save </button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+<center>
+<script>
+  //function myFunction() {
+    input = document.getElementById("myinput");
+    input.addEventListener('keyup',()=>{
+      var input, filter, table, tr, td, i;
+      input = document.getElementById("myinput");
+      filter = input.value.toUpperCase();
+      table = document.querySelector('.table')
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1];
+          tda = tr[i].getElementsByTagName("td")[2];
+          tdi = tr[i].getElementsByTagName("td")[0];
+          if (td, tda) {
+              if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || tda.innerHTML.toUpperCase().indexOf(filter) > -1 || tdi.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+              } else {
+                  tr[i].style.display = "none";
+              }
+          }
+      }
+    })</script>
+{% endblock content %}

@@ -1,0 +1,127 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+  
+  
+<link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+  
+  </style>
+</head>
+
+<div class="container-sm">
+  {% if messages %}
+  {% for message in messages %}
+<div class="container-fluid p-0">
+<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+  <button  class="btn close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="True">&times;</span>
+  </button>
+  {{ message }}
+</div>
+</div>
+{% endfor %}
+      {%endif%}
+ {%if tes %}
+    {%for t in tes%}
+<div class="row">
+
+<div class="col-6">
+<div class="card"  >
+<div class="card-header bg-c-blue text-white" style="background-color: rgb(20, 117, 117);">
+<span>{{t.name}}</span>
+</div>
+<div class="card-body">
+  {%if t.pr == 1 %}
+  
+  <a href="{% url 'student:start-exam' cours  %}" class="btn btn-info" style="text-decoration: none;display: none;" id="{{t.id}}" name="{{t.id}}">Attend Exam</a>
+ 
+ <span id="msg"></span>
+ {%else%}
+ <button disabled>Attend Exam</button>
+ {%endif%}
+
+</div>
+</div>
+</div>
+
+<div class="col-6">
+  <div class="card" >
+  <div class="card-header bg-c-blue" style="background-color: rgb(20, 117, 117);">
+  <span>{{t.name}}</span>
+  </div>
+  <div class="card-body">
+    {%if t.pr == 1 %}
+    <div class="form-group">
+      <label class="form-label">Enter Exem Password</label>
+      <input type="text" class="form-control" id="password" >
+   <button class="btn btn-success" id="bm">show</button>
+     </div>
+ {%else%}
+ <button disabled>This exam Is Note ready</button>
+ {%endif%}
+   
+     </div>
+  </div>
+</div>
+</div>
+
+{%endfor%}
+{%else%}
+<div class="col-6">
+  <div class="card" style="background-color: black;" >
+  <div class="card-header bg-c-blue text-white" style="background-color: black">
+  <span>{{t.name}}</span>
+  </div>
+  <div class="card-body" style="background-color: rgb(16, 30, 30);" >
+   <h1 class="btn text-white">This course have no exam to take</h1>
+   <a class="btn btn-success" href="student-dashboard">Back</a>
+     </div>
+  </div>
+</div>
+</div>
+{%endif%}
+
+    
+<script>
+   
+    $(document).ready(function(){
+      $('#bm').click(function(){
+        var pasb=$('#password').val()
+        console.log(pasb)
+        $.ajax({
+          url:"",
+          method:"POST",
+          data:{
+
+          },success:function(response){
+
+             if(pasb==response.pas){
+             var bn=document.getElementById(response.id)
+             bn.style.display="block";
+             }else{
+             document.getElementById('msg').innerHTML="incorect password";
+             }
+
+
+
+            
+          }
+        })
+      })
+    })
+   
+  
+  
+</script>
+{% endblock content %}

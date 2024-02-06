@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <style>
+
+        form{
+           margin: 50px; 
+          
+        }
+      
+    </style>
+  </head>
+  <body>
+    {% include "exam/navbar.html" %}
+ 
+
+
+<br><br><br>
+<div class="container-sm ">
+  <div class="card">
+    <div class="card-body">
+  <h3 style="text-align: center;" class="">Teacher Signup Form</h3>
+<form method="POST" autocomplete="off" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    
+          <label for="first_name" class="">First Name</label>
+          {% render_field userForm.first_name|attr:'required:true'  class="form-control form-control-sm rounded-0"  placeholder="First Name" %}
+       
+          <label for="last_name" class="">Last Name</label>
+          {% render_field userForm.last_name|attr:'required:true'  class="form-control form-control-sm rounded-0" placeholder="Last Name" %}
+        
+
+      
+         
+          <label for="username" class="">Username</label>
+          {% render_field userForm.username|attr:'required:true'  class="form-control form-control-sm rounded-0" placeholder="username" %}
+        
+          <label for="inputPassword4" class="">Password</label>
+          {% render_field userForm.password|attr:'required:true'  class="form-control form-control-sm rounded-0" placeholder="password" %}
+       
+          <label for="depart" class="">departiment</label>
+          {% render_field teacherForm.depart|attr:'required:true'  class="form-control form-control-sm rounded-0" placeholder="depart" %}
+       
+     
+       
+          <label for="profile_pic" class="">Profile Picture</label>
+          {% render_field teacherForm.profile_pic|attr:'required:true' class="form-control form-control-sm rounded-0" placeholder="" %}
+       
+
+<br>
+    <button type="submit" class="btn btn-primary btn-lg rounded-0">Sign Up</button>
+  </form>
+</div>
+
+
+<br><br>
+
+  </body>
+</html>

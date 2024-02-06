@@ -1,0 +1,158 @@
+{% extends 'teacher/teacherbase.html' %}
+{% load widget_tweaks %}
+{%load static%}
+{% block content %}
+
+<head>
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+     
+    }
+  </style>
+ 
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<div class="container-sm">
+
+<div class="card">
+  <div class="card-body">
+<div class="container">
+  {% if messages %}
+  {% for message in messages %}
+<div class="container-fluid p-0">
+<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="True">&times;</span>
+  </button>
+  {{ message }}
+</div>
+</div>
+{% endfor %}
+      {%endif%}
+
+
+  <div class="panel panel-success rounded-0">
+    <div class="panel-heading rounded-0">
+      <h6 class="panel-title">Students</h6>
+    </div>
+    <input type="text" id="myinput" placeholder="search......." class="form-control" style="font-size:20px">
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>FName</th>
+          <th>LName</th>
+          <th>UName</th>
+          <th>Photo</th>
+          <th>Contact</th>
+          <th>Address</th>
+          <th>enable exam</th>
+          <th>disable exam</th>
+          <th>exam code</th>
+        
+        </tr>
+      </thead>
+      {% for t in students %}
+      <tr>
+        <td> {{forloop.counter}}</td>
+        <td> {{t.user.first_name}}</td>
+        <td> {{t.user.last_name}}</td>
+        <td> {{t.user}}</td>
+        {%if t.profile_pic != ""%}
+        <td> <img src="{{t.profile_pic.url}}" alt="Profile Pic" height="40px" width="40px" /></td>
+        {%else%}
+        <td><img alt="image"></td>
+        {%endif%}
+        <td>{{t.mobile}}</td>
+        <td>{{t.address}}</td>
+        <td class="text-center"><a class="btn btn-primary btn-xs" style="border-radius: 0%;" href="{% url 'teacher:enable_student' t.id  %}"><small class="fa fa-eye "></small></a></td>
+        <td class="text-center"><a class="btn btn-primary btn-xs" style="border-radius: 0%;" href="{% url 'teacher:disable_student' t.id  %}"><span class="fa-stack fa-lg">
+          <i class="fa fa-camera fa-stack-1x"></i>
+          <i class="fa fa-ban fa-stack-2x text-danger"></i>
+        </span></a></td>
+        <td class="text-center"><a class="btn btn-primary btn-xs" style="border-radius: 0%;" href="{% url 'teacher:enable_student_code' t.id  %}">set code</a></td>
+<!--   <td class="text-center"><a class="btn btn-primary btn-xs" style="border-radius: 0%;" href="{% url 'teacher:update-student' t.id  %}"><small class="fas fa-edit"></small></a>
+        </td><td><a class="btn btn-danger btn-xs" style="border-radius: 0%;" href="{% url 'teacher:delete_student' t.id  %}"><small class="fas fa-trash"></small></a></td>-->
+        
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+
+<center>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Create student bellow </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+     
+       <div style="padding:20px">
+      <form  action=""  name="my-form1" method="post" style="font-size:20px">
+    {%csrf_token%}
+    <div>
+        <label for="first_name" class="">First Name</label>
+        {% render_field userForm.first_name|attr:'required:true'  class="form-control form-control-sm rounded-0" placeholder="First Name" %}
+     
+        <label for="last_name" class="">Last Name</label>
+        {% render_field userForm.last_name|attr:'required:true'  class="form-control form-control-sm rounded-0" placeholder="Last Name" %}
+      
+        <label for="mobile" class="">Contact</label>
+        {% render_field studentForm.mobile|attr:'required:true'  class="form-control form-control-sm rounded-0" placeholder="Contact Number" %}
+     
+        <label for="address" class="">Address</label>
+        {% render_field studentForm.address|attr:'required:true'  class="form-control form-control-sm rounded-0" placeholder="Address" %}
+      
+
+    
+        <label for="username" class="">Username</label>
+        {% render_field userForm.username|attr:'required:true'  class="form-control form-control-sm rounded-0" placeholder="only character and unique" %}
+      
+        <label for="inputPassword4" class="">Password</label>
+        {% render_field userForm.password|attr:'required:true'  class="form-control form-control-sm rounded-0" placeholder="example:J128767k" %}
+    </div>
+  </div>
+      
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary">Save </button>
+  </div>
+</form>
+</div>
+</div>
+</div></center>
+    <script>
+      //function myFunction() {
+        input = document.getElementById("myinput");
+        input.addEventListener('keyup',()=>{
+          var input, filter, table, tr, td, i;
+          input = document.getElementById("myinput");
+          filter = input.value.toUpperCase();
+          table = document.querySelector('.table')
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByTagName("td")[1];
+              tda = tr[i].getElementsByTagName("td")[3];
+              tdi = tr[i].getElementsByTagName("td")[0];
+              if (td, tda) {
+                  if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || tda.innerHTML.toUpperCase().indexOf(filter) > -1 || tdi.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                      tr[i].style.display = "";
+                  } else {
+                      tr[i].style.display = "none";
+                  }
+              }
+          }
+        })</script>
+{% endblock content %}

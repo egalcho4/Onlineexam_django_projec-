@@ -1,0 +1,100 @@
+{% extends 'exam/adminbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+ 
+  <link rel="stylesheet" href="{%static 'font/css/all.min.css'%}">
+  <link rel="stylesheet" href="{%static 'font/css/fontawesome.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/font.css'%}">
+<script type="text/javascript" src="{%static 'jsb/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/proper.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/jq.js' %}"></script>
+<link rel="stylesheet" href="{%static 'css/ex.css'%}"> 
+<link rel="stylesheet" href="{%static 'css/style.css'%}"> 
+
+<link rel="stylesheet" href="{%static 'css/color.css'%}"> 
+<style>
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+  </style>
+</head>
+<br><br>
+<div class="container">
+  {% if messages %}
+    {% for message in messages %}
+<div class="container-fluid p-0">
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="True">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+</div>
+{% endfor %}
+        {%endif%}
+ 
+  <div class="panel panel-primary rounded-0">
+    <div class="panel-heading rounded-0">
+      <h6 class="panel-title">Teachers Salary</h6>
+    </div>
+    <input type="text" id="myinput" placeholder="search......." class="form-control" style="font-size:20px">
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Photo</th>
+          <th>Contact</th>
+          <th>Salary</th>
+         
+          
+        </tr>
+      </thead>
+      {% for t in teachers %}
+      <tr>
+<td>{{forloop.counter}}</td>
+        <td> {{t.get_name}}</td>
+        <td> <img src="{{t.profile_pic.url }}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>{{t.mobile}}</td>
+        <td>${{t.salary}}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+<br><br><br><br><br><br>
+<script>
+  //function myFunction() {
+    input = document.getElementById("myinput");
+    input.addEventListener('keyup',()=>{
+      var input, filter, table, tr, td, i;
+      input = document.getElementById("myinput");
+      filter = input.value.toUpperCase();
+      table = document.querySelector('.table')
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1];
+          tda = tr[i].getElementsByTagName("td")[3];
+          tdi = tr[i].getElementsByTagName("td")[0];
+          if (td, tda) {
+              if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || tda.innerHTML.toUpperCase().indexOf(filter) > -1 || tdi.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+              } else {
+                  tr[i].style.display = "none";
+              }
+          }
+      }
+    })</script>
+{% endblock content %}

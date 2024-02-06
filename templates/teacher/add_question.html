@@ -1,0 +1,1192 @@
+
+{% extends 'teacher/teacherbase.html' %}
+{% load widget_tweaks %}
+{%load static%}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <style>
+        ul .li{
+            padding-left: 20px;
+            font-size: 30px;
+            color: white;
+        
+          }
+          
+    </style>
+    <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+    <script type="text/javascript" src="{%static 'jsb/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{%static 'js/proper.js' %}"></script>
+    <script type="text/javascript" src="{%static 'js/jq.js' %}"></script>
+    <script type="text/javascript" src="{%static 'js/jqn.js' %}"></script>
+    {% load latexify %}
+    {% include 'latexify/stylesheets.html' %}
+   </head>
+    <body>
+       
+          
+          
+     
+          
+              
+              
+          <center>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">question form </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+               
+                 <div style="padding:20px">
+            <form  action=""  name="my-form1" method="post" enctype="multipart/form-data" >
+          {%csrf_token%}
+                
+          
+          
+            
+              <input type="hidden" name="id" id="idb" value="{{username}}">
+              
+              <input type="hidden" name="course" id="idb" value="{{course}}">
+              <label class="form-label">question code</label>
+      <input type="number" name="code" id="mark" class="form-control" value="1" placeholder="example:2">
+       
+              <label class="form-label">question weight</label>
+              <input type="text" name="mark" id="mark" class="form-control" placeholder="example:2">
+             
+                
+              <label class="form-label">write your question bellow</label>
+              <textarea class="form-control" rows="4" id="question"  name="question" placeholder="example:where is jinka university"></textarea>
+             
+              <label class="form-label">enter choose A</label>
+              <input type="text" name="option1" id="option1" class="form-control" placeholder="ethiopia">
+                     <label class="form-label">enter choose B</label>
+              <input type="text" name="option2" id="option2" class="form-control" placeholder="kenya">
+              <label class="form-label">enter choose c</label>
+              <input type="text" name="option3" id="option3" class="form-control" placeholder="sudan">
+              <label class="form-label">enter choose d</label>
+              <input type="text" name="option4" id="option4" class="form-control" placeholder="england">
+              <label class="form-label">select answer</label>
+              <select name="answer" class="form-control">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
+              
+          
+      
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" id="sub" style="">Save </button>
+            </div>
+          </form>
+          </div>
+          </div>
+          </div></center>
+          <center>
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"> create True/False questions</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+               
+                 <div style="padding:20px">
+            <form  action="{%url 'teacher:true_false_question'%}"  name="my-form1" method="post" enctype="multipart/form-data" >
+          {%csrf_token%}
+                
+          
+          
+            
+              <input type="hidden" name="id" id="idb" value="{{username}}">
+              <input type="hidden" name="idt" id="idt" value="{{id}}">
+              <input type="hidden" name="course" id="idb" value="{{course}}">
+              <label class="form-label">question code</label>
+      <input type="number" name="code" id="mark" class="form-control" value="1" placeholder="example:2">
+       
+              <label class="form-label">question weight</label>
+              <input type="text" name="mark" id="mark" class="form-control" placeholder="example:2">
+             
+                
+              <label class="form-label">write your question bellow</label>
+              <textarea class="form-control" rows="4" id="question"  name="question" placeholder="example:where is jinka university"></textarea>
+             
+             
+              <label class="form-label">select answer</label>
+              <select name="answer" class="form-control">
+                <option value="A">True</option>
+                <option value="B">false</option>
+                
+              </select>
+              
+          
+      
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" id="sub" style="">Save </button>
+            </div>
+          </form>
+          </div>
+          </div>
+          </div></center>
+       
+          <div class="modal fade" id="exampleModala" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">short answer question form </h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+             
+               <div style="padding:20px">
+          <form  action="{%url 'teacher:short_question'%}"  name="my-form1" method="post" enctype="multipart/form-data" >
+        {%csrf_token%}
+              
+        
+        
+          
+            <input type="hidden" name="id" id="idb" value="{{username}}">
+            <input type="hidden" name="idt" id="idt" value="{{id}}">
+            <input type="hidden" name="course" id="idb" value="{{course}}">
+            <label class="form-label">question code</label>
+      <input type="number" name="code" id="mark" class="form-control" value="1" placeholder="example:2">
+       
+            <label class="form-label">question weight</label>
+            <input type="text" name="mark" id="mark" class="form-control" placeholder="example:2">
+           
+              
+            <label class="form-label">Type your Question</label>
+           
+            <textarea class="form-control" rows="4" id="question"  name="question" placeholder="example:where is jinka university"></textarea>
+           
+            <label class="form-label">answer</label>
+            <input type="text" name="answer" class="form-control" value=" " placeholder=""/>
+           
+            <label class="form-label">explanation</label>
+            <textarea class="form-control" rows="4" id="question"  name="exp" placeholder="example:jku located at south om ethiopia......."></textarea>
+           
+            
+        
+    
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary"  style="">Save </button>
+          </div>
+        </form>
+        </div>
+        </div>
+        </div></center></div>
+          
+          <div class="container-sm" style=" " id="qz">
+            <div class="row">
+              <div class="col-2">
+                <label class="form-label">selct question type</label>
+                <select class="form-control" id="ch">
+                  <option>choose</option>
+                  <option>blanck</option>
+                  <option>short</option>
+                  <option value="TF">True/False</option>
+                 
+                </select>
+               <br>
+                  
+                
+
+                <span data-bs-toggle="modal" data-bs-target="#exampleModala" class="btn btn-success fa fa-plus" style="float: right;display:none" id="sh">add short</span>
+                <span data-bs-toggle="modal" data-bs-target="#exampleModal1" class="btn btn-warning fa fa-plus" style="float: right;display:none" id="bl">add blanck</span>
+                <span data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-warning fa fa-plus" style="float: right;display:none" id="tf">add True/False</span>
+                <span data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success fa fa-plus" style="float: right;" id="chos">add choose</span>
+                <span data-bs-toggle="modal" data-bs-target="#exampleModal3" class="btn btn-success fa fa-plus" style="float: right;display:none" id="para">add paragraph</span>
+                {% if messages %}
+                {% for message in messages %}
+            <div class="container-fluid p-0">
+              <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                <button class="btn close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="True">&times;</span>
+                </button>
+                {{ message }}
+              </div>
+            </div>
+            {% endfor %}
+                    {%endif%}
+                           </div>
+              <div class="col-10">
+                <span onclick="window.print()" class="btn btn-danger" style="float: right;">print</span>
+                <div class="" style="overflow-x: auto;max-width: max-content;">
+            <div class="card" style="">
+              <div class="card-body">
+             
+           
+              
+                
+           
+               
+           
+            
+            
+             
+                
+              <form class="form" autocomplete="off" onsubmit="return saveAns()" action="/student/calculate-marks" method="POST" style="font-size:20px">
+                {% csrf_token %}
+                 <div class="card" >
+                    <div class="card-body">
+                  {% for q in questions%}
+               
+                <div class="d-flex w-100 align-items-center" style="padding: 30px;">
+                  {%if q.typ == 0 %}
+                    <div class="col-auto flex-shrink-1 ">
+                        <h3 class="">{{ forloop.counter }}. {{q.question}}&nbsp;&nbsp;({{q.marks}} Marks)  &nbsp;<a href="{%url 'teacher:qedit' q.id %}" style="text-align: right;" class="text-success fa fa-pen"></a>
+                          &nbsp;<a href="{%url 'teacher:qtdelete' q.id %}" style="text-align: right;" class="text-danger fa fa-trash" ></a>
+                        </h3>
+                      
+                      </div>
+                   
+                   
+                </div>
+                {%if q.para%}
+        <center>
+        <div class="container-sm" style="width: 90%;">
+<span class="btn bg-info" style="width: 100%;">Reading Paragraph</span>
+<div class="" style="border: 1px outset black;overflow-x: auto;">
+  <p>{{q.para}}</p>
+</div>
+
+</div>
+
+</center>
+{%endif%}
+                <center>
+                  {%if q.tabl %}
+        
+        <span style="width:100%" class="btn btn-info">{{q.tabl.name}}</span>
+        
+        <div style="overflow-y: auto;max-height: 200px;width: 90%;overflow-x: auto;max-width: 90%;" >
+        
+        
+        <table class="table table-striped">
+        <tr>
+        {%for t in q.tabl.data1%}
+        
+        
+         <th>{{t}}</th>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data2%}
+        
+        
+         <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data3%}
+        
+        
+         <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data4%}
+        
+        
+         <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data5%}
+        
+        
+         <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data6%}
+        
+        
+         <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data7%}
+        
+        
+         <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data8%}
+        
+        
+         <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data9%}
+        
+        
+         <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data10%}
+        
+        
+         <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data11%}
+        
+        
+         <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data12%}
+        
+        
+         <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data13%}
+        
+        
+         <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        
+        </table>
+        {%endif%}
+        </div></center>
+                {% if q.image != "2" %}
+                
+                 
+                  <div class="d-flex w-100 align-items-center">
+                  <image src="{{q.image.url }}" style="width:400px;height:300px;margin-left:2px"/>
+                </div>
+        
+                  {%endif%}
+               
+                <input type="hidden" name="csrfmiddlewaretoken" style="display:none" value="C24rUotmdHawVQJL3KrqiWxvti8UffOFYUc8TRbZtLt36AVLdP3jbkzUVe3beRAa">
+        
+               <div id="cover" name="cover" class="cover" name="{{ forloop.counter }}">
+                <div class="form-check mx-4 d-flex align-items-center">
+                    <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="A" value="A">
+                    <label class="form-check-label ml-3" for="option1">
+                      A {{q.option1}}
+                    </label>
+                </div>
+        
+        
+                <div class="form-check mx-4 d-flex align-items-center">
+                    <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="B" value="B">
+                    <label class="form-check-label ml-3" for="option2">
+                      B {{q.option2}}
+                    </label>
+                </div>
+        
+        
+                <div class="form-check mx-4 d-flex align-items-center">
+                    <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="C" value="C">
+                    <label class="form-check-label ml-3" for="option3">
+                      C {{q.option3}}
+                    </label>
+                </div>
+        
+        
+                <div class="form-check mx-4 d-flex align-items-center">
+                    <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="D" value="D">
+                    <label class="form-check-label ml-3" for="option4">
+                      D {{q.option4}}
+                    </label>
+                </div>
+        
+              {%elif q.typ == 1 %}
+              <div class=" ">
+                <center><span  class="btn bg-info" style="width: 600px;">Paragraph writing question </span></center>
+                <h3 class="">{{ forloop.counter }}. {{q.question}}&nbsp;&nbsp;({{q.marks}} Marks)</h3>
+                &nbsp;<a href="{%url 'teacher:cqeditblanck' q.id %}" style="text-align: right;" class="text-success fa fa-pen"></a>
+                &nbsp;<a href="{%url 'teacher:qtdelete' q.id %}" style="text-align: right;" class="text-danger fa fa-trash" ></a>
+              
+              </div>
+           
+           
+        </div>
+        {%if q.para%}
+        <center>
+        <div class="container-sm" style="width: 90%;">
+<span class="btn bg-info" style="width: 100%;">Reading Paragraph</span>
+<div class="" style="border: 1px outset black;overflow-x: auto;">
+  <p>{{q.para}}</p>
+</div>
+
+
+</center>
+{%endif%}
+        <center>
+          {%if q.tabl %}
+        
+        <span style="width:100%" class="btn btn-info">{{q.tabl.name}}</span>
+        
+        <div style="overflow-y: auto;max-height: 200px;width: 90%;overflow-x: auto;max-width: 90%;" >
+        
+        
+        <table class="table table-striped">
+        <tr>
+        {%for t in q.tabl.data1%}
+        
+        
+        <th>{{t}}</th>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data2%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data3%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data4%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data5%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data6%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data7%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data8%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data9%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data10%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data11%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data12%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data13%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        
+        </table>
+        {%endif%}
+        </center>
+        {% if q.image != "2" %}
+        
+         
+          <div class="d-flex w-100 align-items-center">
+          <image src="{{q.image.url }}" style="width:400px;height:400px;margin-left:2px"/>
+        </div>
+        
+          {%endif%}
+        
+        <input type="hidden" name="csrfmiddlewaretoken" style="display:none" value="C24rUotmdHawVQJL3KrqiWxvti8UffOFYUc8TRbZtLt36AVLdP3jbkzUVe3beRAa">
+        
+        <div id="cover" name="cover" class="cover" name="{{ forloop.counter }}">
+        <div class="form-check mx-4 d-flex align-items-center">
+          <textarea class="form-control dran" rows="4" name="{{forloop.counter}}" id="dran" value="" placeholder="enter your answer" ></textarea>
+                     
+        </div>
+        {%elif q.typ == 2 %}
+        
+        
+        
+        <div class="col-auto flex-shrink-1 ">
+          <center><span  class="btn bg-info" style="width: 600px;">fill in blanck space questions</span></center>
+          <h3 class="">{{ forloop.counter }}. {{q.question}}&nbsp;&nbsp;({{q.marks}} Marks)</h3>
+          &nbsp;<a href="{%url 'teacher:qeditblanck' q.id %}" style="text-align: right;" class="text-success fa fa-pen"></a>
+                            &nbsp;<a href="{%url 'teacher:qtdelete' q.id %}" style="text-align: right;" class="text-danger fa fa-trash" ></a>
+                          
+        </div>
+        
+        
+        </div>
+        {%if q.para%}
+        <center>
+        <div class="container-sm" style="width: 90%;">
+<span class="btn bg-info" style="width: 100%;">Reading Paragraph</span>
+<div class="" style="border: 1px outset black;overflow-x: auto;">
+  <p>{{q.para}}</p>
+</div>
+
+</div>
+
+</center>
+{%endif%}
+        <center>
+          {%if q.tabl %}
+        
+        <span style="width:100%" class="btn btn-info">{{q.tabl.name}}</span>
+        
+        <div style="overflow-y: auto;max-height: 200px;width: 90%;overflow-x: auto;max-width: 90%;" >
+        
+        
+        <table class="table table-striped">
+        <tr>
+        {%for t in q.tabl.data1%}
+        
+        
+        <th>{{t}}</th>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data2%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data3%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data4%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data5%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data6%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data7%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data8%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data9%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data10%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data11%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data12%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data13%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        
+        </table>
+        {%endif%}
+        </div></center>
+        {% if q.image != "2" %}
+        
+        
+        <div class="d-flex w-100 align-items-center">
+        <image src="{{q.image.url }}" style="width:400px;height:400px;margin-left:2px"/>
+        </div>
+        
+        {%endif%}
+        
+        <input type="hidden" name="csrfmiddlewaretoken" style="display:none" value="C24rUotmdHawVQJL3KrqiWxvti8UffOFYUc8TRbZtLt36AVLdP3jbkzUVe3beRAa">
+        
+        <div id="cover" name="cover" class="cover" name="{{ forloop.counter }}">
+        <div class="form-check mx-4 d-flex align-items-center">
+        <textarea class="form-control dran" rows="4" name="{{forloop.counter}}" id="dran" value="enter your answer" placeholder="enter your answer" ></textarea>
+               
+        </div>
+        {%elif q.typ == 3 %}
+        
+        <div class="col-auto flex-shrink-1 ">
+          <center><span  class="btn bg-info" style="width: 600px;">True/False</span></center>
+          <h3 class="">{{ forloop.counter }}. {{q.question}}&nbsp;&nbsp;({{q.marks}} Marks)</h3>
+          &nbsp;<a href="{%url 'teacher:qedit' q.id %}" style="text-align: right;" class="text-success fa fa-pen"></a>
+                            &nbsp;<a href="{%url 'teacher:qtdelete' q.id %}" style="text-align: right;" class="text-danger fa fa-trash" ></a>
+                          
+        </div>
+        
+        
+        </div>
+        {%if q.para%}
+        <center>
+        <div class="container-sm" style="width: 90%;">
+<span class="btn bg-info" style="width: 100%;">Reading Paragraph</span>
+<div class="" style="border: 1px outset black;overflow-x: auto;">
+  <p>{{q.para}}</p>
+</div>
+
+</div>
+
+</center>
+{%endif%}
+        <center>
+          {%if q.tabl %}
+        
+        <span style="width:100%" class="btn btn-info">{{q.tabl.name}}</span>
+        
+        <div style="overflow-y: auto;max-height: 200px;width: 90%;overflow-x: auto;max-width: 90%;" >
+        
+        
+        <table class="table table-striped">
+        <tr>
+        {%for t in q.tabl.data1%}
+        
+        
+        <th>{{t}}</th>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data2%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data3%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data4%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data5%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data6%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data7%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data8%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data9%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data10%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data11%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data12%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        <tr>
+        {%for t in q.tabl.data13%}
+        
+        
+        <td>{{t}}</td>
+        
+        
+        {%endfor%}
+        </tr>
+        
+        </table>
+        {%endif%}
+        </center>
+        
+        {% if q.image != "2" %}
+        
+        
+        <div class="d-flex w-100 align-items-center">
+        <image src="{{q.image.url }}" style="width:400px;height:400px;margin-left:2px"/>
+        </div>
+        
+        {%endif%}
+        
+        <input type="hidden" name="csrfmiddlewaretoken" style="display:none" value="C24rUotmdHawVQJL3KrqiWxvti8UffOFYUc8TRbZtLt36AVLdP3jbkzUVe3beRAa">
+        
+        <div id="cover" name="cover" class="cover" name="{{ forloop.counter }}">
+          <div class="form-check mx-4 d-flex align-items-center">
+              <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="A" value="A">
+              <label class="form-check-label ml-3" for="option1">
+                A {{q.option1}}
+              </label>
+          </div>
+        
+        
+          <div class="form-check mx-4 d-flex align-items-center">
+              <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="B" value="B">
+              <label class="form-check-label ml-3" for="option2">
+                B {{q.option2}}
+              </label>
+          </div>
+          <div class="form-check mx-4 d-flex align-items-center" style="display:none">
+            <input class="form-check-input option3" type="radio" name="{{ forloop.counter }}" id="C" value="C" style="display:none">
+          
+          </div>
+          
+          
+          <div class="form-check mx-4 d-flex align-items-center" style="display:none">
+            <input class="form-check-input option4" type="radio" name="{{ forloop.counter }}" id="D" value="D" style="display:none">
+          
+          </div>
+          
+              {%endif%}
+                
+              </div>
+                {% endfor %}
+           </div>
+              
+                 
+              
+                </form>
+              </div>
+              </div>
+              </div>
+             
+              
+             
+          </div>
+          
+          
+          </div>
+          
+
+              </div>
+            </div>
+            
+            <!--=========================================student list========================-->
+            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">question form </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+               
+                 <div style="padding:20px">
+            <form  action="{%url 'teacher:blanck_question'%}"  name="my-form1" method="post" enctype="multipart/form-data" >
+          {%csrf_token%}
+                
+          <input type="hidden" name="idt" id="idt" value="{{id}}">
+          
+            
+              <input type="hidden" name="id" id="idb" value="{{username}}">
+              
+              <input type="hidden" name="course" id="idb" value="{{course}}">
+              <label class="form-label">question code</label>
+      <input type="number" name="code" id="mark" class="form-control" value="1" placeholder="example:2">
+       
+              <label class="form-label">question weight</label>
+              <input type="text" name="mark" id="mark" class="form-control" placeholder="example:2">
+             
+                
+              <label class="form-label">write your question bellow</label>
+              <textarea class="form-control" rows="4" id="question"  name="question" placeholder="example:where is jinka university"></textarea>
+             
+              <label class="form-label">write key word that separated by coma</label>
+              <textarea class="form-control" rows="4" id="question"  name="answer" placeholder="example:where is jinka university"></textarea>
+              <label class="form-label">explanation</label>
+            <textarea class="form-control" rows="4" id="question"  name="exp" placeholder="example:jku located at south om ethiopia......."></textarea>
+           
+              
+          
+      
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary"  style="">Save </button>
+            </div>
+          </form>
+          </div>
+          </div>
+          </div></center>
+          <!--======================================set time===================-->
+          
+         
+          <!--=====================================report page=================-->
+        
+          
+          </div>
+          {% include "latexify/scripts.html" %}
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+          <script type="text/javascript">
+         
+          var ch=document.getElementById('ch');
+          ch.addEventListener("change",()=>{
+            var bl=document.getElementById('bl');
+            var sh=document.getElementById('sh');
+            var chos=document.getElementById('chos');
+            var tf=document.getElementById('tf');
+            var para=document.getElementById('para');
+            var name=ch.value;
+           if(name=="blanck"){
+           
+            bl.style.display="block"
+            chos.style.display="none"
+            sh.style.display="none"
+            tf.style.display="none"
+            para.style.display="none"
+           }else if(name=="short"){
+            
+            bl.style.display="none"
+            chos.style.display="none"
+            sh.style.display="block"
+            para.style.display="none"
+            tf.style.display="none"
+           }else if(name=="TF"){
+           
+            bl.style.display="none"
+            chos.style.display="none"
+            sh.style.display="none"
+            tf.style.display="block"
+            para.style.display="none"
+            
+           }else if(name=="para"){
+           
+            bl.style.display="none"
+            chos.style.display="none"
+            sh.style.display="none"
+            tf.style.display="none"
+            para.style.display="block"
+            
+           }
+           
+           
+           else{
+           
+            bl.style.display="none"
+            chos.style.display="block"
+            sh.style.display="none"
+            tf.style.display="none"
+            para.style.display="none"
+           }
+          })
+
+
+           var question=document.getElementById('question');
+           var mark=document.getElementById('mark');
+           var option1=document.getElementById('option1');
+           var option2=document.getElementById('option2');
+           var option3=document.getElementById('option3');
+           var option4=document.getElementById('option4');
+           var sub=document.getElementById('sub');
+
+           question.addEventListener('keyup',()=>{
+             if(question.value!="" ){
+              question.setAttribute("class","form-control is-valid")
+             }else{
+              question.setAttribute("class","form-control is-invalid")
+             }
+           })
+           option1.addEventListener('keyup',()=>{
+            if(option1.value!="" ){
+             option1.setAttribute("class","form-control is-valid")
+            }else{
+              option1.setAttribute("class","form-control is-invalid")
+            }
+          })
+          option2.addEventListener('keyup',()=>{
+            if(option2.value!="" ){
+              option2.setAttribute("class","form-control is-valid")
+            }else{
+              option2.setAttribute("class","form-control is-invalid")
+            }
+          })
+          option3.addEventListener('keyup',()=>{
+            if(option3.value!="" ){
+             option3.setAttribute("class","form-control is-valid")
+            }else{
+              option3.setAttribute("class","form-control is-invalid")
+            }
+          })
+          option4.addEventListener('keyup',()=>{
+            if(option4.value!="" ){
+             option4.setAttribute("class","form-control is-valid")
+            }else{
+              option4.setAttribute("class","form-control is-invalid")
+            }
+          })
+          mark.addEventListener('keyup',()=>{
+            mn=mark.value;
+            if(mark.value!="" && mn.match(/^[0-9]*$/) ){
+             mark.setAttribute("class","form-control is-valid")
+             sub.style.display="block"
+            }else{
+              mark.setAttribute("class","form-control is-invalid")
+              sub.style.display="none"
+              
+            }
+          })
+          
+         /*var quest=document.querySelector('#question');
+         var name=question.value;
+          var onkeydown = (function (ev) {
+            var key;
+            var isShift;
+            if (window.event) {
+              key = window.event.keyCode;
+              isShift = !!window.event.shiftKey; // typecast to boolean
+              console.log(key)
+              if(isShift==true&&key==83){
+                var x = document.createElement("SUP");
+                var tax=prompt("enter superscript")
+                var t = document.createTextNode(tax);
+                x.appendChild(t);
+                quest.appendChild(x);
+              }
+            } else {
+              key = ev.which;
+              isShift = !!ev.shiftKey;
+              //console.log(isShift)
+            }
+            if ( isShift ) {
+              switch (key) {
+                case 16: // ignore shift key
+                  break;
+                default:
+                  console.log(key)
+                  break;
+              }
+            }
+          });*/
+        </script>
+        
+    </body>
+</html>
+{%endblock content %}

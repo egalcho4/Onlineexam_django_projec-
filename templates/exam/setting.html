@@ -1,0 +1,132 @@
+{% extends 'exam/adminbase.html' %}
+{% load widget_tweaks %}
+{%load static%}
+{% block content %}
+<link rel="stylesheet" href="{%static 'font/css/all.min.css'%}">
+  <link rel="stylesheet" href="{%static 'font/css/fontawesome.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/font.css'%}">
+<script type="text/javascript" src="{%static 'jsb/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/proper.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/jq.js' %}"></script>
+<link rel="stylesheet" href="{%static 'css/ex.css'%}"> 
+<link rel="stylesheet" href="{%static 'css/style.css'%}"> 
+
+<link rel="stylesheet" href="{%static 'css/color.css'%}"> <head>
+  <style media="screen">
+   
+</style>
+</head>
+<div class="container-sm">
+
+  <div class="card">
+    <div class="card-body">
+<a class="btn btn-success btn-xs" style="border-radius: 0%;margin-left:20px" href="{% url 'exam:admin-dashboard'  %}"> <i class="bi bi-chevron-left">back</i></a>
+<div class="container">
+  {% if messages %}
+    {% for message in messages %}
+<div class="container-fluid p-0">
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="True">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+</div>
+{% endfor %}
+        {%endif%}
+ 
+  <div class="panel panel-primary rounded-0">
+    <div class="panel-heading rounded-0">
+      <h6 class="panel-title text-white" style="">settings</h6>
+    </div>
+   <form action="" method="post">
+    {%csrf_token%}
+    
+            <fieldset>
+              <legend>cammera settings:</legend> {%if came.perm == "1" %}
+              <li class="text-success">enabled</li>
+              {%else%}
+              <li class="text-danger">disabled</li>
+              
+              {%endif%}
+              <div>
+                <input type="radio" name="camera" id="camera1" value="1" placeholder="enable" id="camera">&nbsp;&nbsp;
+                <label for="camera1">enable</label>
+                &nbsp;&nbsp;
+               
+                <input type="radio" name="camera" id="camera2" value="0" placeholder="disable" id="camera">&nbsp;&nbsp;
+                <label for="camera2">disable</label>
+          
+                
+              </div>
+              <legend>camera to be used:</legend>
+              {%if live.perm == "1" %}
+              <li class="text-success">on leave streaming mode</li>
+              {%elif live.perm == "0"%}
+              <li class="text-danger">on self control  mode</li>
+              {%else %}
+              <li class="text-warning">motion control mode</li>
+              {%endif%}
+              <div>
+                <input type="radio" name="lv" id="camera5" value="1" placeholder="enable" id="camera">&nbsp;&nbsp;
+                <label for="camera5">leave streaming mode</label> 
+               
+                &nbsp;&nbsp;
+                <input type="radio" name="lv" id="camera6" value="0" placeholder="disable" id="camera">&nbsp;&nbsp;
+                <label for="camera6">object detect mode</label>
+                &nbsp;&nbsp;
+                <input type="radio" name="lv" id="camera6" value="2" placeholder="disable" id="camera">&nbsp;&nbsp;
+                <label for="camera6">motion control mode</label>
+          
+                
+              </div>
+              <legend>registration settings:</legend>
+              {%if reg.perm == "1" %}
+              <li class="text-success">enabled</li>
+              {%else%}
+              <li class="text-danger">disabled</li>
+              {%endif%}
+              <div>
+                <input type="radio" name="reg" id="camera3" value="1" placeholder="enable" id="camera">&nbsp;&nbsp;
+                <label for="camera3">enable</label>
+                &nbsp;&nbsp;
+                <input type="radio" name="reg" id="camera4" value="0" placeholder="disable" id="camera">&nbsp;&nbsp;
+                <label for="camera4">disable</label>
+          
+                
+              </div>
+              <legend>exam  settings:</legend>
+              {%if exam.perm == "1" %}
+              <li class="text-success">passworded mode</li>
+              {%elif exam.perm == "0" %}
+              <li class="text-success">controled mode</li>
+              {%elif exam.perm == "2"%}
+              <li class="text-success">student based</li>
+              {%endif%}
+              <div>
+                <input type="radio" name="ex" id="camera5" value="1" placeholder="enable" id="camera">&nbsp;&nbsp;
+                <label for="camera5">passworded</label> 
+               
+                &nbsp;&nbsp;
+                <input type="radio" name="ex" id="camera6" value="0" placeholder="disable" id="camera">&nbsp;&nbsp;
+                <label for="camera6">controled</label>
+                &nbsp;&nbsp;
+                <input type="radio" name="ex" id="camera6" value="2" placeholder="disable" id="camera">&nbsp;&nbsp;
+                <label for="camera6">student based</label>
+          
+                
+              </div>
+              <div>
+                
+              </div>
+            </fieldset>
+            <button type="submit" class="btn btn-success">Save</button>
+          </form>
+   
+   
+</div>
+
+
+
+{% endblock content %}

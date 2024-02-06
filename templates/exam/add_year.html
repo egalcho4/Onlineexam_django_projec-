@@ -1,0 +1,91 @@
+{%extends 'exam/adminbase.html'%}
+{%load static%}
+{%block content%}
+{% load widget_tweaks %}
+<div class="container-sm">
+
+<div class="card">
+    <div class="card-body">
+        {% if messages %}
+  {% for message in messages %}
+<div class="container-fluid p-0">
+<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+  <button  class="btn close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="True">&times;</span>
+  </button>
+  {{ message }}
+</div>
+</div>
+{% endfor %}
+      {%endif%}
+        <button class="btn btn-success" style="float: right;" id="bt" onclick="show()">add year</button>
+        <div style="display: none;" id="frm">
+<form action="" method="post">
+    {%csrf_token%}
+    
+    <label class="form-label">year of student level</label>
+     {% render_field form.year class="form-control rounded-0" autocomplete="off" placeholder="Enter Year 3rd year" %}
+     <label class="form-label">semister</label>
+     {% render_field form.sem class="form-control rounded-0" autocomplete="off" placeholder="Example :8" %}
+     <label class="form-label">total student</label>
+     {% render_field form.tot class="form-control rounded-0" autocomplete="off" placeholder="Enter total student" %}
+     <label class="form-label">departiment</label>
+     {% render_field form.dep class="form-control rounded-0" autocomplete="off" placeholder="Enter " %}
+      
+    <button type="submit" class="btn btn-primary">add year</button>
+</form>
+</div>
+
+<div class="panel panel-primary rounded-0" id="pn">
+    <div class="panel-heading rounded-0">
+      <h6 class="panel-title">Students</h6>
+    </div>
+    <input type="text" id="myinput" placeholder="search......." class="form-control" style="font-size:20px">
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Year</th>
+          <th>semister</th>
+          <th>Total Student</th>
+          <th>departiment</th>
+          
+          <th>set code</th>
+        
+          
+        
+        </tr>
+      </thead>
+      {% for t in ye %}
+      <tr>
+        <td> {{forloop.counter}}</td>
+        <td> {{t.year}}</td>
+        <td> {{t.sem}}</td>
+        <td> {{t.tot}}</td>
+        
+        <td>{{t.dep}}</td>
+        
+        <td class="text-center"><a class="btn btn-primary btn-xs" style="border-radius: 0%;" href="{% url 'exam:add_student_info' t.sem   %}"><span class="fa fa-eye"></span></a></td>
+        
+     
+<!--   <td class="text-center"><a class="btn btn-primary btn-xs" style="border-radius: 0%;" href="{% url 'teacher:update-student' t.id  %}"><small class="fas fa-edit"></small></a>
+        </td><td><a class="btn btn-danger btn-xs" style="border-radius: 0%;" href="{% url 'teacher:delete_student' t.id  %}"><small class="fas fa-trash"></small></a></td>-->
+        
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+<script>
+function show(){
+    var d=document.querySelector('#frm');
+    var p=document.querySelector('#pn');
+    d.style.display="block";
+    p.style.display="none"
+}
+</script>
+{%endblock%}

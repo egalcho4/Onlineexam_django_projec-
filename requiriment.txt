@@ -1,0 +1,17 @@
+agora-token-builder==1.0.0
+asgi-redis==1.4.3
+asgiref==3.6.0
+Django==4.2.1
+django-jazzmin==2.6.0
+django-mathfield==0.1.0
+django-widget-tweaks==1.4.12
+numpy==1.24.3
+opencv-python==4.7.0.72
+pandas==2.0.1
+Pillow==9.5.0
+psycopg2==2.9.6
+python-dateutil==2.8.2
+pytz==2023.3
+six==1.16.0
+sqlparse==0.4.4
+tzdata==2023.3
