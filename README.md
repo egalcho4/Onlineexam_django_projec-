@@ -1,1 +1,1 @@
-# Onlineexam_django_projec-
+# smart online exam project
