@@ -35,17 +35,17 @@ Pip install –r requirement.txt
 ‘’’
 Then you have to download yolo weight  and put it in static/yolo folder inside the project
 Aim sorry I can’t able to put yolo weight inside project b/c it has 273mg size and github not allow this much data
-After then you have to couple of things 
-Incide camera table 
-Insert same data
-Livestream=0
-Camera=0
-Exam=0
-Etc
+ - After then you have to couple of things 
+* Incide camera table 
++ Insert same data
+1 Livestream=0
+2 Camera=0
+3 Exam=0
+4 E,t,c
 Then all thing working fine
 
  Sample code 
-```bash
+```bash python
 from django.db import models
 from teacher.models import Teacher
 from student.models import Student
