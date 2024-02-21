@@ -3,6 +3,8 @@
 ![sample image](/Screenshot_20230526-163020_1.jpg)
 ## evaluation page screen shoot
 ![sample image](/Screenshot_20230526-162736_1.jpg)
+## admin dashboard
+![sample image](/Screenshot_20230526-162647_1.jpg)
 
 
 ## Introduction 
