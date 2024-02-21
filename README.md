@@ -1,5 +1,5 @@
 # Title smart online exam system
-![sample image]([Screenshot_20230526-162647_1.jpg](https://photos.app.goo.gl/Ckx8ya6xoyfiZsZPA))
+![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://myoctocat.com/assets/images/base-octocat.svg)
 
 ## Introduction 
 Smart online examination system is developed by back end Django and front end JavaScript, html, css jQuery, bootstrap5.  Smart online examination system have advanced future than currently existing online examination system same of them listed bellow
