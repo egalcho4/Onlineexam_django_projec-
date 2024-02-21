@@ -1,6 +1,7 @@
-#Title smart online exam system
+# Title smart online exam system
+![sample image](Screenshot_20230526-162647_1.jpg)
 
-##Introduction 
+## Introduction 
 Smart online examination system is developed by back end Django and front end JavaScript, html, css jQuery, bootstrap5.  Smart online examination system have advanced future than currently existing online examination system same of them listed bellow
 
 - Detect object like book,phone,laptop,student motion
