@@ -14,11 +14,11 @@ Smart online examination system is developed by back end Django and front end Ja
 + It allow to start exam of  each student if accidental closed and reported by admin
 This little functionality about smart online examination system
 ## Requirements
-	Python 3.97
-	PostgreSQL server 
-	Django
-	Opencv
-	Widget_tweeks
+1	Python 3.97
+2	PostgreSQL server 
+3	Django
+4	Opencv
+5	Widget_tweeks
 Above listed software are major requirement to run this project
 You will get more about requirements on requirement.txt file
 ## Installation
