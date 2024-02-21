@@ -1,95 +1,73 @@
-# smart online exam project
-@@ -1,4 +1,5 @@
-<div id="top"></div>
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
-<a name="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-@@ -95,7 +96,7 @@ Of course, no one template will serve all projects since your needs may be diffe
+#Title smart online exam system
+##Introduction 
+Smart online examination system is developed by back end Django and front end JavaScript, html, css jQuery, bootstrap5.  Smart online examination system have advanced future than currently existing online examination system same of them listed bellow
+	Detect object like book,phone,laptop,student motion
+	Control window minimization 
+	Control new tab open and other software open
+	Control more than one login per account at a time
+	Block the computer to not allow other user login at same exam
+	Evaluate the blank question
+	Evaluate short answer question 
+	Show answer with fully explanation
+	It allow to start exam of  each student if accidental closed and reported by admin
+This little functionality about smart online examination system
+## Requirements
+	Python 3.97
+	PostgreSQL server 
+	Django
+	Opencv
+	Widget_tweeks
+Above listed software are major requirement to run this project
+You will get more about requirements on requirement.txt file
+## Installation
+To use this software first install python 3.97 on your system
+Then create virtual environment like this
+Clone this project
+‘’’bash
+Python –m venv virtual_environment_name
+‘’’
+Then activate virtual environment
+And install requirement like this
+‘’’bash
+Pip install –r requirement.txt
+‘’’
+Then you have to download yolo weight  and put it in static/yolo folder inside the project
+Aim sorry I can’t able to put yolo weight inside project b/c it has 273mg size and github not allow this much data
+After then you have to couple of things 
+Incide camera table 
+Insert same data
+Livestream=0
+Camera=0
+Exam=0
+Etc
+Then all thing working fine
 
-Use the `BLANK_README.md` to get started.
+ Sample code 
+```python
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+```
+##
 
-
-
-@@ -112,7 +113,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-@@ -148,7 +149,7 @@ _Below is an example of how you can instruct your audience on installing and set
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-@@ -159,7 +160,7 @@ Use this space to show useful examples of how a project can be used. Additional
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-@@ -176,7 +177,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-@@ -194,7 +195,7 @@ Don't forget to give the project a star! Thanks again!
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-@@ -203,7 +204,7 @@ Don't forget to give the project a star! Thanks again!
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## Acknowledgement
+First of all I need to thanks God Who helps me allot to accomplish this project within time and then I would like to thank you jinka university they help me to by giving all requirement on time  ,final I would to thank you my friends and family they are side of me for every situation
+##About repository
+This repository was created at the finally stage after first repository failed to not updated file and you may not get the commit history for this project sorry for this
+## About Me
+My name is Elias Galcho
+I have BSc in computer science
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
 
 
 
-@@ -214,7 +215,7 @@ Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.c
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
-@@ -232,7 +233,7 @@ Use this space to list resources you find helpful and would like to give credit
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
-@@ -266,4 +267,4 @@ Use this space to list resources you find helpful and would like to give credit
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
-[JQuery-url]: https://jquery.com 
+
+
+
+
+
