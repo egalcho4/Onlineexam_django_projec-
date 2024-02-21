@@ -35,13 +35,16 @@ Pip install –r requirement.txt
 ‘’’
 Then you have to download yolo weight  and put it in static/yolo folder inside the project
 Aim sorry I can’t able to put yolo weight inside project b/c it has 273mg size and github not allow this much data
+
  - After then you have to couple of things 
 * Incide camera table 
 + Insert same data
+  
 1 Livestream=0
 2 Camera=0
 3 Exam=0
 4 E,t,c
+
 Then all thing working fine
 
  Sample code 
@@ -194,8 +197,10 @@ First of all I need to thanks God Who helps me allot to accomplish this project 
 ##About repository
 This repository was created at the finally stage after first repository failed to not updated file and you may not get the commit history for this project sorry for this
 ## About Me
-My name is Elias Galcho
-I have BSc in computer science
+
+- My name is Elias Galcho
+* I have BSc in computer science
+  
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
 
