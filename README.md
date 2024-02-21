@@ -1,15 +1,16 @@
 #Title smart online exam system
+
 ##Introduction 
 Smart online examination system is developed by back end Django and front end JavaScript, html, css jQuery, bootstrap5.  Smart online examination system have advanced future than currently existing online examination system same of them listed bellow
-	Detect object like book,phone,laptop,student motion
-	Control window minimization 
-	Control new tab open and other software open
-	Control more than one login per account at a time
-	Block the computer to not allow other user login at same exam
-	Evaluate the blank question
-	Evaluate short answer question 
-	Show answer with fully explanation
-	It allow to start exam of  each student if accidental closed and reported by admin
+-Detect object like book,phone,laptop,student motion
+-Control window minimization 
+-Control new tab open and other software open
+-Control more than one login per account at a time
+-Block the computer to not allow other user login at same exam
+-Evaluate the blank question
+-Evaluate short answer question 
+-Show answer with fully explanation
+-It allow to start exam of  each student if accidental closed and reported by admin
 This little functionality about smart online examination system
 ## Requirements
 	Python 3.97
