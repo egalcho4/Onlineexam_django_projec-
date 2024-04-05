@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load widget_tweaks %}
+{%load widget_tweaks%}
 {%load static%}
 <html lang="en" dir="ltr">
   <head>
@@ -68,14 +68,13 @@
                     <h1 class="fa fa-user" style="width:100px;height:100px;font-size:140px" ></h1>
                     </div>
                     <div class="col-9" >
-                    <label class="form-label">username</label>
-                     {% render_field form.username class="form-control rounded-0" autocomplete="off" placeholder="Enter your username" %}
-                     <label class="form-label">password</label>
-                     {% render_field form.password class="form-control rounded-0" autocomplete="off" placeholder="Enter your Password" %}
-                     <br><br>
+                      <label class="form-label">username</label>
+                      {% render_field form.username class="form-control rounded-0" autocomplete="off" placeholder="Enter your username" %}
+                      <label class="form-label">password</label>
+                      {% render_field form.password class="form-control rounded-0" autocomplete="off" placeholder="Enter your Password" %}
+                       <br><br>
 
-                     <input type="submit" class="btn btn-primary btn-lg rounded-0" name="" value="Login">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    
+                     <input type="submit" class="btn btn-primary btn-lg rounded" name="" value="Login">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                      <a href="{%url 'exam:psforgot'%}" class="" style="padding-right: 35px; border-radius: 0%;"><i class="fa fa-key" aria-hidden="true"></i> forgot password</a>
                     </div> </div>
                 </form>

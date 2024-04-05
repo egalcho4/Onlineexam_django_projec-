@@ -1,0 +1,1668 @@
+
+
+
+{%load static%}
+ 
+
+<head>
+ 
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+<script type="text/javascript" src="{%static 'jsb/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/proper.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/jq.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/jqn.js' %}"></script>
+
+</style>
+</head>
+<style>
+    body{
+       
+        background: -webkit-linear-gradient(top left,black,darkgray);
+        background: -linear-gradient(top left,black,darkgray);
+        background: -o-linear-gradient(top left,black,darkgray);
+       
+     
+       
+    }#main{
+        border:2px solid black;
+    }#exmpage{
+        margin-top:20%;
+    }.jumbotron1{
+        border: 3px solid white;
+        border-radius:20px;
+        background: -webkit-linear-gradient(top left,black,darkgray);
+        background: -linear-gradient(top left,black,darkgray);
+        background: -o-linear-gradient(top left,black,darkgray);
+     
+        margin:10px;
+    }
+</style>
+ 
+<body >
+ <div class="container-sm">
+    <div class="row">
+        <div class="col-1">
+
+        </div>
+        
+        <div class="col-9  rounded" id="exampage" style="margin-top:50px;"><center>
+            <form class="form" autocomplete="off" onsubmit="return saveAns()" action="/student/calculate-marks" method="POST" style="font-size:20px">
+                <span>{{course.name}}</span>
+            <div id="exam" style="padding-top:30px;outline:5px inset brown" class="container-sm bg-white">
+                  {% csrf_token %}
+                 
+                    {% for q in questions%}
+                 
+                  <div class="d-flex w-100 align-items-center" >
+                            <br><br>
+                    {%if q.typ == 0 %}
+                      <div class="col-auto flex-shrink-1 ">
+                          <h3 class="">{{ q.id}}. {{q.question}}&nbsp;&nbsp;({{q.marks}} Marks)</h3>
+                      </div>
+                     
+                     
+                  </div>
+                  {%if q.para%}
+                  <center>
+                  <div class="container-sm" style="width: 90%;">
+          <span class="btn bg-info" style="width: 100%;">Reading Paragraph</span>
+          
+            <p>{{q.para}}</p>
+          </div>
+          
+          
+          
+          </center>
+          {%endif%}
+                  <center>
+                    {%if q.tabl %}
+          
+          <span style="width:100%" class="btn btn-info">{{q.tabl.name}}</span>
+          
+          <div style="overflow-y: auto;max-height: 200px;width: 90%;overflow-x: auto;max-width: 90%;" >
+          
+          
+          <table class="table table-striped">
+          <tr>
+          {%for t in q.tabl.data1%}
+          
+          
+           <th>{{t}}</th>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data2%}
+          
+          
+           <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data3%}
+          
+          
+           <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data4%}
+          
+          
+           <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data5%}
+          
+          
+           <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data6%}
+          
+          
+           <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data7%}
+          
+          
+           <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data8%}
+          
+          
+           <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data9%}
+          
+          
+           <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data10%}
+          
+          
+           <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data11%}
+          
+          
+           <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data12%}
+          
+          
+           <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data13%}
+          
+          
+           <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          
+          </table>
+          {%endif%}
+          </center>
+                  {% if q.image != "2" %}
+                  
+                   
+                    <div class="d-flex w-100 align-items-center">
+                    <image src="{{q.image.url }}" style="width:90%;height:400px;margin-left:2px"/>
+                  </div>
+          
+                    {%endif%}
+                 
+                  <input type="hidden" name="csrfmiddlewaretoken" style="display:none" value="C24rUotmdHawVQJL3KrqiWxvti8UffOFYUc8TRbZtLt36AVLdP3jbkzUVe3beRAa">
+          
+                 <div id="cover" name="cover" class="cover" name="{{ forloop.counter }}">
+                  <div style="margin-left: 20px;">
+                  <div class="form-check mx-4 d-flex align-items-center">
+                      <input class="form-check-input" style="border: 3px solid black;" type="radio" name="{{ forloop.counter }}" id="A" value="A">
+                      <label class="form-check-label ml-3" for="option1">
+                        &nbsp;&nbsp;A &nbsp;&nbsp;{{q.option1}}
+                      </label>
+                  </div>
+          
+          
+                  <div class="form-check mx-4 d-flex align-items-center">
+                      <input class="form-check-input" style="border: 3px solid black;" type="radio" name="{{ forloop.counter }}" id="B" value="B">
+                      <label class="form-check-label ml-3" for="option2">
+                        &nbsp;&nbsp;B&nbsp;&nbsp;{{q.option2}}
+                      </label>
+                  </div>
+          
+          
+                  <div class="form-check mx-4 d-flex align-items-center">
+                      <input class="form-check-input" style="border: 3px solid black;" type="radio" name="{{ forloop.counter }}" id="C" value="C">
+                      <label class="form-check-label ml-3" for="option3">
+                        &nbsp;&nbsp;C&nbsp;&nbsp;{{q.option3}}
+                      </label>
+                  </div>
+          
+          
+                  <div class="form-check mx-4 d-flex align-items-center">
+                      <input class="form-check-input" style="border: 3px solid black;" type="radio" name="{{ forloop.counter }}" id="D" value="D">
+                      <label class="form-check-label ml-3" for="option4">
+                        &nbsp;&nbsp;D&nbsp;&nbsp;{{q.option4}}
+                      </label>
+                  </div>
+                  {%elif q.typ == 1 %}
+                  <div class=" ">
+                    <center><span  class="btn bg-info" style="width: 600px;">Paragraph writing question </span></center>
+                    <h3 class="">{{ forloop.counter }}. {{q.question}}&nbsp;&nbsp;({{q.marks}} Marks)</h3>
+                </div>
+               
+               
+            </div>
+            {%if q.para%}
+            <center>
+            <div class="container-sm" style="width: 90%;">
+            <span class="btn bg-info" style="width: 100%;">Reading Paragraph</span>
+            <div class="" style="">
+            <p>{{q.para}}</p>
+            </div>
+            
+            </div>
+            
+            </center>
+            {%endif%}
+            <center>
+              {%if q.tabl %}
+            
+            <span style="width:100%" class="btn btn-info">{{q.tabl.name}}</span>
+            
+            <div style="overflow-y: auto;max-height: 200px;width: 90%;overflow-x: auto;max-width: 90%;" >
+            
+            
+            <table class="table table-striped">
+            <tr>
+            {%for t in q.tabl.data1%}
+            
+            
+            <th>{{t}}</th>
+            
+            
+            {%endfor%}
+            </tr>
+            <tr>
+            {%for t in q.tabl.data2%}
+            
+            
+            <td>{{t}}</td>
+            
+            
+            {%endfor%}
+            </tr>
+            <tr>
+            {%for t in q.tabl.data3%}
+            
+            
+            <td>{{t}}</td>
+            
+            
+            {%endfor%}
+            </tr>
+            <tr>
+            {%for t in q.tabl.data4%}
+            
+            
+            <td>{{t}}</td>
+            
+            
+            {%endfor%}
+            </tr>
+            <tr>
+            {%for t in q.tabl.data5%}
+            
+            
+            <td>{{t}}</td>
+            
+            
+            {%endfor%}
+            </tr>
+            <tr>
+            {%for t in q.tabl.data6%}
+            
+            
+            <td>{{t}}</td>
+            
+            
+            {%endfor%}
+            </tr>
+            <tr>
+            {%for t in q.tabl.data7%}
+            
+            
+            <td>{{t}}</td>
+            
+            
+            {%endfor%}
+            </tr>
+            <tr>
+            {%for t in q.tabl.data8%}
+            
+            
+            <td>{{t}}</td>
+            
+            
+            {%endfor%}
+            </tr>
+            <tr>
+            {%for t in q.tabl.data9%}
+            
+            
+            <td>{{t}}</td>
+            
+            
+            {%endfor%}
+            </tr>
+            <tr>
+            {%for t in q.tabl.data10%}
+            
+            
+            <td>{{t}}</td>
+            
+            
+            {%endfor%}
+            </tr>
+            <tr>
+            {%for t in q.tabl.data11%}
+            
+            
+            <td>{{t}}</td>
+            
+            
+            {%endfor%}
+            </tr>
+            <tr>
+            {%for t in q.tabl.data12%}
+            
+            
+            <td>{{t}}</td>
+            
+            
+            {%endfor%}
+            </tr>
+            <tr>
+            {%for t in q.tabl.data13%}
+            
+            
+            <td>{{t}}</td>
+            
+            
+            {%endfor%}
+            </tr>
+            
+            </table>
+            {%endif%}
+            </center>
+            {% if q.image != "2" %}
+            
+             
+              <div class="d-flex w-100 align-items-center">
+              <image src="{{q.image.url }}" style="width:90%;height:400px;margin-left:2px"/>
+            </div>
+            
+              {%endif%}
+            
+            <input type="hidden" name="csrfmiddlewaretoken" style="display:none" value="C24rUotmdHawVQJL3KrqiWxvti8UffOFYUc8TRbZtLt36AVLdP3jbkzUVe3beRAa">
+            
+            <div id="cover" name="cover" class="cover" name="{{ forloop.counter }}">
+            <label class="form-label" style="margin-left: 10px;">Enter Your Answer Below Space</label><br>
+            <div class="form-check mx-4 d-flex align-items-center">
+             
+              <textarea class="form-control dran" rows="4" style="border: 1px solid black;margin-left: 10px;" name="{{forloop.counter}}" id="dran" value="enter your answer" placeholder="enter your answer" ></textarea>
+                         
+            </div>
+          
+            {%elif q.typ == 2 %}
+          
+          
+          
+          <div class="col-auto flex-shrink-1 ">
+            <center><span  class="btn bg-info" style="width: 600px;">fill in blanck space questions</span></center>
+            <h3 class="">{{ forloop.counter }}. {{q.question}}&nbsp;&nbsp;({{q.marks}} Marks)</h3>
+          </div>
+          
+          
+          
+          {%if q.para%}
+          <center>
+          <div class="container-sm" style="width: 90%;margin: 40px;">
+          <span class="btn bg-info" style="width: 100%;">Reading Paragraph</span>
+          <div class="" style="">
+          <p>{{q.para}}</p>
+          </div>
+          
+          </div>
+          
+          </center>
+          {%endif%}
+          <center>
+            {%if q.tabl %}
+          
+          <span style="width:100%" class="btn btn-info">{{q.tabl.name}}</span>
+          
+          <div style="overflow-y: auto;max-height: 200px;width: 90%;overflow-x: auto;max-width: 90%;" >
+          
+          
+          <table class="table table-striped">
+          <tr>
+          {%for t in q.tabl.data1%}
+          
+          
+          <th>{{t}}</th>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data2%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data3%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data4%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data5%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data6%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data7%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data8%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data9%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data10%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data11%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data12%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data13%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          
+          </table>
+          {%endif%}
+          </div></center>
+          {% if q.image != "2" %}
+          
+          
+          <div class="d-flex w-100 align-items-center">
+          <image src="{{q.image.url }}" style="width:90%;height:400px;margin-left:2px"/>
+          </div>
+          
+          {%endif%}
+          
+          <input type="hidden" name="csrfmiddlewaretoken" style="display:none" value="C24rUotmdHawVQJL3KrqiWxvti8UffOFYUc8TRbZtLt36AVLdP3jbkzUVe3beRAa">
+          
+          <div id="cover" name="cover" class="cover" name="{{ forloop.counter }}">
+            <label class="form-label" style="margin-left: 10px;">Enter Your Answer Below Space</label><br>
+          <div class="form-check mx-4 d-flex ">
+          <textarea class="form-control dran" rows="4" name="{{forloop.counter}}" id="dran" value="" placeholder="enter your answer" style="border: 1px solid black;margin-left: 10px;" ></textarea>
+                 
+          </div>
+          {%elif q.typ == 3 %}
+          
+          <div class="col-auto flex-shrink-1 ">
+            <center><span  class="btn bg-info" style="width: 600px;">True/False</span></center>
+            <h3 class="">{{ forloop.counter }}. {{q.question}}&nbsp;&nbsp;({{q.marks}} Marks)</h3>
+          </div>
+          
+          
+          </div>
+          {%if q.para%}
+          <center>
+          <div class="container-sm" style="width: 90%;">
+          <span class="btn bg-info" style="width: 100%;">Reading Paragraph</span>
+          <div class="" style="border: 2px outset black;overflow-x: auto;max-width: min-content;">
+          <p>{{q.para}}</p>
+          </div>
+          
+          </div>
+          
+          </center>
+          {%endif%}
+          <center>
+            {%if q.tabl %}
+          
+          <span style="width:100%" class="btn btn-info">{{q.tabl.name}}</span>
+          
+          <div style="overflow-y: auto;max-height: 200px;width: 90%;overflow-x: auto;max-width: 90%;" >
+          
+          
+          <table class="table table-striped">
+          <tr>
+          {%for t in q.tabl.data1%}
+          
+          
+          <th>{{t}}</th>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data2%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data3%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data4%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data5%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data6%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data7%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data8%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data9%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data10%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data11%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data12%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          <tr>
+          {%for t in q.tabl.data13%}
+          
+          
+          <td>{{t}}</td>
+          
+          
+          {%endfor%}
+          </tr>
+          
+          </table>
+          {%endif%}
+          </center>
+          
+          {% if q.image != "2" %}
+          
+          
+          <div class="d-flex w-100 align-items-center">
+          <image src="{{q.image.url }}" style="width:90%;height:400px;margin-left:2px"/>
+          </div>
+          
+          {%endif%}
+          
+          <input type="hidden" name="csrfmiddlewaretoken" style="display:none" value="C24rUotmdHawVQJL3KrqiWxvti8UffOFYUc8TRbZtLt36AVLdP3jbkzUVe3beRAa">
+          
+          <div id="cover" name="cover" class="cover" name="{{ forloop.counter }}">
+            <div class="form-check mx-4 d-flex align-items-center">
+                <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="A" value="A" style="border: 2px solid black;">
+                <label class="form-check-label ml-3" for="option1">
+                  &nbsp;&nbsp;A&nbsp;&nbsp;{{q.option1}}
+                </label>
+            </div>
+          
+          
+            <div class="form-check mx-4 d-flex align-items-center">
+                <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="B" value="B" style="border: 2px solid black;">
+                <label class="form-check-label ml-3" for="option2">
+                  &nbsp;&nbsp;B&nbsp;&nbsp;{{q.option2}}
+                </label>
+            </div>
+            <div class="form-check mx-4 d-flex align-items-center" style="display:none">
+              <input class="form-check-input option3" type="radio" name="{{ forloop.counter }}" id="C" value="C" style="display:none">
+            
+            </div>
+            
+            
+            <div class="form-check mx-4 d-flex align-items-center" style="display:none">
+              <input class="form-check-input option4" type="radio" name="{{ forloop.counter }}" id="D" value="D" style="display:none">
+            
+            </div>
+            
+                {%endif%}
+          
+          
+          
+                    </div>
+                    {%endfor%}<br><br>
+                    
+                    <div class="pagination" style="">
+                        <span class="step-links">
+                          {%if questions.has_previous%}
+                          <a href="?page=1"></a>
+                          <a href="?page={{questions.previous_page_number}}" class="btn btn-primary">previous Questions</a>
+                          {%endif%}
+                          <span class="current">
+                           &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Question &nbsp;&nbsp;&nbsp;{{questions.number}} &nbsp;&nbsp;&nbsp;of  &nbsp;&nbsp;&nbsp;{{questions.paginator.num_pages}}
+                          </span> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                          {%if questions.has_next%}
+                          <a href="?page={{questions.next_page_number}}"  class="btn btn-primary">next   Question</a>
+                          <a href="?page={{questions.paginator.num_pages}}"></a>
+                          {%endif%}
+                        </span>
+                      </div><br><br><br>
+                    </div> </div>
+                    <span class="btn btn-primary" onclick="document.getElementById('id01').style.display='block'" id="dem" >Submit Answers</span>
+  
+              
+                    
+             
+           <br><br>
+           <div id="id01" class="modal">
+
+    
+    
+    
+    
+            <div class="container" style="background-color:#f1f1f1;border-radius: 20px;width: 400px;height: 420px;">
+             
+           
+          
+            <div class="card">
+        
+              <div class="card-body" id="crb" style="display:none">
+               
+                <span id="tml"></span><br>
+                <span id="qsl"></span>
+              </div>
+            </div>
+          
+            <center>
+            <div id="chekr" style="">
+            <div class="" style="width:100px;height: 100px;border-radius: 50%;border-left:10px solid red;border-top: 10px solid gold;border-right:10px solid rgb(225, 49, 123);border-bottom: 10px solid green;" id="anme">
+        
+            </div>
+        
+            <div id="chep">0%</div>
+            </div>
+          </center><br>
+             <div style="">
+              <span id="inf"></span>
+              <div style="display: none;" id="bng">
+              
+              <span>are you sure? you want to submit</span><br>
+             <span  onclick="document.getElementById('id01').style.display='none'" class="btn btn-success">Cancel</span>
+             
+             <button class="btn btn-primary" type="submit" onclick="move()" id="ans">Yes</button>
+            </div> 
+              
+            </div>
+          
+          
+          </div></form></div>
+            
+           <div style="max-height:500px;min-height:500px;border:2px solid white;text:white" id="pro">
+            <span id="title" class="text-white"></span>
+            <span id="date" class="text-white"></span>
+            <span id="time" class="text-white"></span>
+            <br>
+            
+              <span class="text-white">
+      
+                <h4 class="" style="">Exam Details :</h4>
+                <p class="" style="">
+                    </p><ul style="list-style:decimal;" style="">
+                        <li style="">Course : {{course.course_name}}</li>
+                        <li style="">Total Question : {{total_questions}}</li>
+                        <li style="">Total Marks : {{total_marks}}</li>
+                    </ul>
+               
+                
+                  
+                <h4 class="" style="font-size:20px">Rules :</h4>
+                
+                  <ol type="1">
+                        <li style=""> The  questions are multiple choice question,true/false,blanck,short writing)</li>
+                        <li style="">Please Do exam based On exam police only</li>
+                        <li style="">Every question carry different marks.</li>
+                        <li style="">Try to answer asoon as possible.</li>
+                        <li style="">after exam start don't try to do any thing except exam .</li>
+                        <li style="">if you try to open another software you will authomatical dismissed by the system.</li>
+                        <li style="">You will be able to view marks immediately once after you submit the answer.</li>
+                        <li style="">If you can't able to answer it mean not saying the system don't able to show answer but your departiment instraction to software.</li>
+                        <li style="">don't try to minimize the window.</li>
+                        <li style="">if exam axcedental closed write message to admin.</li>
+                        <li style="">if there is camera please minimize your motion remove any kinds material expcet pen and peper.</li>
+       
+       
+       
+                    </ol>
+                  
+                </div>
+            </span>
+            
+      
+       
+    
+    </center>
+
+    
+        </div>
+        <div class="col-2">
+            <span class="" id="tma" style="float:right;overflow-y:hidden;transition:0.8s;backgroud:#111;">
+                <br><br>
+                <div class="" style="border:2px solid box-shadow: 20px;padding: 5px; justify-items: center; background:red;height:50px; width:100px;border-radius: 10px;color: white;float: right;margin-top: 2%;">
+            <span id="hr"></span>
+            <span id="min"></span>
+            <span id="sec"></span>
+            </div>
+           
+          
+            <br><br><br>
+            <span class="text-white" style="width: 100%;">visited </span>
+              <div id="myProgress" style="width: 100%;border-radius: 10px;">
+                <div id="myBar">
+                  <div id="label" class="bg-white rounded">0%</div>
+                </div>
+              </div>
+                  </span>
+                  
+        </div>
+    </div>
+ </div>
+ <script>
+  
+    var dem=document.querySelector('#dem');
+    dem.addEventListener('click',()=>{
+      var tot=sessionStorage.getItem("quest")
+    var mrk=localStorage.getItem("marked")
+    var lf=parseInt(tot)-parseInt(mrk)
+    var tmn=localStorage.getItem("timnow")
+      var chep=document.querySelector('#chep');
+      var tml=document.querySelector('#tml');
+      var qsl=document.querySelector('#qsl');
+      qsl.innerHTML="question left="+lf;
+      tml.innerHTML="time left="+tmn+"min";
+      per(chep,tmn,lf);
+  
+    })
+    function per(chep,tmn,lf){
+      var an=0;
+      setInterval(function(){
+   
+      if(an<100){
+        an+=1;
+        chep.innerHTML=an+"%"+"<br>"+"checking...";
+  
+      }else if(an>97&&an<=100){
+        document.querySelector('#crb').style.display="block";
+        document.querySelector('#bng').style.display="block";
+        var inf=document.querySelector('#inf');
+        chep.innerHTML=an+"%"+"<br>"+"checking over";
+        var anme=document.querySelector('#anme')
+        anme.setAttribute("id","anm")
+        document.querySelector('#chep').style.display="none";
+        if(lf==0 ){
+        
+        inf.innerHTML="it's ok you can procced";
+        inf.style.color="green"
+        }else if(lf!=0&&tmn>1){
+          inf.innerHTML="i think you have time, why you not answer the left question";
+        inf.style.color="red"
+  
+        }else{
+  
+        }
+      }else if(an>=99){
+        document.querySelector('#chekr').style.display="none";
+      }
+      },10)
+     
+    }
+  </script>
+  <script type="text/javascript">
+    function move() {
+  var width = 10;
+   var id = setInterval(framea, 10);
+   var elema = document.getElementById("myBar1");
+  function framea() {
+  
+   if (width >= 100) {
+     clearInterval(id);
+   } else {
+     width++;
+     elema.style.width = width + '%';
+     document.getElementById("label1").innerHTML = width * 1  + '%';
+  
+   }
+  }
+  }
+  </script>
+  <script>
+  
+  // Get the modal 
+  
+  
+  var modal = document.getElementById('id01');
+  
+  
+  window.onclick = function(event) {
+   if (event.target == modal) {
+    modal.style.display = "none";
+   }
+  }
+  </script>
+  
+  
+  
+  <script >
+   function saveAns() {
+        
+       
+          var ele = document.getElementsByTagName('input');
+          for (i = 0; i < ele.length; i++) {
+              if (ele[i].type = "radio") {
+                  if (ele[i].checked) {
+                      setCookie(ele[i].name, ele[i].value, 3)
+                  }
+              }
+          }
+         get_blanck();
+        
+        
+      }
+       function setCookie(cname, cvalue, exdays) {
+          var d = new Date();
+          d.setTime(d.getTime() + (exdays * 1 * 1 * 60 * 1000));
+          var expires = "expires=" + d.toUTCString();
+          document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+          var m="you are submitted your answer successfully no punishment detected";
+         sessionStorage.setItem("msg",m)
+      }
+       function get_blanck(){
+        var dran = document.getElementsByTagName('textarea');
+       
+        
+        for (i = 0; i < dran.length; i++) {
+         
+          setCookie(dran[i].name, dran[i].value, 3)
+         
+  
+        
+          
+        }
+        
+      }
+   
+    </script>
+    <script>
+      setInterval(get_blancka,1000);
+      function get_blancka(){
+        var dran = document.getElementsByTagName('textarea');
+       
+        
+        for (i = 0; i < dran.length; i++) {
+         localStorage.setItem(dran[i].name,dran[i].value)
+         
+         
+  
+        
+          
+        }
+        
+      }
+      setInterval(function(){
+          var dran = document.getElementsByTagName('textarea');
+          for (i = 0; i < dran.length; i++) {
+          
+            var dt=document.getElementsByName(dran[i].name);
+            var loc=localStorage.getItem(dran[i].name)
+          
+           
+                dt[i].innerHTML=loc
+                dt[i].setAttribute("placeholder",loc)
+              
+              
+            
+          
+        
+          }
+        },1000)
+    </script>
+    <script>
+   setTimeout(function(){
+          var ele = document.getElementsByTagName('input');
+          for (i = 0; i < ele.length; i++) {
+          if(ele[i].type=="radio"){
+            var dt=document.getElementsByName(ele[i].name);
+            var loc=localStorage.getItem(ele[i].name)
+          
+            for(j=0;j<4;j++){
+              if(dt[j].id==loc){
+           
+              
+                dt[j].setAttribute("checked","")
+              
+              
+            }
+          }
+        
+          }}
+         
+         
+            
+        },1000)
+    </script>
+    <script>
+    //setInterval(function(){
+      var tot=sessionStorage.getItem("quest")
+    var dran = document.getElementsByTagName('textarea');
+    var elem = document.getElementById("myBar");
+        var width=0;
+       for (i = 0; i < dran.length; i++) {
+        dran[i].addEventListener('change',()=>{
+          width+=1;
+         var mr= localStorage.getItem('marked')
+         
+          localStorage.setItem('marked1',width)
+          //var m= localStorage.getItem('marked1')? '0'+ m:m;
+          //var rs=parseInt(mr)
+          elem.style.width = rs + '%';
+          document.getElementById("label").innerHTML = width * 1  + '/'+tot;
+                      
+        })
+         
+       
+         
+       }
+      //},1000)
+    </script>
+  <script>
+    
+    function movea() {
+      var elem = document.getElementById("myBar");
+    
+      var width = 1;
+    
+      var id = setInterval(frame, 10);
+    
+      function frame() {
+   
+    
+        if (width >= 100) {
+         
+          clearInterval(id);
+        } else {
+          width++;
+          elem.style.width = width + '%';
+          elem.innerHTML = width + '%'+" change your mind";
+        }
+      }
+    }
+    
+    function show(){
+    document.getElementById('id01').style.display = 'block';
+    move()
+    }
+    
+    var modal = document.getElementById
+    ('id01');
+    
+    
+    window.onclick = function(event) {
+        if (event.target == modal) {
+         modal.style.display = "none";
+        }
+    }
+  var win=setInterval(function(){
+  sessionStorage.setItem('window',window.outerWidth)
+  },1000);
+  
+       
+  setTimeout(function(){
+      clearInterval(win)
+      },1000);
+     
+      
+     
+      function validate(){
+        var dran = document.getElementsByTagName('textarea');
+       
+        
+        for (i = 0; i < dran.length; i++) {
+         
+          
+          if(dran[i].value==""){
+            dran[i].style.display.color="red"
+            return false;
+          }else{
+            return true;
+          }
+          
+        }
+  
+      }
+     
+     
+      
+      
+  
+      var tot=sessionStorage.getItem("quest")
+      var ti=setInterval(function(){
+  
+        
+        
+        var ele = document.getElementsByTagName('input');
+        
+        var elem = document.getElementById("myBar");
+        var width = 0;
+        var dta=[]
+        
+          for (i = 0; i < ele.length; i++) {
+          
+              if (ele[i].type = "radio" ) {
+                  if (ele[i].checked) {
+                    
+                    localStorage.setItem(ele[i].name,ele[i].value)
+                      dta.push(ele[i].value)
+                     
+                      localStorage.setItem(ele[i].name,ele[i].name)
+                   
+                        if (width >= 100) {
+                          clearInterval(id);
+                        } else {
+                          width++;
+                          var m= localStorage.getItem('marked1');
+                          m=m=NaN? "0"+m:m;
+                          var w=parseInt(m)+parseInt(width);
+                          
+                          elem.style.width = w + '%';
+                          document.getElementById("label").innerHTML = w * 1  + '/'+tot;
+                          //var m=localStorage.getItem("marked")
+                          //var to=parseInt(m)+parseInt(width)
+                         localStorage.setItem('marked',w)
+                        }
+                      
+                      localStorage.setItem(ele[i].name,ele[i].value)
+                      
+                      
+                    
+                  }
+              }
+             
+  
+            
+  
+  
+          }
+          
+         
+    
+    
+          
+        
+      },1000)
+      
+      
+     
+        
+      function alarm(dy,tim){
+      var dy=sessionStorage.getItem("dat");
+      //var tim=sessionStorage.getItem("tim");
+      
+      var tim=localStorage.getItem("tim")
+     
+      var t=new Date();
+      var hr=t.getHours()
+       var hn=t.getHours() < 10 ? '0'+hr : hr;
+      var min=t.getMinutes()
+      var mn=t.getMinutes() < 10 ? '0'+min : min;
+      var d=t.getDate();
+      var dba=t.getDate() < 10 ? '0'+d : d;
+      var y=t.getFullYear()
+      var mbr=t.getMonth()+1;
+      var mo=t.getMonth() < 10 ? '0'+mbr : mbr;
+      var day=y+"-"+mo+"-"+dba;
+      var h=hn+":"+mn;
+      
+      if(day==dy&&h==tim){
+        var started=localStorage.getItem("started")
+        var dur=sessionStorage.getItem("dur");
+        if(started==null||started==""){
+          
+        localStorage.setItem("timnow",dur)
+        localStorage.setItem("started","started")
+        }
+        var drt=localStorage.getItem("dret")
+        sessionStorage.setItem("dure",dur);
+        var t=sessionStorage.getItem('dur')
+        localStorage.setItem("timnow",t)
+        localStorage.setItem("endt",drt)
+        document.getElementById('exam').style.display="block";
+    document.getElementById('pro').style.display="none";
+    var tma=document.querySelector('#tma');
+        tma.setAttribute("style","display:block;");
+        var t=sessionStorage.getItem('dur')
+        localStorage.setItem("timnow",t)
+        
+        
+        reftresh();
+       
+        localStorage.setItem("endt",drt)
+       
+        control()
+      var t=setTimeout(function(){
+        window.location.reload()
+      },0)
+      clearTimeout(t)
+        
+      
+      clearInterval(dx);
+     //clearInterval(dxa);
+     
+      }else{
+        document.querySelector('#cheat').innerHTML="wait few minutes";
+      }
+  }
+  function reftresh(){
+    var rfs=setTimeout(function(){
+  //window.location.reload()
+  clearTimeout(rfs);
+    },1000)
+   //var n= setTimeout(function(){
+  
+  //clearTimeout(n);
+    //},1500)
+  }
+  var dx=setInterval(function(){
+    var dy=sessionStorage.getItem("dat");
+      
+      var tim=localStorage.getItem("tim")
+      console.log(tim)
+        alarm(dy,tim);
+       
+      },1000); 
+       
+         
+  
+     
+  
+     function control(){
+  
+     
+  
+    
+       var tmout=setInterval(function(){
+          var normal =parseInt(sessionStorage.getItem("window"));
+          if (window.innerWidth>=window.outerWidth&&window.innerWidth>=normal) {
+              
+     
+      }
+      else {
+          document.title = "you are minimuzed your window ";
+          document.querySelector('#cheat').innerHTML="you are minimuzed your window. for this reason you are lost your exam.we are sorry!"+normal+"inner"+window.innerWidth;
+         document.querySelector('#exam').style.display="none";
+         var m="you are minimuzed your window. for this reason you are lost your exam.we are sorry!"+normal+"inner"+window.innerWidth;
+         sessionStorage.setItem("msg",m)
+      showResults(questions, quizContainer, resultsContainer);
+      var form = document.forms[0];
+      form.submit();
+    
+      
+      }
+      },1000);
+      
+     
+        document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === 'visible') {
+        document.title = "you are live state now";
+         document.querySelector('#cheat').innerHTML="you are live state now";
+        } else {
+         document.title = "you are try to cheat exam we are sorry";
+          document.querySelector('#cheat').innerHTML="you are try to open new tab. for this reason you are lost your exam.we are sorry!";
+        
+        document.querySelector('#exam').style.display="none";
+        //var m="you are try to open new tab. for this reason you are lost your exam.we are sorry!";
+         //sessionStorage.setItem("msg",m)
+        var form = document.forms[0];
+      form.submit();
+       
+        }
+      });
+      
+        window.addEventListener("blur", () => {
+          document.title = "you are try to cheat exam we are sorry";
+          document.querySelector('#cheat').innerHTML="you are try to open other software. for this reason you are lost your exam.we are sorry!";
+        document.querySelector('#exam').style.display="none";
+        var m="you are try to open other software. for this reason you are lost your exam.we are sorry!";
+         sessionStorage.setItem("msg",m)
+      var form = document.forms[0];
+        form.submit();
+        
+          
+      
+      });
+    }
+  var b= setInterval(function(){
+    var dt=sessionStorage.getItem("ex");
+    var start=sessionStorage.getItem("start");
+    var dur=sessionStorage.getItem("dur");
+    var started=localStorage.getItem("started")
+    console.log(dt)
+    
+     
+    if(dt==1){
+     
+    document.getElementById('exam').style.display="block";
+    document.getElementById('pro').style.display="none";
+    var tma=document.querySelector('#tma');
+        tma.setAttribute("style","display:block;");
+        var t=sessionStorage.getItem('dur')
+        if(started==null||started==""){
+         
+        localStorage.setItem("timnow",t)
+        localStorage.setItem("started","started")
+        }
+        control()
+        reftresh()
+        var drt=localStorage.getItem("dret")
+        
+        localStorage.setItem("endt",drt)
+        var t=setTimeout(function(){
+        window.location.reload()
+      },100)
+      clearTimeout(t)
+        
+    }else if(dt==2){
+      document.getElementById('exam').style.display="none";
+    document.getElementById('pro').style.display="block";
+    var tma=document.querySelector('#tma');
+        tma.setAttribute("style","display:none;");
+        sessionStorage.setItem("dure",dur);
+        var drt=localStorage.getItem("dret")
+        
+        localStorage.setItem("endt",drt)
+    }else if(dt==0){
+      document.getElementById('exam').style.display="none";
+    document.getElementById('pro').style.display="block";
+    var tma=document.querySelector('#tma');
+        tma.setAttribute("style","display:none;");
+        sessionStorage.setItem("dure",dur);
+        var drt=localStorage.getItem("dret")
+        
+        localStorage.setItem("endt",drt)
+    }
+  
+    /*if(start==1){
+      document.getElementById('exam').style.display="block";
+    document.getElementById('pro').style.display="none";
+    var tma=document.querySelector('#tma');
+        tma.setAttribute("style","display:block;");
+        sessionStorage.setItem("dure",dur);
+        control()
+   
+    }*/
+    if(started=="started"){
+      document.getElementById('exam').style.display="block";
+      document.getElementById('pro').style.display="none";
+      var tma=document.querySelector('#tma');
+          tma.setAttribute("style","display:block;");
+          sessionStorage.setItem("dure",dur);
+          control()
+          reftresh()
+    }
+    
+  },10)
+  
+      $(document).ready(function () {
+  
+  
+   
+          var dxas= setInterval(function () {
+           var postData = {csrfmiddlewaretoken: '{{ csrf_token }}' }
+           var tim=localStorage.getItem("timnow");
+         
+               $.ajax({
+                   url: "",
+                   type: "GET",
+                   dataType: 'json',
+                   data: {
+                    tim:tim,
+   
+                   },
+                   success: function (response) {
+                       localStorage.setItem("tim",response.tim)
+                       sessionStorage.setItem("dat",response.dat)
+                       sessionStorage.setItem("tim",response.tim)
+                       sessionStorage.setItem("dur",response.dur)
+                       localStorage.setItem("dret",response.dur)
+                       sessionStorage.setItem("quest",response.total)
+                       sessionStorage.setItem("start",response.start)
+                      // document.querySelector('#messege').innerHTML="message="+response.msg;
+                       
+                       
+                       
+                       
+                       
+                   }
+   
+               });
+               }, 1000);
+         
+       })
+  
+       
+  
+  
+  
+       $(document).ready(function () {
+       var materiala= setInterval(function () {
+        var postData = {csrfmiddlewaretoken: '{{ csrf_token }}' }
+            $.ajax({
+                url: "",
+                type: "POST",
+                dataType: 'json',
+                data: {
+  
+                },
+                success: function (response) {
+                    
+                   
+                    sessionStorage.setItem("ex",response.ex)
+                    document.querySelector('#mot').innerHTML="motion="+response.motion;
+                    
+                   document.querySelector('#tyme').innerHTML= "NO attempts="+response.tyme;
+                   document.querySelector('#mat').innerHTML = "material="+response.material;
+                  if(parseInt(response.tyme)==1){
+                   document.querySelector('#what').innerHTML="please follow our exam guidline, you aretry to cheat exam one time don't do agian"
+                  }else if(parseInt(response.tyme)==2){
+                    document.querySelector('#what').innerHTML="please follow our exam guidline we are tell you agian, you are try to cheat exam second time don't do agian if you try once you are going to ban from exam"
+                
+  
+                  }else if(parseInt(response.tyme)==3){
+                    document.querySelector('#what').innerHTML="we are soorry we take action on you becouse you are cheat our exam three times "
+                   
+                    document.getElementById('exam').style.display="none";
+                    document.getElementById('pro').style.display="block";
+                    var tma=document.querySelector('#tma');
+                        tma.setAttribute("style","display:none;");
+                        var form = document.forms[0];
+                        form.submit();
+  
+                  }
+  
+  
+                   
+                }
+  
+            });
+            }, 1000);
+       // })
+    })
+  
+      
+  
+    
+      
+      
+  
+    //var jk=sessionStorage.getItem("dure")
+   
+  
+      var jk=localStorage.getItem("timnow")
+      var t=jk!=null ? parseInt(jk)*60000:3400000;
+    
+    
+      
+      
+      setTimeout(function(){
+        document.getElementById('exam').style.display="block";
+        document.getElementById('pro').style.display="none";
+        
+        
+        localStorage.clear()
+        sessionStorage.clear()
+        var form = document.forms[0];
+        form.submit();
+       
+      
+      },t)
+      var g=setInterval(function(){
+       
+      var ghb=parseInt(t/3600000);
+      
+       localStorage.setItem('gh',ghb);
+      
+        },100);
+       
+       
+        var mex=setInterval(function(){
+       var gmn=parseInt((t%3600000)/60000);
+       //console.log(gmn)
+       localStorage.setItem("gm",gmn);
+      
+       },100)
+       var gm;
+       var gh;
+      var mn_c= setInterval(function(){
+      var gma=localStorage.getItem("gm");
+      var gha=localStorage.getItem('gh');
+      gm=gma
+      gh=gha
+      },100)
+       
+     
+       
+       
+        var sec=setInterval(function(){
+      
+       var dt=new Date();
+       var sec=dt.getSeconds();
+       var hr=dt.getHours()
+       
+       
+      document.querySelector('#sec').innerHTML=":"+sec;
+           
+        },1000);
+        
+      var min= setInterval(function() {
+        clearInterval(mn_c);
+        clearInterval(g)
+        var gm=localStorage.getItem("gm");
+        var gh=localStorage.getItem('gh');
+          
+          gm-= 1;
+          document.querySelector('#min').innerHTML = ":"+gm;
+        clearInterval(m)
+        clearInterval(mex)
+        clearInterval(h)
+      localStorage.setItem('gm',gm);
+      
+      jk-=1
+      localStorage.setItem("timnow",jk)
+      document.querySelector('#hr').innerHTML = gh;
+     
+      if(gh==0&&gm==0){
+        clearInterval(min);
+      }
+        if(gh>=0&&gm==0){
+          gh-=1
+          console.log(gh)
+          localStorage.setItem("gh",gh);
+          
+        
+        
+        localStorage.setItem("gm",59);
+        
+        document.querySelector('#hr').innerHTML =  gh;
+      
+        }
+        }, 60000);
+     
+        var m=setInterval(function(){
+      document.querySelector('#min').innerHTML =":" +gm;
+        
+         
+        },100)
+      var h = setInterval(function() {
+        
+         
+      
+      
+          document.querySelector('#hr').innerHTML = gh;
+        
+        },100);
+    
+    
+  
+     
+  
+  </script>
+  
+</body>

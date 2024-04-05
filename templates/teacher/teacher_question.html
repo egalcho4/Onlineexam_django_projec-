@@ -52,8 +52,8 @@
 </form>
 </div></div></div>
 
-<div class="panel panel-primary rounded-0" id="pn">
-    <div class="panel-heading rounded-0">
+<div class="panel panel-primary rounded" id="pn">
+    <div class="panel-heading rounded">
      </div>
 {%for t in tes%}
 <div class="row">
@@ -64,8 +64,8 @@
 <span>{{t.name}}</span>
 </div>
 <div class="card-body">
-  <a href="{%url 'teacher:teacher_add_question' t.id %}" class="btn btn-info" style="text-decoration: none;"><p class=" fa fa-plus"></p> <p class=" fa fa-plus fa fa-question"></p></a>
- &nbsp;&nbsp;&nbsp; <a href="{%url 'teacher:delet_test' t.id%}" class="btn btn-danger" style="text-decoration: none;"><p class=" fa fa-trash"></p> </a>
+  <a href="{%url 'teacher:teacher_add_question' t.id %}" class="btn btn-info" style="text-decoration: none;"><p class=" fa fa-plus"></p> <p class=" fa fa-plus fa fa-question">&plus;&nbsp;?</p></a>
+ &nbsp;&nbsp;&nbsp; <a href="{%url 'teacher:delet_test' t.id%}" class="btn btn-danger" style="text-decoration: none;"><p class=" fas fa-trash">delete</p> </a>
  &nbsp;&nbsp;&nbsp;  <span data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success fa fa-plus" style="" id="sh"><p class="fa fa-plus"></p>&nbsp;password</span>
  <input type="hidden" id="ida" name="id" value="{{t.name}}">   
 

@@ -35,7 +35,7 @@ import time,cv2
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from student.models import *
-from agora_token_builder import RtcTokenBuilder
+#from agora_token_builder import RtcTokenBuilder
 from concurrent.futures import ThreadPoolExecutor
 import random
 

@@ -19,7 +19,7 @@ import time
 from django.contrib.auth.models import User
 from datetime import date, timedelta
 from datetime import datetime
-import cv2,pandas
+#import cv2,pandas
 import numpy as np
 import os
 

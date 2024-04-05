@@ -7,4 +7,5 @@ admin.site.register(RoomMember)
 admin.site.register(Sms_feedback)
 admin.site.register(Answer)
 admin.site.register(Ip_adress)
+admin.site.register(Loged_user)
 

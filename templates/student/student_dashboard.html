@@ -1,148 +1,139 @@
 <!DOCTYPE html>
 <html>
-{% extends 'student/studentbase.html' %}
-{% load widget_tweaks %}
-{%load static%}
-{%load mathjax%}
-{%load latexify%}
-{% block content %}
+  {% extends 'student/studentbase.html' %} {% load widget_tweaks %} {%load
+  static%} {%load static%} {% block content %}
 
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
-    <meta name="viewport" content="width=device-width, initial-scale=1">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link
+      href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}" />
     <style type="text/css">
       a:link {
         text-decoration: none;
       }
-  
+
       .order-card {
         color: rgb(255, 255, 255);
       }
-  
+
       .bg-c-blue {
         background: #104f66;
       }
-  
+
       .bg-c-green {
-        background:#4C51BF;
+        background: #4c51bf;
       }
-  
+
       .bg-c-yellow {
         background: #53616e;
       }
-  
+
       .bg-c-pink {
         background: #663a30;
       }
-  
-  
+
       .card {
-        
         -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
         box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
         margin-bottom: 30px;
         -webkit-transition: all 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
       }
-  
+
       .card .card-block {
         padding: 25px;
       }
-  
+
       .order-card i {
         font-size: 26px;
       }
-  
+
       .f-left {
         float: left;
       }
-  
+
       .f-right {
         float: right;
       }
       header {
-      left: 0px;
-      right: 0px;
-    }
+        left: 0px;
+        right: 0px;
+      }
     </style>
-    {% mathjax_scripts%}
-    {%include 'latexify/stylesheets.html'%}
   </head>
 
-<body>
-  
-  <div class="container-sm">
-    <div class="row">
-      <div class="col-6">
-    <div class="card">
-      <div class="card-header bg-c-blue text-white">
-your exam schedule
-      </div>
-      <div class="card-body">
-<table class="table table-striped">
-  <th>No</th>
-  <th>exam</th>
-  <th>start time</th>
-  <th>date</th>
-  <th>Duration</th>
-  {%for s in sc%}
-  <tr>
-<td>{{forloop.counter}}</td>
-<td>{{s.exam}}</td>
-<td>{{s.tim}}</td>
-<td>{{s.dat}}</td>
-<td>{{s.dur}}&nbsp;min</td>
-  </tr>
-  {%endfor%}
-</table>
-      </div>
-
-    </div>
-    </div>
-  
-    <div class="col-6">
-      <div class="card">
-        <div class="card-header bg-c-blue text-white">
-   Exam Name
+  <body>
+    <div class="container-sm">
+      <div class="row">
+        <div class="col-6">
+          <div class="card">
+            <div class="card-header bg-c-blue text-white">
+              your exam schedule
+            </div>
+            <div class="card-body">
+              <table class="table table-striped">
+                <th>No</th>
+                <th>exam</th>
+                <th>start time</th>
+                <th>date</th>
+                <th>Duration</th>
+                {%for s in sc%}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{s.exam}}</td>
+                  <td>{{s.tim}}</td>
+                  <td>{{s.dat}}</td>
+                  <td>{{s.dur}}&nbsp;min</td>
+                </tr>
+                {%endfor%}
+              </table>
+            </div>
+          </div>
         </div>
-        <div class="card-body">
-  <table class="table table-striped">
-    <th>ID</th>
-    <th>Course Name</th>
-    <th>Total Question</th>
-    <th>Total Marks</th>
-   
-    {%for s in cor%}
-    <tr>
-  <td>{{s.id}}</td>
-  <td>{{s.course_name}}</td>
-  <td>{{s.question_number}}</td>
-  <td>{{s.total_marks}}</td>
-  
-    </tr>
-    {%endfor%}
-  </table>
-        </div>
-  
-      </div>
-     
-    </div>
-    <button class="btn btn-primary">welcome&nbsp;{{student.user}}</button>
-  </div>
-  </div>
 
-{%include "latexify/scripts.html"%}
-<br><br><br><br><br><br><br><br><br><br>
-</body></html>
+        <div class="col-6">
+          <div class="card">
+            <div class="card-header bg-c-blue text-white">Exam Name</div>
+            <div class="card-body">
+              <table class="table table-striped">
+                <th>ID</th>
+                <th>Course Name</th>
+                <th>Total Question</th>
+                <th>Total Marks</th>
+
+                {%for s in cor%}
+                <tr>
+                  <td>{{s.id}}</td>
+                  <td>{{s.course_name}}</td>
+                  <td>{{s.question_number}}</td>
+                  <td>{{s.total_marks}}</td>
+                </tr>
+                {%endfor%}
+              </table>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary">welcome&nbsp;{{student.user}}</button>
+      </div>
+    </div>
+
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  </body>
+</html>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-
 
 {% endblock content %}

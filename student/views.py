@@ -20,7 +20,7 @@ from django.db.models import Q
 from django.views.decorators import gzip
 from exam.models import *
 import threading
-import cv2,pandas
+import cv2
 import time
 from datetime import datetime
 #import pyttsx3
@@ -34,7 +34,8 @@ from django.contrib import messages
 import subprocess
 import random
 
-from agora_token_builder import RtcTokenBuilder
+from django.core.paginator import Paginator
+#from agora_token_builder import RtcTokenBuilder
 from django.contrib.auth.forms import PasswordChangeForm
 import json
 from django.views.decorators.csrf import csrf_exempt
@@ -55,7 +56,7 @@ import json
 from concurrent.futures import ThreadPoolExecutor
 import uuid
 from django.http import StreamingHttpResponse
-from .stream import LiveControl,VideoCamera
+#from .stream import LiveControl,VideoCamera
 
 
 
@@ -106,6 +107,27 @@ def student_dashboard_view(request):
     sc=TMODEL.Schedule.objects.filter(dep=st.dep,sem=st.sem)
     request.session['id']=id
     cor=QMODEL.Course.objects.filter(dp_id=st.dep,sem=st.sem)
+    host=socket.gethostname()
+    ip=socket.gethostbyname(host)
+    user=request.user
+    name=User.objects.get(username=user)
+    sid_id=name.id
+    user_names=User.objects.get(username=request.user)
+    depid=st.dep
+    depart=QMODEL.Departiment.objects.get(id=depid)
+    cid=depart.pk
+    student=SModel.Student.objects.get(user_id=request.user.id)
+    courses=QMODEL.Course.objects.get(dp=cid,pre=1,sem=student.sem)
+    
+    st=SModel.Student.objects.get(user_id=sid_id)
+   
+    depid=st.dep
+    try:
+        log=Loged_user.objects.create(user=user_names,ip=ip,com_name=host,exam=courses.id)
+        ipa=Ip_adress(ip=ip,host=host,name=name,dep=depid,exam=courses.id)
+        ipa.save()
+    except:
+       pass
     dict={
     
     'total_course':QMODEL.Course.objects.all().count(),
@@ -123,7 +145,7 @@ def student_exam_view(request):
     name=User.objects.get(username=user)
     sid_id=name.id
     st=SModel.Student.objects.get(user_id=sid_id)
-    print(st.dep)
+   
     depid=st.dep
     depart=QMODEL.Departiment.objects.get(id=depid)
     cid=depart.pk
@@ -133,16 +155,34 @@ def student_exam_view(request):
     exam=QMODEL.Permision.objects.get(name="exam")
     host=socket.gethostname()
     ip=socket.gethostbyname(host)
+    ip_status=0
+    compname=""
+    userip=""
+    
     try:
-        ipa=Ip_adress(ip=ip,host=host,name=name,dep=depid)
-        ipa.save()
-    except:
         messages.error(request,"this ip already exists ")
+        ipa=Ip_adress.objects.get(ip=ip,exam=courses.id)
+        user_name=User.objects.get(username=request.user)
+        try:
+            usernameip=Loged_user.objects.filter(user=user_name,exam=courses.id).count()
+            compname=usernameip
+            print(usernameip)
+            if ip==ipa.ip:
+                ip_status=1
+                
+                
+               # messages.error(request,"This user is olready loged in,two person not allowed")
+        except:
+            pass
+    except:
+        pass
+            
     if is_ajax(request=request):
          t=QMODEL.Test_hand.objects.get(course=courses,pr=1)
          pa=t.pas
          sid=t.id
-         return JsonResponse({'pas':pa,'id':sid},status=200)
+         
+         return JsonResponse({'pas':pa,'id':sid,'ip':ip_status,'cname':compname},status=200)
 
     return render(request,'student/student_exam.html',{'tes':tes,'exam':exam,'courses':courses,'student':student,'cours':courses.id})
 
@@ -194,8 +234,8 @@ def start_exam_view(request,pk):
     total_marks=0
     for q in questions:
         total_marks=total_marks + q.marks
-    perm=QMODEL.Permision.objects.get(name="camera")
-    lv=QMODEL.Permision.objects.get(name="livestream")
+    #perm=QMODEL.Permision.objects.get(name="camera")
+    #lv=QMODEL.Permision.objects.get(name="livestream")
     if is_ajax(request=request):
         b=0
         tim=request.GET.get('tim')
@@ -248,9 +288,12 @@ def start_exam_view(request,pk):
     st=Student.objects.get(user_id=ida)
     tes=QMODEL.Test_hand.objects.get(course=course,pr=1)
     questions=QMODEL.Question.objects.all().filter(course=course,code=st.exam_code,tes=tes)
+    pag=Paginator(questions,1)
+    page=request.GET.get("page")
+    page_obj=pag.get_page(page)
     if request.method=='POST':
         pass
-    response= render(request,'student/start_exam.html',{'total_questions':total_questions,'total_marks':total_marks,'course':course,'questions':questions,'id':ida,'perm':perm,'lv':lv,'token':token})
+    response= render(request,'student/start_random.html',{'total_questions':total_questions,'total_marks':total_marks,'course':course,'questions':page_obj,'id':ida,'token':token})
     response.set_cookie('course_id',course.id)
     response.set_cookie('id',id)
     return response
@@ -1082,4 +1125,11 @@ def livestraminga(request):
         pass
 def vdostremin(request):
     return render(request,"student/livest.html")
+def start_random_exam(request,id):
+    
+    user=QMODEL.Question.objects.all()
+    pag=Paginator(user,1)
+    page=request.GET.get("page")
+    page_obj=pag.get_page(page)
+    return render(request,"student/start_random.html",{'questions':page_obj})
 

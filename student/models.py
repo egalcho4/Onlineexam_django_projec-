@@ -103,6 +103,15 @@ class Ip_adress(models.Model):
     host=models.CharField(max_length=255,null=True)
     dep=models.IntegerField(null=True)
     tim=models.DateTimeField(auto_now=True)
+    exam=models.IntegerField(null=True)
+    def __str__(self):
+        return self.ip
+class Loged_user(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    com_name=models.CharField(max_length=255,null=True)
+    ip=models.CharField(max_length=255,null=True)
+    tim=models.DateTimeField(auto_now=True)
+    exam=models.IntegerField(null=True,unique=True)
     def __str__(self):
         return self.ip
 

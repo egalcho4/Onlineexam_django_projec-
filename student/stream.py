@@ -4,7 +4,7 @@ from django.views.decorators import gzip
 from django.contrib.auth.models import User
 
 import threading
-import cv2,pandas
+#import cv2,pandas
 import time
 from datetime import datetime
 from exam import models as QMODEL

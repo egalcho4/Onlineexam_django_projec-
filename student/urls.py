@@ -1,5 +1,5 @@
 from django.urls import path
-from student import views
+from . import views
 from studentbase import views as viw
 from django.contrib.auth.views import LoginView
 app_name="student"
@@ -23,7 +23,7 @@ path('student-marks', views.student_marks_view,name='student-marks'),
  #path('livestramface/',views.livestramface,name="livestramface"),
  path('st_message/',views.st_message,name="st_message"),
 
-    
+    path('start_random/<int:id>',views.start_random_exam,name="start_random"),
     path('profile_change/',views.profile_change,name="profile_change"),
     path('change_password/',views.change_password,name="change_password"),
     path('loby', views.lobby),

@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'jazzmin',
-    'latexify',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,13 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
   
-    
+    'widget_tweaks',
     'exam',
     'teacher',
     'student',
-    'widget_tweaks',
-    'ckeditor',
-    'django_mathjax',
+    
+    
+    
     
    
 ]
@@ -105,7 +105,7 @@ DATABASES = {
      'default': {
    
     'ENGINE':'django.db.backends.postgresql_psycopg2',
-      'NAME':'jkuoexam',
+      'NAME':'onlineexam',
       'USER':'postgres',
       'PASSWORD':'12345678',
       'HOST':'localhost',
@@ -115,7 +115,7 @@ DATABASES = {
 """DATABASES = {  
     'default': {  
         'ENGINE': 'django.db.backends.mysql',  
-        'NAME': 'jkuoexam',  
+        'NAME': 'onlineexam',  
         'USER': 'root',  
         'PASSWORD': '',  
         'HOST': 'localhost',  
