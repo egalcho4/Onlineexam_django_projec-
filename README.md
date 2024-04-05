@@ -1,6 +1,6 @@
 # Title smart online exam system
 ## exam page screen shoot
-![sample image](/https://lh3.googleusercontent.com/drive-viewer/AKGpihaXZLKYvpDhJxJGEt_ZwnU5sd9ti4MKI5zNDteW-DeGy1-v6-LXfHR9TUaVHgsIeqUe_VbqMNoSRaB8ADaodfSMf3EV17GMLWY=s1600-v0)
+![sample image](/nm.jpg)
 ## evaluation page screen shoot
 ![sample image](/Screenshot_20230526-162736_1.jpg)
 ## admin dashboard
